@@ -10,9 +10,7 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core';
-import Build from '@material-ui/icons/Build';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import MusicVideo from '@material-ui/icons/MusicVideo';
 import Users from '@material-ui/icons/SupervisorAccount';
 import * as cx from 'classnames';
 import * as React from 'react';
@@ -83,20 +81,6 @@ const Sidebar: React.SFC<Props> = ({ classes, handleDrawerClose, open }) => (
     <List>
       <ListItemLink
         button
-        title="Permits"
-        component={NavLink}
-        to={`/permits`}
-        activeClassName={classes.active}
-        className={classes.linkIcon}
-      >
-        <ListItemIcon className={classes.icon}>
-          <MusicVideo color="inherit" />
-        </ListItemIcon>
-        <ListItemText primary="Permits" />
-      </ListItemLink>
-
-      <ListItemLink
-        button
         title="Users"
         component={NavLink}
         to={`/users`}
@@ -107,20 +91,6 @@ const Sidebar: React.SFC<Props> = ({ classes, handleDrawerClose, open }) => (
           <Users />
         </ListItemIcon>
         <ListItemText primary="Users" />
-      </ListItemLink>
-
-      <ListItemLink
-        button
-        title="Utils"
-        component={NavLink}
-        to={`/utils`}
-        activeClassName={classes.active}
-        className={classes.linkIcon}
-      >
-        <ListItemIcon className={classes.icon}>
-          <Build />
-        </ListItemIcon>
-        <ListItemText primary="Utils" />
       </ListItemLink>
     </List>
   </Drawer>

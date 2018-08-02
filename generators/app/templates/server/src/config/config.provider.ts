@@ -121,18 +121,6 @@ export class ConfigurationProvider implements Configuration {
     return this.configuration.gmailUser;
   }
 
-  get twilioNumber(): string | undefined {
-    return this.configuration.twilioNumber;
-  }
-
-  get twilioAccountSID(): string {
-    return this.configuration.twilioAccountSID || '';
-  }
-
-  get twilioAuthToken(): string {
-    return this.configuration.twilioAuthToken || '';
-  }
-
   get systemSecret(): Buffer {
     return Buffer.from(this.configuration.systemSecret, 'base64');
   }

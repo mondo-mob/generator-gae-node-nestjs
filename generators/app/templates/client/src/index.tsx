@@ -8,7 +8,6 @@ import { CssBaseline } from '@material-ui/core';
 import App from './App';
 import { DelayLoading } from './components/PageProgressBar';
 import Toast from './components/Toast';
-import './index.css';
 import client from './util/client';
 
 ReactDOM.render(

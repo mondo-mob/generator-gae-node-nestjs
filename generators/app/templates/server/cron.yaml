@@ -1,4 +1,1 @@
 cron:
-- description: "daily summary job"
-  url: /tasks/permits/daily-summary
-  schedule: every 24 hours

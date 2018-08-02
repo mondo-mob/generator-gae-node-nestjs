@@ -38,7 +38,6 @@ class App extends React.Component {
             if (!data || !data.me) {
               return (
                 <Switch>
-                  <Route exact path="/" component={HomePage} />
                   <Route path="/signin" component={LogIn} />
                   <Route path="/reset" component={Reset} />
                   <Route path="/activate/:code" component={Activate} />
@@ -60,7 +59,6 @@ class App extends React.Component {
 
             return (
               <Switch>
-                <Route exact path="/" component={HomePage} />
                 <Route
                   render={() => (
                     <Page>
@@ -74,7 +72,7 @@ class App extends React.Component {
                           path="/users"
                           component={hasRole('admin', List)}
                         />
-                        <Redirect to="/permits" />
+                        <Redirect to="/users" />
                       </Switch>
                     </Page>
                   )}

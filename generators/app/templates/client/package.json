@@ -1,5 +1,5 @@
 {
-  "name": "busker-node-ts-react-client",
+  "name": "<%= slugify(project) %>-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -54,7 +54,7 @@
     "@types/react-dom": "^16.0.6",
     "prettier": "^1.13.7",
     "react-scripts-ts": "^2.16.0",
-    "typescript": "^2.9.2"
+    "typescript": "^3.0.1"
   },
   "proxy": {
     "/api": {
