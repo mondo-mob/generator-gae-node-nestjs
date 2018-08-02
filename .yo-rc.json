@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Michael Oates",
+      "authorEmail": "michael.oates@growthops.com.au",
+      "authorUrl": ""
+    }
+  }
+}
