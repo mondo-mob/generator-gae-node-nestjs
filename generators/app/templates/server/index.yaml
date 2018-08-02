@@ -1,0 +1,22 @@
+indexes:
+- kind: Permit
+  properties:
+  - name: status
+  - name: name
+
+- kind: Permit
+  properties:
+  - name: status
+  - name: name
+    direction: desc
+
+- kind: Permit
+  properties:
+  - name: status
+  - name: dateAndTime
+
+- kind: Permit
+  properties:
+  - name: status
+  - name: dateAndTime
+    direction: desc

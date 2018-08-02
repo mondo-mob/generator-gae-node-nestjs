@@ -1,0 +1,6 @@
+{
+    "bootstrap": true,
+    "apiEndpoint": "localhost:9000",
+    "host": "http://localhost:8080",
+    "systemSecret": "eKH0BO6Glk3ajwPoHrj2zvFSlVfPg8VX14dmyqKdne2HHsQAuKhUhwIq3cwQugn+ykChxEB9DNzAAqIBBpSjnQ=="
+}

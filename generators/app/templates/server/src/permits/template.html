@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Permit Application</title>
+    <head>
+        <style>
+            td.left-col {
+                font-weight: bold;
+                width:25%;
+            }
+        </style>
+    </head>
+</head>
+<body class="">
+<table border="0" cellpadding="0" cellspacing="0" class="body">
+    <tr>
+        <td colspan="2">
+            <h1>Permit Application Approved</h1>
+        </td>
+    </tr>
+    <tr>
+        <td class="left-col">Location:</td>
+        <td><%= permit.location %></td>
+    </tr>
+    <tr>
+        <td class="left-col">Duration:</td>
+        <td><%= permit.durationInMinutes %> minutes</td>
+    </tr>
+    <tr>
+        <td class="left-col">Description:</td>
+        <td><%= permit.description %></td>
+    </tr>
+</table>
+</body>
+</html>

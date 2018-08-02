@@ -2,20 +2,36 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const slugify = require('slugify');
+const _ = require('lodash');
 
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
-    this.log(
-      yosay(`Welcome to the ace ${chalk.red('generator-gae-node')} generator!`)
-    );
+    this.log(yosay(`Welcome to the ${chalk.red('gae-node')} generator!`));
 
     const prompts = [
       {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
+        name: 'project',
+        message: 'What is the ID of this project?',
+        store: true,
+        default: slugify(this.appname)
+      },
+      {
+        name: 'projectName',
+        message: 'What is the name of this project?',
+        store: true,
+        default: _.startCase(this.appname)
+      },
+      {
+        name: 'gitPath',
+        message: 'What is the HTTPS git path for this project?',
+        store: true
+      },
+      {
+        name: 'adminEmail',
+        message: 'What email address should we use to create the initial admin login?',
+        store: true
       }
     ];
 

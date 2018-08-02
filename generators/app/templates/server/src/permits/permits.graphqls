@@ -1,0 +1,77 @@
+type Permit {
+  id: ID!
+  name: String!
+  email: String!
+  location: String!
+  dateAndTime: DateAndTime!
+  durationInMinutes: Int!
+  description: String!
+  rejectionReason: String
+  status: PermitApplicationState!
+  pdfUrl: String
+  mobileNumber: String
+  attachments: [PermitAttachment!]
+}
+
+type PermitApplicationState {
+  key: String!
+  description: String!
+}
+
+type PermitAttachment {
+  id: ID!
+  filename: String!
+}
+
+input PermitApplicationAttachment {
+  id: ID!
+  filename: String!
+}
+
+input PermitApplication {
+  name: String!
+  email: String!
+  location: String!
+  dateAndTime: DateAndTime!
+  description: String!
+  durationInMinutes: Int!
+  mobileNumber: String
+  attachments: [PermitApplicationAttachment!]
+}
+
+input PermitQuery {
+  status: String
+  mobileNumber: String
+}
+
+enum SortDirection {
+  asc
+  desc
+}
+
+enum PermitSortField {
+  name
+  dateAndTime
+}
+
+input PermitOrderBy {
+  field: PermitSortField!
+  direction: SortDirection!
+}
+
+type PermitList {
+  items: [Permit!]!
+  cursor: String
+  moreResults: Boolean
+}
+
+type Query {
+  permits(where: PermitQuery!, orderBy: PermitOrderBy, cursor: String): PermitList!
+  permitById(id: ID!): Permit
+}
+
+type Mutation {
+  approvePermit(id: ID!): Permit
+  rejectPermit(id: ID!, reason: String!): Permit
+  createPermit(application: PermitApplication!): Permit!
+}

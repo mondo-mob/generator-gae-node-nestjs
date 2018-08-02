@@ -1,0 +1,25 @@
+{
+  "projectId": "busker-node-ts-react-dev-us",
+  "host": "http://localhost:3000",
+  "location": "us-central1",
+  "gmailUser": "michael@3wks.com.au",
+  "bucket": "busker-node-ts-react-dev-us.appspot.com",
+  "auth": {
+    "local": {
+      "enabled": true
+    },
+    "google": {
+      "enabled": true,
+      "clientId": "700949401316-8krqtm8k7fknecgkh9dqlk3vssh0s1ra.apps.googleusercontent.com",
+      "secret": "9nwgSvK7c9wBvJS00ZFcfm4G",
+      "signUpEnabled": true,
+      "signUpDomains": [],
+      "signUpRoles": []
+    },
+    "saml": {
+      "enabled": true,
+      "identityProviderUrl": "https://accounts.google.com/o/saml2/idp?idpid=C0252uul3",
+      "cert": "MIIDdDCCAlygAwIBAgIGAWEl+UQKMA0GCSqGSIb3DQEBCwUAMHsxFDASBgNVBAoTC0dvb2dsZSBJbmMuMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MQ8wDQYDVQQDEwZHb29nbGUxGDAWBgNVBAsTD0dvb2dsZSBGb3IgV29yazELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWEwHhcNMTgwMTI0MDIyMjI3WhcNMjMwMTIzMDIyMjI3WjB7MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEPMA0GA1UEAxMGR29vZ2xlMRgwFgYDVQQLEw9Hb29nbGUgRm9yIFdvcmsxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA05R8iH9+aHX7tr3F6S6Py0bGUG1O4N/XaUQnMLHq3SIAWCSi8ogrK2DEJkbMoFqu+HBULAKWEXTW4+0rEsLBLGl7juG2/B9YpuRUq+H2mCS+ZcaJGm6BQRpCfCI/cKU32Sd57ojmTg6VCZHTfB+1646pTHrpfEjPcH+Qb2I8fiwgtoeM6F94SzqhPnkPslF3Ccr4rVYOw4qsAyJN1W9mO8NUtT6EkN6p7Q2oleGsdNDkEzB4xocsgLrcRmWwmPiO68RxCkxQUQsuMcjIf9yMg5MQ04ReiTMlTPtsyiNt6BnPpFXjObcDFi9V3/Smwsj9uxE/CJC8A2dxoG7NGn0RjwIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBEKU6nYhNWk9R0VSCausXy7J1m7UVuEZvcPE61e35TSdqvU2OJCLQq2SKJb6OwDnZqYbdCJ7Hg06CJP9GwdWOkhMB6uYii7W6+LrNvwwIGxKfrOX1XyLm6MxTe0H939Y19wuTUit1YT3I8ev/PEee/JVLxycKJqR60SbM2y9S37A/I481IUo2JOiGz+SXNn+Uaz3en+WpmyjXFEPuQh4uNEaJk726pvQ9zSsaPmme2Eg2By1Imxnq88NDZpiUgyODuAloBOtLKT66FRB208otNQM1ZYGMQuO4JXLybRSSC0WhCUm8ctFo4T5mQuaTnATPzBMYj2ahwLpBhUqktFts8"
+    }
+  }
+}
