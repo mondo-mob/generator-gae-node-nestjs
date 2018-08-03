@@ -46,6 +46,12 @@ const Config = t.intersection([
   }),
 ]);
 
+interface SessionConfiguration {
+  apiEndpoint?: string;
+  projectId?: string;
+  secret: string;
+}
+
 export class ConfigurationProvider implements Configuration {
   configuration: t.TypeOf<typeof Config>;
   logger: Logger;
@@ -127,5 +133,13 @@ export class ConfigurationProvider implements Configuration {
 
   get auth() {
     return this.configuration.auth;
+  }
+
+  get session(): SessionConfiguration {
+    return {
+      secret: 'secret',
+      apiEndpoint: this.apiEndpoint,
+      projectId: this.projectId
+    }
   }
 }

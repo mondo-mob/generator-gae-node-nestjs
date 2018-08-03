@@ -8,6 +8,7 @@ import * as trace from '@google-cloud/trace-agent';
 import { NestFactory } from '@nestjs/core';
 import * as express from 'express';
 import { AppModule } from './app.module';
+import { configurationProvider } from './config/config.module';
 
 if (process.env.APP_ENGINE_ENVIRONMENT) {
   trace.start();
@@ -18,7 +19,9 @@ if (process.env.APP_ENGINE_ENVIRONMENT) {
 
 export async function bootstrap() {
   const expressApp = express();
-  configureExpress(expressApp, { session: { secret: 'secret' } });
+  configureExpress(expressApp, {
+    session: configurationProvider.session,
+  });
 
   rootLogger.info(`Configuring server`);
   const app = await NestFactory.create(AppModule, expressApp, {

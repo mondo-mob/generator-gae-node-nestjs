@@ -19,7 +19,7 @@
     "dsui": "dsui --port 4000"
   },
   "dependencies": {
-    "@3wks/gae-node-nestjs": "^0.1.1",
+    "@3wks/gae-node-nestjs": "^0.1.4",
     "@google-cloud/connect-datastore": "^1.0.0",
     "@google-cloud/datastore": "^1.4.1",
     "@google-cloud/debug-agent": "^2.6.0",

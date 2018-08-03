@@ -59,12 +59,12 @@ module.exports = class extends Generator {
 
     const copyTpl = (src, dest, additionalContext) => {
       const destName = dest || src;
-      const srcParam = !_.isArray(src)
-        ? this.templatePath(src)
-        : _.map(
+      const srcParam = _.isArray(src)
+        ? _.map(
             src,
             entry => (_.startsWith(entry, '!') ? entry : this.templatePath(entry))
-          );
+          )
+        : this.templatePath(src);
 
       return this.fs.copyTpl(
         srcParam,
@@ -84,7 +84,9 @@ module.exports = class extends Generator {
     copyTpl('client/package.json');
     copyTpl('server/package.json');
     copyTpl('server/config/default.json');
-    copyTpl('server/config/development.json');
+    copyTpl('server/config/development.json', 'server/config/development.json', {
+      secret: generateKey(512)
+    });
     copyTpl('server/config/env.json', 'server/config/dev.json', {
       env: 'dev',
       secret: generateKey(512)

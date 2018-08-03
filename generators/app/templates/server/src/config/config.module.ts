@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigurationProvider } from './config.provider';
 
-const configurationProvider = new ConfigurationProvider();
+export const configurationProvider = new ConfigurationProvider();
 
 @Module({
   providers: [
