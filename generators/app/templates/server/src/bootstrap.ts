@@ -7,7 +7,6 @@ import * as debug from '@google-cloud/debug-agent';
 import * as trace from '@google-cloud/trace-agent';
 import { NestFactory } from '@nestjs/core';
 import * as express from 'express';
-import * as csp from 'helmet-csp';
 import { AppModule } from './app.module';
 
 if (process.env.APP_ENGINE_ENVIRONMENT) {
@@ -20,18 +19,7 @@ if (process.env.APP_ENGINE_ENVIRONMENT) {
 export async function bootstrap() {
   const expressApp = express();
   configureExpress(expressApp, { session: { secret: 'secret' } });
-  expressApp.use(
-    csp({
-      directives: {
-        defaultSrc: ["'none'"],
-        scriptSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-        fontSrc: ["'self'", 'https://fonts.gstatic.com'],
-        imgSrc: ["'self'"],
-        connectSrc: ["'self'"],
-      },
-    }),
-  );
+
   rootLogger.info(`Configuring server`);
   const app = await NestFactory.create(AppModule, expressApp, {
     logger: new BunyanLogger(),
