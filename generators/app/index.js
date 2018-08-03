@@ -85,19 +85,23 @@ module.exports = class extends Generator {
     copyTpl('server/package.json');
     copyTpl('server/config/default.json');
     copyTpl('server/config/development.json', 'server/config/development.json', {
-      secret: generateKey(512)
+      secret: generateKey(512),
+      cookieSecret: generateKey(512)
     });
     copyTpl('server/config/env.json', 'server/config/dev.json', {
       env: 'dev',
-      secret: generateKey(512)
+      secret: generateKey(512),
+      cookieSecret: generateKey(512)
     });
     copyTpl('server/config/env.json', 'server/config/uat.json', {
       env: 'uat',
-      secret: generateKey(512)
+      secret: generateKey(512),
+      cookieSecret: generateKey(512)
     });
     copyTpl('server/config/env.json', 'server/config/prod.json', {
       env: 'prod',
-      secret: generateKey(512)
+      secret: generateKey(512),
+      cookieSecret: generateKey(512)
     });
   }
 

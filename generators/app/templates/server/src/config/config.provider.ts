@@ -32,6 +32,7 @@ const Config = t.intersection([
     location: t.string,
     gmailUser: t.string,
     systemSecret: t.string,
+    cookieSecret: t.string,
     auth
   }),
   t.partial({
@@ -139,7 +140,7 @@ export class ConfigurationProvider implements Configuration {
 
   get session(): SessionConfiguration {
     return {
-      secret: "secret",
+      secret: this.configuration.cookieSecret,
       apiEndpoint: this.apiEndpoint,
       projectId: this.projectId
     };

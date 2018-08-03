@@ -2,5 +2,6 @@
   "bootstrap": true,
   "apiEndpoint": "localhost:9000",
   "host": "http://localhost:8080",
-  "systemSecret": "<%= secret %>"
+  "systemSecret": "<%= secret %>",
+  "cookieSecret": "<%= cookieSecret %>"
 }
