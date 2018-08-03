@@ -56,7 +56,7 @@ const PageTitle: React.SFC<Props> = ({ open, classes, handleDrawerOpen }) => (
         <MenuIcon />
       </IconButton>
       <Typography variant="title" color="inherit">
-        Busker
+        <%= projectName %>
       </Typography>
     </Toolbar>
   </AppBar>

@@ -11,7 +11,7 @@ const generateKey = bits => crypto.randomBytes(Math.ceil(bits / 8)).toString('ba
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
-    this.log(yosay(`Welcome to the ${chalk.red('gae-node')} generator!`));
+    this.log(yosay(`Welcome to the ${chalk.red('@3wks/gae-node-nestjs')} generator!`));
 
     const prompts = [
       {
@@ -82,6 +82,8 @@ module.exports = class extends Generator {
     copy('server', 'server');
     copyTpl('README.md');
     copyTpl('client/package.json');
+    copyTpl('client/public/index.html');
+    copyTpl('client/src/components/PageTitle.tsx');
     copyTpl('server/package.json');
     copyTpl('server/config/default.json');
     copyTpl('server/config/development.json', 'server/config/development.json', {

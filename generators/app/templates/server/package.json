@@ -1,7 +1,7 @@
 {
   "name": "<%= slugify(project) %>-server",
   "version": "1.0.0",
-  "description": "Busker built with node + typescript + react",
+  "description": "<%= slugify(projectName) %> built with node + typescript + react",
   "author": "",
   "license": "MIT",
   "scripts": {
