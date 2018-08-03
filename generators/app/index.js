@@ -4,6 +4,9 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 const slugify = require('slugify');
 const _ = require('lodash');
+const crypto = require('crypto');
+
+const generateKey = bits => crypto.randomBytes(Math.ceil(bits / 8)).toString('base64');
 
 module.exports = class extends Generator {
   prompting() {
@@ -35,7 +38,7 @@ module.exports = class extends Generator {
       },
       {
         name: 'appEngineRegion',
-        message: 'What email address should we use to create the initial admin login?',
+        message: 'What google cloud region will this project run in?',
         store: true,
         default: 'us-central1'
       }
@@ -82,10 +85,17 @@ module.exports = class extends Generator {
     copyTpl('server/package.json');
     copyTpl('server/config/default.json');
     copyTpl('server/config/development.json');
-    copyTpl('server/config/env.json', 'server/config/dev.json', { env: 'dev' });
-    copyTpl('server/config/env.json', 'server/config/uat.json', { env: 'uat' });
+    copyTpl('server/config/env.json', 'server/config/dev.json', {
+      env: 'dev',
+      secret: generateKey(512)
+    });
+    copyTpl('server/config/env.json', 'server/config/uat.json', {
+      env: 'uat',
+      secret: generateKey(512)
+    });
     copyTpl('server/config/env.json', 'server/config/prod.json', {
-      env: 'prod'
+      env: 'prod',
+      secret: generateKey(512)
     });
   }
 
