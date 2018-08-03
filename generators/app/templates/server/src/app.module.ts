@@ -3,7 +3,6 @@ import { GCloudModule } from "@3wks/gae-node-nestjs";
 import { ConfigurationModule } from "./config/config.module";
 import { UserModule } from "./users/users.module";
 import { MigrationModule } from "./migrations/migrations.module";
-import { GraphQLConfiguration } from "./graphql/graphql.module";
 
 @Module({
   imports: [
@@ -14,7 +13,6 @@ import { GraphQLConfiguration } from "./graphql/graphql.module";
     ConfigurationModule,
     UserModule,
     MigrationModule,
-    GraphQLConfiguration
   ]
 })
 export class AppModule {}
