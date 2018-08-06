@@ -1,0 +1,18 @@
+<% if (includeRepository) { %>type <%= typeName %> {
+  id: ID!
+}
+
+input <%= typeName %>Input {
+  _: Boolean #Remove this when adding your own fields
+}
+
+type Query {
+  <% if (includeRepository) { %><%= lowerTypeName %>ById(id: ID!): <%= typeName %>
+  <%= lowerTypeNamePlural %>: [<%= typeName %>!]!<% } %>
+}
+
+type Mutation {
+  <% if (includeRepository) { %>create<%= typeName %>(<%= lowerTypeName %>: <%= typeName %>Input!): <%= typeName %>!
+  update<%= typeName %>(id: ID!, <%= lowerTypeName %>: <%= typeName %>Input!): <%= typeName %>
+  delete<%= typeName %>(id: ID!)<% } %>: Boolean
+}<% } %>

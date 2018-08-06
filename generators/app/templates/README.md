@@ -12,6 +12,10 @@ Server: `npx server` from `server` directory
 
 Client: `npm start` from `client` directory
 
+## New: Adding server modules
+
+Run `yo @3wks/gae-node-nestjs:module tests` from root directory (directory containing client / server) where `tests` is the name of your module (by convention this is plural). This generator can bootstrap a new module with repository + service + graphql.
+
 # App Engine Setup
 
 ## System user bootstrap
@@ -44,6 +48,15 @@ For more information on how the above command works see the migrations section.
 2.  Add additional redirect to `{host}/auth/google/login/callback`
 3.  Visit the URL `{host}/system/gmail/setup` signed in as the admin user
 
+## SAML
+
+1.  Update the config file in the affected environment. These properties should include:
+
+    - `identityProviderUrl` - The URL of the identity provider to use as part of login
+    - `cert` - The certificate to be used for validating SAML requests - this should be provided by the SAML server
+
+2.  Enable SAML signup by changing the `enabled` flag to true in the configuration
+
 # Adding Functionality
 
 ## New Modules
@@ -52,7 +65,11 @@ Modules are an important concept in nestjs - they wrap up related units of funct
 
 There should only be one module per folder within your solution, and there should ideally not be any circular dependencies.
 
-To create a new module:
+To create a new module run the following from your root project directory:
+
+`yo @3wks/gae-node-nestjs:module tests`
+
+To create a module by hand:
 
 1.  Create a new folder
 2.  Create a new module file
