@@ -3,17 +3,17 @@
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-gae-node using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and `@3wks/generator-gae-node-nestjs` using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
-npm install -g generator-gae-node
+npm install -g @3wks/generator-gae-node-nestjs
 ```
 
 Then generate your new project:
 
 ```bash
-yo gae-node
+yo @3wks/gae-node-nestjs
 ```
 
 ## Getting To Know Yeoman
