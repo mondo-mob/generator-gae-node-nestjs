@@ -16,6 +16,8 @@ Client: `npm start` from `client` directory
 
 Run `yo @3wks/gae-node-nestjs:module tests` from root directory (directory containing client / server) where `tests` is the name of your module (by convention this is plural). This generator can bootstrap a new module with repository + service + graphql.
 
+**NOTE:** Remember to add new modules to your AppModule
+
 # App Engine Setup
 
 ## System user bootstrap
