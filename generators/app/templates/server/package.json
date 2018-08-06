@@ -89,7 +89,6 @@
     "chokidar": "^2.0.4",
     "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^3.6.0",
-    "@steamrail/dsui": "^0.2.2",
     "jest": "^21.2.1",
     "nodemon": "^1.14.1",
     "prettier": "1.13.7",
