@@ -3,6 +3,12 @@ import { Context, IUser } from '@3wks/gae-node-nestjs';
 import { <%= module %>Service } from './<%= moduleSlugged %>.service';
 <% if (includeRepository) { %> import { <%= typeName %> } from './<%= moduleSlugged %>.repository'; <% } %>
 
+  <% if (includeRepository) { %> interface <%= typeName %>List {
+  values: ReadonlyArray<<%= typeName %>>;
+  next ?: string;
+  more: boolean;
+} <% } %>
+
 @Resolver(<% if (includeRepository) { %> '<%= typeName %>' <% } %>)
 export class <%= module %>Resolver {
   constructor(
@@ -16,8 +22,14 @@ export class <%= module %>Resolver {
   }
 
     @Query('<%= lowerTypeNamePlural %>')
-    async all(_req: void, _args: void, context: Context<IUser>): Promise < ReadonlyArray<<%= typeName %>>> {
-      return await this.service.getAll(context);
+    async list(_req: void, { cursor, limit }: { cursor?: string, limit?: number }, context: Context<IUser>): Promise <<%= typeName %>List> {
+      const [results, info] = await this.service.getAll(context, limit, cursor);
+
+      return {
+        values: results,
+        next: info.endCursor,
+        more: info.moreResults === "MORE_RESULTS_AFTER_LIMIT"
+      };
   }
 
   @Mutation('create<%= typeName %>')

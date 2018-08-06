@@ -2,13 +2,19 @@
   id: ID!
 }
 
+type <%= typeName %>List {
+  values: [<%= typeName %>!]!
+  next: String!
+  more: Boolean!
+}
+
 input <%= typeName %>Input {
   _: Boolean #Remove this when adding your own fields
 }
 
 type Query {
   <% if (includeRepository) { %><%= lowerTypeName %>ById(id: ID!): <%= typeName %>
-  <%= lowerTypeNamePlural %>: [<%= typeName %>!]!<% } %>
+  <%= lowerTypeNamePlural %>(cursor: String, limit: Int): <%= typeName %>List!<% } %>
 }
 
 type Mutation {
