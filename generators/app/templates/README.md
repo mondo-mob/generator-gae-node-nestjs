@@ -6,7 +6,7 @@ The project should be ready to run locally straight away - though some configura
 
 The nest documentation (https://github.com/nestjs/nest) is invaluable for getting started.
 
-## Running
+## Running (locally)
 
 Server: `npx server` from `server` directory
 
@@ -19,6 +19,19 @@ Run `yo @3wks/gae-node-nestjs:module tests` from root directory (directory conta
 **NOTE:** Remember to add new modules to your AppModule
 
 # App Engine Setup
+
+## Deploying to App Engine
+By default you will find configurations for `dev`, `uat` and `prod` environments in the `server/config` directory of the project. These assume you have created GCP projects called `<%= slugify(project) %>-dev`, `<%= slugify(project) %>-uat` and  `<%= slugify(project) %>-prod`
+
+To deploy to these environments run the following from the `server` directory, substituting `dev` for your current environment:
+
+```
+npm run deploy:dev
+```
+
+Note: The first time you run the deploy you may be asked which region to deploy in. At this stage (Aug 2018) we are choosing `us-central` instead of `australia-southeast1` because:
+* Cloud tasks is not available in australia - it's in alpha and can only call app engine in same region
+* Datastore access from nodejs is broken in Australia (min 700ms per request)
 
 ## System user bootstrap
 
