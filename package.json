@@ -1,6 +1,6 @@
 {
   "name": "@3wks/generator-gae-node-nestjs",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A generator for building nestjs apps on app engine node",
   "homepage": "",
   "author": {
