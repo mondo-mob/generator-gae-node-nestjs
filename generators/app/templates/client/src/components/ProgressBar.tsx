@@ -1,5 +1,4 @@
 import { Theme, WithStyles, withStyles } from "@material-ui/core";
-import * as PropTypes from "prop-types";
 import * as React from "react";
 import ProgressBar from "react-progress-bar-plus";
 import "react-progress-bar-plus/lib/progress-bar.css";
@@ -20,10 +19,6 @@ interface Props {
 }
 
 class Progress extends React.PureComponent<Props & WithStyles<typeof styles>> {
-  public static propTypes = {
-    isLoading: PropTypes.bool.isRequired,
-    classes: PropTypes.object.isRequired
-  };
 
   public render() {
     return (
