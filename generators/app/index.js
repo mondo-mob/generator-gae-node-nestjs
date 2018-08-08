@@ -73,13 +73,23 @@ module.exports = class extends Generator {
       );
     };
 
-    const copy = (src, dest) => {
+    const copy = (src, dest, options) => {
       const destName = dest || src;
-      return this.fs.copy(this.templatePath(src), this.destinationPath(destName));
+      return this.fs.copy(
+        this.templatePath(src),
+        this.destinationPath(destName),
+        options
+      );
     };
 
-    copy('client', 'client');
-    copy('server', 'server');
+    const fileCopyOptions = {
+      globOptions: {
+        dot: true
+      }
+    };
+
+    copy('client', 'client', fileCopyOptions);
+    copy('server', 'server', fileCopyOptions);
     copyTpl('README.md');
     copyTpl('client/package.json');
     copyTpl('client/public/index.html');
