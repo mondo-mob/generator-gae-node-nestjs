@@ -1,4 +1,5 @@
 {
+  "bootstrap": false,
   "projectId": "<%= slugify(project) %>-dev",
   "host": "http://localhost:3000",
   "location": "<%= appEngineRegion %>",

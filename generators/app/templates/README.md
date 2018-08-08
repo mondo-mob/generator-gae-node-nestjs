@@ -18,12 +18,24 @@ Run `yo @3wks/gae-node-nestjs:module tests` from root directory (directory conta
 
 **NOTE:** Remember to add new modules to your AppModule
 
+#Environments
+The following environments are pre-configured for you in the `server/config` directory of the project.:
+* `development` - your local machine
+* `dev` - App Engine project called <%= slugify(project) %>-dev for development
+* `uat` - App Engine project called <%= slugify(project) %>-uat for user acceptance testing
+* `prod` - App Engine project called <%= slugify(project) %>-prod for production
+
+Note there is also a `default` config which applies to all environments unless overridden.
+
 # App Engine Setup
 
 ## Deploying to App Engine
-By default you will find configurations for `dev`, `uat` and `prod` environments in the `server/config` directory of the project. These assume you have created GCP projects called `<%= slugify(project) %>-dev`, `<%= slugify(project) %>-uat` and  `<%= slugify(project) %>-prod`
+You will need to create GCP projects for each environmemnt you want to deploy to:
+* `<%= slugify(project) %>-dev`
+* `<%= slugify(project) %>-uat`
+* `<%= slugify(project) %>-prod`
 
-To deploy to these environments run the following from the `server` directory, substituting `dev` for your current environment:
+To deploy to these environments run the following from the `server` directory, substituting `dev` for your target environment:
 
 ```
 npm run deploy:dev
@@ -34,12 +46,23 @@ Note: The first time you run the deploy you may be asked which region to deploy 
 * Datastore access from nodejs is broken in Australia (min 700ms per request)
 
 ## System user bootstrap
+The `development` environment is configured to run bootstrap each time the server is started. If not already present, bootstrap will create a system user `admin@3wks.com.au` with password `password`.
 
-1.  Run the following command substituting `dev` for your current environment:
+For all other environments (`dev`, `uat`, `prod`), auto-bootstrap is off by default.
+
+To create/update the system user you need to run bootstrap manually by running the following command substituting `development` for your target environment:
 
 ```
-npx server s c --env dev /system/migrate/bootstrap
+npx server s c --env development /system/migrate/bootstrap
 ```
+A new password will be randomly generated and can be found in the logs. Look for an entry in the form of:
+
+```
+2018-08-08 16:08:54.834 AEST Bootstrapping admin account with id 12345 and password <the password>
+```
+
+To turn auto-bootstrap on/off set the `bootstrap` flag to true/false in the appropriate environment config file in `server/config/`
+
 
 For more information on how the above command works see the migrations section.
 

@@ -25,7 +25,7 @@ export class MigrationService {
   ) {}
 
   async bootstrap() {
-    if (this.configurationProvider.isDevelopment) {
+    if (this.configurationProvider.isDevelopment()) {
       const context = newContext(this.datastoreProvider.datastore);
 
       const [credentials] = await this.credentialsRepository.query(context, {
