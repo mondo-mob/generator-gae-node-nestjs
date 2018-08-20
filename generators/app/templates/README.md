@@ -8,6 +8,8 @@ The nest documentation (https://github.com/nestjs/nest) is invaluable for gettin
 
 ## Running (locally)
 
+Datastore emulator: `gcloud beta emulators datastore start`
+
 Server: `npx server` from `server` directory
 
 Client: `npm start` from `client` directory
