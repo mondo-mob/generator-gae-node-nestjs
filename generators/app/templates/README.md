@@ -55,7 +55,7 @@ For all other environments (`dev`, `uat`, `prod`), auto-bootstrap is off by defa
 To create/update the system user you need to run bootstrap manually by running the following command substituting `development` for your target environment:
 
 ```
-npx server s c --env development /system/migrate/bootstrap
+npx server s c --env dev /system/migrate/bootstrap
 ```
 A new password will be randomly generated and can be found in the logs. Look for an entry in the form of:
 
