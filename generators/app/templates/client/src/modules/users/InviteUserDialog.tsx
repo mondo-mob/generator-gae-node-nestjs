@@ -12,7 +12,7 @@ import { Field } from 'react-final-form';
 import Form from '../../components/Form';
 import Input from '../../components/form/TextField';
 import { InviteUser, InviteUserVariables } from '../../graphql';
-import { required } from '../../util/validation';
+import {compose, isEmail, required} from '../../util/validation';
 
 interface State {
   open: boolean;
@@ -66,7 +66,10 @@ export class InviteUserDialog extends React.Component<{}, State> {
                           fullWidth
                           name="email"
                           margin="normal"
-                          validate={required('Email address is required')}
+                          validate={compose(
+                            required("Email address is required"),
+                            isEmail("Must be a valid email address")
+                          )}
                           component={Input}
                         />
 
