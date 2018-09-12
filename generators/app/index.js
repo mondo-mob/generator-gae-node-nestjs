@@ -84,14 +84,17 @@ module.exports = class extends Generator {
 
     const fileCopyOptions = {
       globOptions: {
-        dot: true
+        dot: true,
+        ignore: ['**/gitignore']
       }
     };
 
     copy('client', 'client', fileCopyOptions);
     copy('server', 'server', fileCopyOptions);
     copyTpl('README.md');
-    copyTpl('.gitignore');
+    copy('gitignore', '.gitignore');
+    copy('client/gitignore', 'client/.gitignore');
+    copy('server/gitignore', 'server/.gitignore');
     copyTpl('client/package.json');
     copyTpl('client/public/index.html');
     copyTpl('client/src/components/PageTitle.tsx');
