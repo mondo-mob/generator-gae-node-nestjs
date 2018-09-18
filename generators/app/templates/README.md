@@ -85,8 +85,9 @@ For more information on how the above command works see the migrations section.
 ## Emails + Invites + Password Reset
 
 1.  Setup client as per "Google Sign In"
-2.  Add additional redirect to `{host}/auth/google/login/callback`
-3.  Visit the URL `{host}/system/gmail/setup` signed in as the admin user
+2.  Add additional redirect to `{host}/system/gmail/setup/oauth2callback`
+3.  Set `gmailUser` in `server/config/{env}.json` to the admin account you will sign in as in the next step.
+4.  Visit the URL `{host}/system/gmail/setup` signed in as the admin user
 
 ## SAML
 
