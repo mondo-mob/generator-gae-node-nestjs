@@ -5,11 +5,11 @@
   "author": "",
   "license": "MIT",
   "scripts": {
+    "start:dev": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-development npx server",
     "format": "prettier --write \"./src/**/*.ts\" && prettier --write \"./src/**/*.graphqls\"",
     "start": "node ./dist/main.js",
     "prestart:dev": "rm -rf dist/",
     "start:debug": "ts-node --inspect src/main.ts",
-    "start:dev": "npx server",
     "compile:prod": "rm -rf dist && tsc",
     "test": "jest",
     "test:cov": "jest --coverage",

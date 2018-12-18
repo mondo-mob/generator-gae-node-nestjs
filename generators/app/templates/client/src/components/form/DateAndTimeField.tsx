@@ -1,9 +1,9 @@
 import DateTimePicker from 'material-ui-pickers/DateTimePicker';
-import { DateTimePickerWrapperProps } from 'material-ui-pickers/DateTimePicker/DateTimePickerWrapper';
+import { DateTimePickerProps } from 'material-ui-pickers/DateTimePicker/DateTimePicker';
 import * as React from 'react';
 import { FieldRenderProps } from 'react-final-form';
 
-const DateTime: React.SFC<FieldRenderProps & DateTimePickerWrapperProps> = ({
+const DateTime: React.SFC<FieldRenderProps & DateTimePickerProps> = ({
   input: { name, onChange, value, ...restInput },
   meta,
   ...rest

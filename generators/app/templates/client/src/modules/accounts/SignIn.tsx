@@ -2,6 +2,7 @@
 
 import { Button, Theme, withStyles, WithStyles } from '@material-ui/core';
 import { ApolloClient } from 'apollo-client';
+import { isArray } from "lodash";
 import * as qs from 'query-string';
 import * as React from 'react';
 import { withApollo, WithApolloClient } from 'react-apollo';
@@ -55,7 +56,7 @@ interface Props
     WithApolloClient<{}> {}
 
 interface State {
-  error?: string;
+  error?: string | string[];
 }
 
 class SignIn extends React.Component<Props, State> {
@@ -71,7 +72,8 @@ class SignIn extends React.Component<Props, State> {
 
   public componentDidMount() {
     if (this.state.error) {
-      showMessage(this.state.error, true);
+      const msg = isArray(this.state.error) ? this.state.error : [this.state.error];
+      showMessage(msg, true);
       this.props.history.replace(`/signin`);
     }
   }
