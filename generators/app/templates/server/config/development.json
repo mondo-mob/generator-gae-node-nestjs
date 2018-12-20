@@ -1,5 +1,6 @@
 {
   "bootstrap": true,
+  "projectId": "<%= slugify(project) %>-development",
   "apiEndpoint": "localhost:9000",
   "host": "http://localhost:8080",
   "systemSecret": "<%= secret %>",
