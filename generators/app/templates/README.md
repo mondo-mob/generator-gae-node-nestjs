@@ -14,6 +14,8 @@ Server: `npx server` from `server` directory
 
 Client: `npm start` from `client` directory
 
+Clear datastore state: remove files from `~/.config/gcloud/emulators/datastore`
+
 ## New: Adding server modules
 
 Run `yo @3wks/gae-node-nestjs:module tests` from root directory (directory containing client / server) where `tests` is the name of your module (by convention this is plural). This generator can bootstrap a new module with repository + service + graphql.
@@ -70,9 +72,9 @@ For more information on how the above command works see the migrations section.
 
 ## Google Sign In
 
-1.  Create oauth credentials (client / secret) through the google console
-2.  Ensure the following a redirect to `{host}/auth/google/login/callback` is enabled
-3.  Add Google+ API in google console
+1.  Create oauth credentials (client / secret) through the google console as per https://support.google.com/cloud/answer/6158849?hl=en
+2.  Ensure the following a redirect to `{host}/auth/signin/google/callback` is enabled
+3.  Add Google+ API in google console (https://console.cloud.google.com/apis/library/plus.googleapis.com)
 4.  Add the client key and secret to the `config/{env}.json` file
 5.  Change the `enabled` flag to true
 
@@ -246,3 +248,5 @@ or
 
 npx server s c --env dev /system/migrate/bootstrap
 ```
+
+

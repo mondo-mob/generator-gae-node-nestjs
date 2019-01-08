@@ -2,7 +2,7 @@
   "bootstrap": true,
   "projectId": "<%= slugify(project) %>-development",
   "apiEndpoint": "localhost:9000",
-  "host": "http://localhost:8080",
+  "host": "http://localhost:3000",
   "systemSecret": "<%= secret %>",
   "cookieSecret": "<%= cookieSecret %>"
 }
