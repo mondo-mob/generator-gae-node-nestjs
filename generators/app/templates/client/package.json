@@ -67,6 +67,9 @@
     },
     "/tasks": {
       "target": "http://localhost:8080"
+    },
+    "/system": {
+      "target": "http://localhost:8080"
     }
   }
 }
