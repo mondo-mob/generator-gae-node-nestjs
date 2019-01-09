@@ -15,9 +15,9 @@
     "test:cov": "jest --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "build": "rm -rf public && npm run --prefix ../client build && npm run compile:prod",
-    "deploy:dev": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-dev npm run deploy",
-    "deploy:uat": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-uat npm run deploy",
-    "deploy:prod": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-prod npm run deploy",
+    "deploy:dev": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-dev npm run deploy && TAG_NAME=dev_`date +%Y%m%d_%H%M%S` && git tag -a $TAG_NAME -m 'dev deployed' && git push origin $TAG_NAME",
+    "deploy:uat": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-uat npm run deploy && TAG_NAME=uat_`date +%Y%m%d_%H%M%S` && git tag -a $TAG_NAME -m 'uat deployed' && git push origin $TAG_NAME",
+    "deploy:prod": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-prod npm run deploy && TAG_NAME=prod_`date +%Y%m%d_%H%M%S` && git tag -a $TAG_NAME -m 'prod deployed' && git push origin $TAG_NAME",
     "deploy": "npm run build && gcloud app deploy",
     "dsui": "dsui --port 4000"
   },
