@@ -57,7 +57,7 @@ const SignIn: React.SFC<WithStyles<typeof styles>> = ({ classes }) => (
               <Button
                 type="submit"
                 color="primary"
-                variant="raised"
+                variant="contained"
                 className={classes.submit}
                 disabled={submitting}
               >

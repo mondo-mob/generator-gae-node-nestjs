@@ -129,7 +129,7 @@ const UpdateUserPage: React.SFC<Props> = ({ match, history, classes }) => (
                       component={Input}
                     />
 
-                    <Button variant="raised" color="primary" type="submit">
+                    <Button variant="contained" color="primary" type="submit">
                       Save changes
                     </Button>
                   </form>

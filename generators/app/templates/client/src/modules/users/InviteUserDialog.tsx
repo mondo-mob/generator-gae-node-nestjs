@@ -41,7 +41,7 @@ export class InviteUserDialog extends React.Component<{}, State> {
   public render() {
     return (
       <React.Fragment>
-        <Button variant="raised" onClick={this.open}>
+        <Button variant="contained" onClick={this.open}>
           Invite User
         </Button>
         <Dialog open={this.state.open} onClose={this.close} fullWidth>

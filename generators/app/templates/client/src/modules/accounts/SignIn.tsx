@@ -2,7 +2,7 @@
 
 import { Button, Theme, withStyles, WithStyles } from '@material-ui/core';
 import { ApolloClient } from 'apollo-client';
-import { isArray } from "lodash";
+import { isArray } from 'lodash';
 import * as qs from 'query-string';
 import * as React from 'react';
 import { withApollo, WithApolloClient } from 'react-apollo';
@@ -73,7 +73,7 @@ class SignIn extends React.Component<Props, State> {
   public componentDidMount() {
     if (this.state.error) {
       const msg = isArray(this.state.error) ? this.state.error : [this.state.error];
-      showMessage(msg, true);
+      showMessage(msg.join(' '), true);
       this.props.history.replace(`/signin`);
     }
   }
@@ -113,7 +113,7 @@ class SignIn extends React.Component<Props, State> {
               <Button
                 type="submit"
                 color="primary"
-                variant="raised"
+                variant="contained"
                 className={classes.submit}
                 disabled={submitting}
               >
@@ -121,7 +121,7 @@ class SignIn extends React.Component<Props, State> {
               </Button>
 
               <Button
-                variant="raised"
+                variant="contained"
                 component="a"
                 href="/auth/signin/google"
                 className={classes.google}

@@ -88,7 +88,7 @@ const ConfirmReset: React.SFC<Props> = ({ classes, match, history }) => (
               <Button
                 type="submit"
                 color="primary"
-                variant="raised"
+                variant="contained"
                 className={classes.submit}
                 disabled={submitting}
               >
