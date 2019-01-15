@@ -24,7 +24,7 @@
     "kill-server-force": "bash ./scripts/kill-server.sh -9"
   },
   "dependencies": {
-    "@3wks/gae-node-nestjs": "^0.1.9",
+    "@3wks/gae-node-nestjs": "^1.0.10",
     "@google-cloud/connect-datastore": "^1.0.0",
     "@google-cloud/datastore": "^1.4.1",
     "@google-cloud/debug-agent": "^2.6.0",
