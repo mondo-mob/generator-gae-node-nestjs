@@ -1,13 +1,13 @@
-import * as t from "io-ts";
-import { reporter } from "io-ts-reporters";
-import { ThrowReporter } from "io-ts/lib/ThrowReporter";
-import * as _ from "lodash";
-import * as Logger from "bunyan";
-import { Configuration, createLogger } from "@3wks/gae-node-nestjs";
+import * as t from 'io-ts';
+import { reporter } from 'io-ts-reporters';
+import { ThrowReporter } from 'io-ts/lib/ThrowReporter';
+import * as _ from 'lodash';
+import * as Logger from 'bunyan';
+import { Configuration, createLogger } from '@3wks/gae-node-nestjs';
 
 const auth = t.partial({
   local: t.interface({
-    enabled: t.boolean
+    enabled: t.boolean,
   }),
   google: t.interface({
     enabled: t.boolean,
@@ -15,15 +15,22 @@ const auth = t.partial({
     secret: t.string,
     signUpEnabled: t.boolean,
     signUpDomains: t.array(t.string),
-    signUpRoles: t.array(t.string)
+    signUpRoles: t.array(t.string),
   }),
   saml: t.interface({
     enabled: t.boolean,
     cert: t.string,
-    identityProviderUrl: t.string
-  })
+    identityProviderUrl: t.string,
+  }),
 });
 
+const devHooks = t.partial({
+  disableLocalMailLogger: t.boolean,
+  divertEmailTo: t.array(t.string),
+  emailSubjectPrefix: t.string,
+});
+
+// tslint:disable-next-line:variable-name
 const Config = t.intersection([
   t.interface({
     projectId: t.string,
@@ -33,17 +40,18 @@ const Config = t.intersection([
     gmailUser: t.string,
     systemSecret: t.string,
     cookieSecret: t.string,
-    auth
+    auth,
   }),
   t.partial({
     APP_ENGINE_ENVIRONMENT: t.string,
     GOOGLE_CLOUD_PROJECT: t.string,
+    devHooks,
     bootstrap: t.boolean,
     apiEndpoint: t.string,
     twilioNumber: t.string,
     twilioAccountSID: t.string,
-    twilioAuthToken: t.string
-  })
+    twilioAuthToken: t.string,
+  }),
 ]);
 
 interface SessionConfiguration {
@@ -57,16 +65,16 @@ export class ConfigurationProvider implements Configuration {
   logger: Logger;
 
   constructor() {
-    this.logger = createLogger("configuration-provider");
+    this.logger = createLogger('configuration-provider');
 
     if (process.env.GOOGLE_CLOUD_PROJECT) {
       const projectId = process.env.GOOGLE_CLOUD_PROJECT;
-      process.env.NODE_CONFIG_ENV = _.last(projectId.split("-"));
+      process.env.NODE_CONFIG_ENV = _.last(projectId.split('-'));
     } else if (!process.env.NODE_CONFIG_ENV) {
-      process.env.NODE_CONFIG_ENV = "development";
+      process.env.NODE_CONFIG_ENV = 'development';
     }
 
-    const nodeConfig = require("config");
+    const nodeConfig = require('config');
     const mergedConfig: object = {};
     const configSources: any = nodeConfig.util.getConfigSources();
 
@@ -77,7 +85,7 @@ export class ConfigurationProvider implements Configuration {
 
     const withEnvironment = nodeConfig.util.extendDeep(
       mergedConfig,
-      process.env
+      process.env,
     );
 
     const decodedConfig = Config.decode(withEnvironment);
@@ -94,16 +102,16 @@ export class ConfigurationProvider implements Configuration {
     return this.configuration.projectId;
   }
 
-  get environment(): "development" | "appengine" {
+  get environment(): 'development' | 'appengine' {
     if (this.configuration.APP_ENGINE_ENVIRONMENT) {
-      return "appengine";
+      return 'appengine';
     }
 
-    return "development";
+    return 'development';
   }
 
   isDevelopment(): boolean {
-    return this.environment === "development";
+    return this.environment === 'development';
   }
 
   get host(): string {
@@ -131,18 +139,23 @@ export class ConfigurationProvider implements Configuration {
   }
 
   get systemSecret(): Buffer {
-    return Buffer.from(this.configuration.systemSecret, "base64");
+    return Buffer.from(this.configuration.systemSecret, 'base64');
   }
 
   get auth() {
     return this.configuration.auth;
   }
 
+  get devHooks() {
+    return this.configuration.devHooks;
+  }
+
   get session(): SessionConfiguration {
     return {
       secret: this.configuration.cookieSecret,
       apiEndpoint: this.apiEndpoint,
-      projectId: this.projectId
+      projectId: this.projectId,
     };
   }
+
 }
