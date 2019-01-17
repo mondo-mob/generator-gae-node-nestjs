@@ -33,7 +33,7 @@ export class UsersResolver {
     { id, name, roles }: { id: string; name: string; roles: string[] },
     context: Context,
   ) {
-    return await this.userService.updateUser(context, id, name, roles);
+    return await this.userService.update(context, id, { name, roles });
   }
 
   avatar({ avatar }: User) {

@@ -1,45 +1,44 @@
 import { Injectable } from '@nestjs/common';
-import {
-  Context,
-  Transactional,
-  UserService as GaeUserService,
-  IUser,
-} from '@3wks/gae-node-nestjs';
-import { UserRepository, User } from './users.repository';
+import {AbstractUserService, Context, LoginIdentifierRepository} from '@3wks/gae-node-nestjs';
+import * as uuid from 'node-uuid';
+import { User, UserCreate, UserInput, UserRepository } from './users.repository';
 
 @Injectable()
-export class UsersService implements GaeUserService<User> {
-  constructor(private readonly userRepository: UserRepository) {}
-
-  @Transactional()
-  async updateUser(
-    context: Context,
-    id: string,
-    name: string,
-    roles: string[],
-  ) {
-    const user = await this.userRepository.get(context, id);
-
-    if (!user) {
-      throw new Error('User does not exist');
-    }
-
-    user.name = name;
-    user.roles = roles;
-
-    return await this.userRepository.save(context, user);
+export class UsersService extends AbstractUserService<User> {
+  constructor(
+    protected readonly loginIdentifierRepository: LoginIdentifierRepository,
+    private readonly userRepository: UserRepository) {
+    super(loginIdentifierRepository);
   }
 
-  async get(context: Context, userId: string): Promise<User | undefined> {
+
+  async getRequired(context: Context, userId: string) {
+    const result = await this.get(context, userId);
+    if (!result) {
+      throw new Error(`No user found with id: ${userId}`);
+    }
+    return result;
+  }
+
+  async get(context: Context, userId: string | undefined) {
+    if (!userId) {
+      return undefined;
+    }
     return this.userRepository.get(context, userId);
   }
-  async create(context: Context, user: User): Promise<User> {
-    return this.userRepository.save(context, {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      roles: user.roles || [],
-      avatar: '',
-    });
+
+  protected async createUser(context: Context, user: UserCreate) {
+    const entity = { ...user } as User;
+
+    entity.id = entity.id || uuid.v4();
+    entity.avatar = '';
+    entity.enabled = entity.enabled === undefined || entity.enabled;
+
+    return this.userRepository.save(context, entity);
   }
+
+  protected async updateUser(context: Context, user: User, updates: UserInput): Promise<User> {
+    return this.userRepository.save(context, {...user, ...updates});
+  }
+
 }

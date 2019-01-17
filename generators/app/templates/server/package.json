@@ -24,7 +24,7 @@
     "kill-server-force": "bash ./scripts/kill-server.sh -9"
   },
   "dependencies": {
-    "@3wks/gae-node-nestjs": "^1.0.10",
+    "@3wks/gae-node-nestjs": "1.2.0",
     "@google-cloud/connect-datastore": "^1.0.0",
     "@google-cloud/datastore": "^1.4.1",
     "@google-cloud/debug-agent": "^2.6.0",
@@ -104,6 +104,7 @@
     "ts-node": "^4.1.0",
     "tsconfig-paths": "^3.1.1",
     "tslint": "5.3.2",
+    "tslint-config-prettier": "1.17.0",
     "typescript": "^3.0.1",
     "webpack": "^4.2.0",
     "webpack-cli": "^2.0.13",
