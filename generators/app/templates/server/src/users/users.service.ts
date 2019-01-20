@@ -1,5 +1,5 @@
+import { AbstractUserService, Context, LoginIdentifierRepository } from '@3wks/gae-node-nestjs';
 import { Injectable } from '@nestjs/common';
-import {AbstractUserService, Context, LoginIdentifierRepository} from '@3wks/gae-node-nestjs';
 import * as uuid from 'node-uuid';
 import { User, UserCreate, UserInput, UserRepository } from './users.repository';
 
@@ -11,6 +11,16 @@ export class UsersService extends AbstractUserService<User> {
     super(loginIdentifierRepository);
   }
 
+  async listByRole(context: Context, role: string, limit = 1000) {
+    // @ts-ignore
+    const [users, ] = await this.userRepository.query(context, {
+      filters: {
+        roles: role,
+      },
+      limit,
+    });
+    return users;
+  }
 
   async getRequired(context: Context, userId: string) {
     const result = await this.get(context, userId);
@@ -40,5 +50,4 @@ export class UsersService extends AbstractUserService<User> {
   protected async updateUser(context: Context, user: User, updates: UserInput): Promise<User> {
     return this.userRepository.save(context, {...user, ...updates});
   }
-
 }
