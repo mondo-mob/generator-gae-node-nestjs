@@ -10,7 +10,7 @@ The nest documentation (https://github.com/nestjs/nest) is invaluable for gettin
 
 Datastore emulator: `gcloud beta emulators datastore start`
 
-Server: `npx server` from `server` directory
+Server: `npm run start:dev` from `server` directory
 
 Client: `npm start` from `client` directory
 
