@@ -20,8 +20,8 @@
     "deploy:prod": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-prod npm run deploy && TAG_NAME=prod/`date +%Y%m%d_%H%M%S` && git tag -a $TAG_NAME -m 'prod deployed' && git push origin $TAG_NAME",
     "deploy": "npm run build && gcloud app deploy cron.yaml index.yaml app.yaml --quiet",
     "dsui": "dsui --port 4000",
-    "kill-server": "bash ./scripts/kill-server.sh",
-    "kill-server-force": "bash ./scripts/kill-server.sh -9"
+    "kill": "bash ./scripts/kill.sh",
+    "kill-force": "bash ./scripts/kill.sh -9"
   },
   "dependencies": {
     "@3wks/gae-node-nestjs": "1.2.0",

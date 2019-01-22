@@ -38,7 +38,9 @@
     "eject": "react-scripts-ts eject",
     "introspect": "apollo-codegen introspect-schema http://localhost:8080/api/graphql --output graphql.schema.json --header='x-csrf-token:development'",
     "generate": "apollo-codegen generate \"src/**/*.ts{,?}\" --tag-name gql --schema graphql.schema.json --target typescript --output src/graphql.ts",
-    "graphql": "npm run introspect && npm run generate"
+    "graphql": "npm run introspect && npm run generate",
+    "kill": "bash ./scripts/kill.sh",
+    "kill-force": "bash ./scripts/kill.sh -9"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.4",
