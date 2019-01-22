@@ -1,6 +1,6 @@
 {
   "name": "@3wks/generator-gae-node-nestjs",
-  "version": "0.2.18",
+  "version": "0.3.0",
   "description": "A generator for building nestjs apps on app engine node",
   "homepage": "",
   "author": {
@@ -20,14 +20,14 @@
     "yeoman-generator"
   ],
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-config-xo": "^0.20.1",
-    "eslint-plugin-prettier": "^2.6.0",
+    "eslint": "5.12.1",
+    "eslint-config-prettier": "3.6.0",
+    "eslint-config-xo": "0.26.0",
+    "eslint-plugin-prettier": "3.0.1",
     "husky": "^0.14.3",
-    "jest": "^22.0.6",
-    "lint-staged": "^6.1.1",
-    "prettier": "^1.11.1",
+    "jest": "23.6.0",
+    "lint-staged": "8.1.0",
+    "prettier": "1.16.0",
     "yeoman-assert": "^3.1.0",
     "yeoman-test": "^1.7.0"
   },
@@ -35,12 +35,12 @@
     "npm": ">= 4.0.0"
   },
   "dependencies": {
-    "chalk": "^2.1.0",
-    "change-case": "^3.0.2",
-    "lodash": "^4.17.10",
+    "chalk": "2.4.2",
+    "change-case": "3.1.0",
+    "lodash": "4.17.11",
     "pluralize": "^7.0.0",
-    "slugify": "^1.3.0",
-    "yeoman-generator": "^2.0.1",
+    "slugify": "1.3.4",
+    "yeoman-generator": "3.2.0",
     "yosay": "^2.0.1"
   },
   "jest": {
