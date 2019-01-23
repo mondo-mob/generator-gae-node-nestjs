@@ -32,9 +32,9 @@
   },
   "scripts": {
     "format": "prettier --write \"./src/**/*.ts{,?}\"",
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build && mv ./build/ ../server/public",
-    "test": "react-scripts-ts test --env=jsdom",
+    "lint": "tslint --project .",
+    "start": "npm run lint && react-scripts-ts start",
+    "build": "npm run lint && react-scripts-ts build && mv ./build/ ../server/public",
     "eject": "react-scripts-ts eject",
     "introspect": "apollo-codegen introspect-schema http://localhost:8080/api/graphql --output graphql.schema.json --header='x-csrf-token:development'",
     "generate": "apollo-codegen generate \"src/**/*.ts{,?}\" --tag-name gql --schema graphql.schema.json --target typescript --output src/graphql.ts",
@@ -58,7 +58,9 @@
     "prettier": "^1.13.7",
     "react-scripts-ts": "3.1.0",
     "typescript": "^3.0.1",
-    "apollo-codegen": "^0.20.2"
+    "apollo-codegen": "^0.20.2",
+    "tslint": "5.12.1",
+    "tslint-config-prettier": "1.17.0"
   },
   "proxy": {
     "/api": {
