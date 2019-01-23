@@ -27,11 +27,6 @@ module.exports = class extends Generator {
         default: _.startCase(this.appname)
       },
       {
-        name: 'gitPath',
-        message: 'What is the HTTPS git path for this project?',
-        store: true
-      },
-      {
         name: 'adminEmail',
         message: 'What email address should we use to create the initial admin login?',
         store: true
