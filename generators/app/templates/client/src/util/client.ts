@@ -3,21 +3,11 @@ import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
 import { BatchHttpLink } from 'apollo-link-batch-http';
 import { onError } from 'apollo-link-error';
-import { toIdValue } from 'apollo-utilities';
 import { finishLoading, startLoading } from '../components/PageProgressBar';
 import { showMessage } from '../components/Toast';
 import { csrfHeaders } from './csrf';
 
-const cache: InMemoryCache = new InMemoryCache({
-  cacheRedirects: {
-    Query: {
-      permitById: (_, { id }) =>
-        toIdValue(
-          (cache as any).config.dataIdFromObject({ __typename: 'Permit', id }),
-        ),
-    },
-  },
-});
+const cache: InMemoryCache = new InMemoryCache({});
 
 const client = new ApolloClient({
   defaultOptions: {
