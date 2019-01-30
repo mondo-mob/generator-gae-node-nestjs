@@ -74,9 +74,8 @@ For more information on how the above command works see the migrations section.
 
 1.  Create oauth credentials (client / secret) through the google console as per https://support.google.com/cloud/answer/6158849?hl=en
 2.  Ensure the following a redirect to `{host}/auth/signin/google/callback` is enabled
-3.  Add Google+ API in google console (https://console.cloud.google.com/apis/library/plus.googleapis.com)
-4.  Add the client key and secret to the `config/{env}.json` file
-5.  Change the `enabled` flag to true
+3.  Add the client key and secret to the `config/{env}.json` file
+4.  Change the `enabled` flag to true
 
 ## Google Sign Up
 
