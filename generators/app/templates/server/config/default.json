@@ -21,6 +21,12 @@
       "enabled": false,
       "identityProviderUrl": "",
       "cert": ""
+    },
+    "auth0": {
+      "enabled": false,
+      "domain": "",
+      "clientId": "",
+      "secret": ""
     }
   }
 }
