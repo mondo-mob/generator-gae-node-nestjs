@@ -6,6 +6,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  StyleRulesCallback,
   Theme,
   withStyles,
   WithStyles,
@@ -16,7 +17,7 @@ import * as cx from 'classnames';
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const styles = (theme: Theme) => ({
+const styles: StyleRulesCallback = (theme: Theme) => ({
   drawerPaper: {
     position: 'relative' as 'relative',
     whiteSpace: 'nowrap' as 'nowrap',

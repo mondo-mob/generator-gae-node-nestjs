@@ -1,6 +1,6 @@
 // tslint:disable:no-console
 
-import { Button, Theme, withStyles, WithStyles } from '@material-ui/core';
+import { Button, StyleRulesCallback, Theme, withStyles, WithStyles } from '@material-ui/core';
 import { ApolloClient } from 'apollo-client';
 import { isArray } from 'lodash';
 import * as qs from 'query-string';
@@ -15,7 +15,7 @@ import { showMessage } from '../../components/Toast';
 import { requestJSON } from '../../util/http';
 import AccountPage from './AccountPage';
 
-const styles = (theme: Theme) => ({
+const styles: StyleRulesCallback = (theme: Theme) => ({
   submit: {
     width: '100%',
     marginTop: theme.spacing.unit * 4,

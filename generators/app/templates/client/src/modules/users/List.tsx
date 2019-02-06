@@ -1,5 +1,6 @@
 import {
   Avatar,
+  StyleRulesCallback,
   Table,
   TableBody,
   TableCell,
@@ -31,7 +32,7 @@ const listUsersQuery = gql`
   }
 `;
 
-const styles = (theme: Theme) => ({
+const styles: StyleRulesCallback = (theme: Theme) => ({
   usernameCell: {
     display: 'flex',
   },

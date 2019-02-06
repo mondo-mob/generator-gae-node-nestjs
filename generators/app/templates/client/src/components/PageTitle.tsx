@@ -1,6 +1,7 @@
 import {
   AppBar,
   IconButton,
+  StyleRulesCallback,
   Theme,
   Toolbar,
   Typography,
@@ -11,7 +12,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import * as cx from 'classnames';
 import * as React from 'react';
 
-const styles = (theme: Theme) => ({
+const styles: StyleRulesCallback = (theme: Theme) => ({
   menuButton: {
     marginLeft: 12,
     marginRight: 36,

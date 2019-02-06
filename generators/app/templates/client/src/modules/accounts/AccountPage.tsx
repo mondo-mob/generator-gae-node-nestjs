@@ -1,7 +1,7 @@
-import { Theme, Typography, withStyles, WithStyles } from '@material-ui/core';
+import { StyleRulesCallback, Theme, Typography, withStyles, WithStyles } from '@material-ui/core';
 import * as React from 'react';
 
-const styles = (theme: Theme) => ({
+const styles: StyleRulesCallback = (theme: Theme) => ({
   page: {
     minHeight: '100vh',
     display: 'flex',

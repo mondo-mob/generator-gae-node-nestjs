@@ -1,9 +1,9 @@
-import { Theme, withStyles, WithStyles } from '@material-ui/core';
+import { StyleRulesCallback, Theme, withStyles, WithStyles } from '@material-ui/core';
 import * as React from 'react';
 import PageTitle from './PageTitle';
 import Sidebar from './Sidebar';
 
-const styles = (theme: Theme) => ({
+const styles: StyleRulesCallback = (theme: Theme) => ({
   root: {
     minHeight: '100vh',
     width: '100%',

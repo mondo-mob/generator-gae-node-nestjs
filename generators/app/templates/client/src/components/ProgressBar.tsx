@@ -1,9 +1,9 @@
-import { Theme, WithStyles, withStyles } from "@material-ui/core";
+import { StyleRulesCallback, Theme, WithStyles, withStyles } from "@material-ui/core";
 import * as React from "react";
 import ProgressBar from "react-progress-bar-plus";
 import "react-progress-bar-plus/lib/progress-bar.css";
 
-const styles = (theme: Theme) => ({
+const styles: StyleRulesCallback = (theme: Theme) => ({
   root: {
     "& .react-progress-bar-percent": {
       backgroundColor: theme.palette.primary.light,

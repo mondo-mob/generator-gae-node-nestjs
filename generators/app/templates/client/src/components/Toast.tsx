@@ -1,6 +1,7 @@
 import {
   Snackbar,
   SnackbarContent,
+  StyleRulesCallback,
   Theme,
   withStyles,
   WithStyles,
@@ -23,7 +24,7 @@ let showToast: (message: string, isError: boolean) => void = (
   // do nothing by default
 };
 
-const styles = (theme: Theme) => ({
+const styles: StyleRulesCallback = (theme: Theme) => ({
   snackbar: {
     marginBottom: theme.spacing.unit * 2,
   },

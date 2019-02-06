@@ -1,4 +1,4 @@
-import { Button, Theme, withStyles, WithStyles } from '@material-ui/core';
+import { Button, StyleRulesCallback, Theme, withStyles, WithStyles } from '@material-ui/core';
 import gql from 'graphql-tag';
 import * as React from 'react';
 import { Mutation } from 'react-apollo';
@@ -10,7 +10,7 @@ import { ActivateAccount, ActivateAccountVariables } from '../../graphql';
 import { required } from '../../util/validation';
 import AccountPage from './AccountPage';
 
-const styles = (theme: Theme) => ({
+const styles: StyleRulesCallback = (theme: Theme) => ({
   submit: {
     width: '100%',
     marginTop: theme.spacing.unit * 4,
