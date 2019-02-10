@@ -38,7 +38,10 @@ const userSchema = t.intersection([
   t.interface({
     id: t.string,
     enabled: t.boolean,
-  })
+  }),
+  t.partial({
+    orgId: t.string,
+  }),
 ]);
 
 export type UserInput = t.TypeOf<typeof userInputSchema>;
@@ -52,6 +55,7 @@ export class UserRepository extends Repository<User> {
       index: {
         email: true,
         roles: true,
+        orgId: true,
       },
       defaultValues: {
         roles: [],
