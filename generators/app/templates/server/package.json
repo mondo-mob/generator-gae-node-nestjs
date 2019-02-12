@@ -12,7 +12,7 @@
     "prestart:dev": "rm -rf dist/ && npm run lint",
     "start:debug": "ts-node --inspect src/main.ts",
     "compile:prod": "rm -rf dist && tsc",
-    "test": "jest",
+    "test": "jest --watch",
     "test:cov": "jest --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "build": "rm -rf public && npm run lint && npm run --prefix ../client build && npm run compile:prod",
