@@ -7,7 +7,7 @@ import {
   WithStyles,
 } from '@material-ui/core';
 import green from '@material-ui/core/colors/green';
-import * as cx from 'classnames';
+import cx from 'classnames';
 import * as React from 'react';
 
 interface State {

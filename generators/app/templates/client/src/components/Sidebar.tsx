@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Users from '@material-ui/icons/SupervisorAccount';
-import * as cx from 'classnames';
+import cx from 'classnames';
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
