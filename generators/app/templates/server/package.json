@@ -22,7 +22,8 @@
     "deploy": "npm run build && gcloud app deploy cron.yaml index.yaml app.yaml --quiet",
     "dsui": "dsui --port 4000",
     "kill": "bash ./scripts/kill.sh",
-    "kill-force": "bash ./scripts/kill.sh -9"
+    "kill-force": "bash ./scripts/kill.sh -9",
+    "clear-datastore": "rm -rf ~/.config/gcloud/emulators/datastore"
   },
   "dependencies": {
     "@3wks/gae-node-nestjs": "1.5.7",
