@@ -9,7 +9,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import cx from 'classnames';
+import * as cx from 'classnames';
 import * as React from 'react';
 
 const styles: StyleRulesCallback = (theme: Theme) => ({
