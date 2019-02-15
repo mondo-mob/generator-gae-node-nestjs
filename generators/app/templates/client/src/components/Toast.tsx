@@ -1,13 +1,6 @@
-import {
-  Snackbar,
-  SnackbarContent,
-  StyleRulesCallback,
-  Theme,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core';
+import { Snackbar, SnackbarContent, StyleRulesCallback, Theme, withStyles, WithStyles } from '@material-ui/core';
 import green from '@material-ui/core/colors/green';
-import * as cx from 'classnames';
+import cx from 'classnames';
 import * as React from 'react';
 
 interface State {
@@ -17,10 +10,7 @@ interface State {
   isError?: boolean;
 }
 
-let showToast: (message: string, isError: boolean) => void = (
-  message: string,
-  isError: boolean,
-) => {
+let showToast: (message: string, isError: boolean) => void = (message: string, isError: boolean) => {
   // do nothing by default
 };
 
