@@ -1,23 +1,13 @@
-import {
-  Button,
-  CircularProgress,
-  Typography,
-  WithStyles,
-  withStyles,
-} from '@material-ui/core';
+import { Button, CircularProgress, Typography, WithStyles, withStyles } from '@material-ui/core';
 import gql from 'graphql-tag';
 import * as React from 'react';
 import { Mutation, Query } from 'react-apollo';
 import { Field } from 'react-final-form';
 import { RouteComponentProps } from 'react-router';
 import Form from '../../components/Form';
+import { DropzoneField } from '../../components/form/DropzoneField';
 import Input from '../../components/form/TextField';
-import {
-  UpdateUser,
-  UpdateUserVariables,
-  UserDetails,
-  UserDetailsVariables,
-} from '../../graphql';
+import { AttachmentInput, UpdateUser, UpdateUserVariables, UserDetails, UserDetailsVariables } from '../../graphql';
 import { required } from '../../util/validation';
 
 const userDetailsQuery = gql`
@@ -35,11 +25,15 @@ const userDetailsQuery = gql`
 `;
 
 const mutation = gql`
-  mutation UpdateUser($userId: ID!, $name: String!, $roles: [String!]!) {
-    updateUser(id: $userId, name: $name, roles: $roles) {
+  mutation UpdateUser($userId: ID!, $name: String!, $roles: [String!]!, $profile: [AttachmentInput!]) {
+    updateUser(id: $userId, name: $name, roles: $roles, profile: $profile) {
       id
       name
       roles
+      profile {
+        id
+        filename
+      }
     }
   }
 `;
@@ -51,6 +45,7 @@ interface RouteProps {
 interface FormProps {
   name: string;
   roles: string[];
+  profile?: AttachmentInput[];
 }
 
 const styles = {
@@ -60,15 +55,10 @@ const styles = {
   },
 };
 
-interface Props
-  extends RouteComponentProps<RouteProps>,
-    WithStyles<typeof styles> {}
+interface Props extends RouteComponentProps<RouteProps>, WithStyles<typeof styles> {}
 
 const UpdateUserPage: React.SFC<Props> = ({ match, history, classes }) => (
-  <Query<UserDetails, UserDetailsVariables>
-    query={userDetailsQuery}
-    variables={{ userId: match.params.userId }}
-  >
+  <Query<UserDetails, UserDetailsVariables> query={userDetailsQuery} variables={{ userId: match.params.userId }}>
     {({ data, loading }) => {
       if (loading && (!data || !data.userById)) {
         return <CircularProgress />;
@@ -97,9 +87,9 @@ const UpdateUserPage: React.SFC<Props> = ({ match, history, classes }) => (
           <Mutation<UpdateUser, UpdateUserVariables> mutation={mutation}>
             {updateUser => (
               <Form<FormProps>
-                onSubmit={({ name, roles }) =>
+                onSubmit={({ name, roles, profile }) =>
                   updateUser({
-                    variables: { userId: match.params.userId, name, roles },
+                    variables: { userId: match.params.userId, name, roles, profile },
                   })
                 }
                 initialValues={{
@@ -128,7 +118,14 @@ const UpdateUserPage: React.SFC<Props> = ({ match, history, classes }) => (
                       validate={required('Name is required')}
                       component={Input}
                     />
-
+                    <Field
+                      infoText="Drag profile image(s) here, or click to select files to upload."
+                      name="profile"
+                      margin="normal"
+                      component={DropzoneField}
+                      multiple={true}
+                      accept="image/jpg, image/jpeg, image/png"
+                    />
                     <Button variant="contained" color="primary" type="submit">
                       Save changes
                     </Button>

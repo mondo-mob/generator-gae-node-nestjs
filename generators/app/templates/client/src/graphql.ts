@@ -135,10 +135,16 @@ export interface UserDetailsVariables {
 // GraphQL mutation operation: UpdateUser
 // ====================================================
 
+export interface UpdateUser_updateUser_profile {
+  id: string;
+  filename: string;
+}
+
 export interface UpdateUser_updateUser {
   id: string;
   name: string | null;
   roles: string[];
+  profile: UpdateUser_updateUser_profile[] | null;
 }
 
 export interface UpdateUser {
@@ -149,6 +155,7 @@ export interface UpdateUserVariables {
   userId: string;
   name: string;
   roles: string[];
+  profile?: AttachmentInput[] | null;
 }
 
 /* tslint:disable */
@@ -157,6 +164,12 @@ export interface UpdateUserVariables {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+//
+export interface AttachmentInput {
+  id: string;
+  filename: string;
+}
 
 //==============================================================
 // END Enums and Input Objects
