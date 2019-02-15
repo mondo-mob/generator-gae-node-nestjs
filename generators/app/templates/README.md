@@ -6,13 +6,25 @@ The project should be ready to run locally straight away - though some configura
 
 The nest documentation (https://github.com/nestjs/nest) is invaluable for getting started.
 
-## Before running (locally)
+## Before running
 
 If you intend to use the dropzone field (demo'd in the update user page), then you need to do the below setups
 
-- Get the keyfile for the GCP with storage write access and place it in server directory
-- Make sure the bucket config in server/config/default.json config is part of the same GCP with above keyfile access.
-- Dropzone upload field in Update user page is for demo purpose only and not actually persisted in User.
+- Get the keyfile for the GCP with storage write access and place it in server directory. File is named as `keyfile.json`.
+- Make sure the bucket config in server/config/default.json config is part of the same GCP and the above keyfile will give the app write access to the bucket to write the upload attachments.
+- Dropzone upload field in Update user page is for demo purpose only and not actually persisted in User. Make necessary changes as needed depending on the schema requirement to persiste the attachment info (id and fileName).
+
+### To remove the upload from update user
+
+- Remove all reference to AttachmentInput & profile from mutation and the form, and also the reference to DropzoneField from Update.tsx in user module.
+- Remove all reference to Attachment and profile from user.graphqls (input, type and updateUser method specification)
+- No changes needed in DropzoneField
+- execute `npm run graphql`
+
+### Recommended usage.
+
+- Update the DropzoneField to use AttachmentInput from graphql instead of it's interface.
+- Interface is added to DropzoneField to make sure that the application doesn't fail if the user decided to remove the upload from upload user page.
 
 ## Running (locally)
 
