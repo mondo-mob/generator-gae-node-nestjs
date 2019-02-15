@@ -17,7 +17,6 @@ import Delete from '@material-ui/icons/Delete';
 import * as React from 'react';
 import Dropzone, { DropFilesEventHandler } from 'react-dropzone';
 import { FieldRenderProps } from 'react-final-form';
-import { AttachmentInput } from '../../graphql';
 import { request } from '../../util/http';
 
 const styles: StyleRulesCallback = () => ({
@@ -48,6 +47,11 @@ const styles: StyleRulesCallback = () => ({
     fontSize: 'small',
   },
 });
+
+interface AttachmentInput {
+  id: string;
+  filename: string;
+}
 
 interface Props extends FieldRenderProps, WithStyles<typeof styles> {
   infoText: string;
