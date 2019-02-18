@@ -5,13 +5,8 @@
     "object-literal-sort-keys": false,
     "no-unnecessary-initializer": false,
     "no-console": false,
-    "variable-name": [
-      true,
-      "ban-keywords",
-      "check-format",
-      "allow-leading-underscore"
-    ],
-
+    "no-floating-promises": true,
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "ordered-imports": false,
     "member-access": false
   },

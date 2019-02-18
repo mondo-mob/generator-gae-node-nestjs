@@ -1,3 +1,4 @@
 import { bootstrap } from './bootstrap';
+import { rootLogger } from '@3wks/gae-node-nestjs';
 
-bootstrap();
+bootstrap().catch(() => rootLogger.error('Error while bootstrapping the application'));
