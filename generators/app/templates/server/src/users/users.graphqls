@@ -2,12 +2,18 @@ type Avatar {
   url: String
 }
 
+enum UserRole {
+  super
+  admin
+  user
+}
+
 type User {
   id: ID!
   name: String
   avatar: Avatar!
   email: String!
-  roles: [String!]!
+  roles: [UserRole!]!
   profile: [Attachment!]
 }
 
@@ -27,5 +33,5 @@ type Attachment {
 }
 
 type Mutation {
-  updateUser(id: ID!, name: String, roles: [String!]!, profile: [AttachmentInput!]): User!
+  updateUser(id: ID!, name: String, roles: [UserRole!]!, profile: [AttachmentInput!]): User!
 }

@@ -7,7 +7,14 @@ import { RouteComponentProps } from 'react-router';
 import Form from '../../components/Form';
 import { DropzoneField } from '../../components/form/DropzoneField';
 import Input from '../../components/form/TextField';
-import { AttachmentInput, UpdateUser, UpdateUserVariables, UserDetails, UserDetailsVariables } from '../../graphql';
+import {
+  AttachmentInput,
+  UpdateUser,
+  UpdateUserVariables,
+  UserDetails,
+  UserDetailsVariables,
+  UserRole,
+} from '../../graphql';
 import { required } from '../../util/validation';
 
 const userDetailsQuery = gql`
@@ -25,7 +32,7 @@ const userDetailsQuery = gql`
 `;
 
 const mutation = gql`
-  mutation UpdateUser($userId: ID!, $name: String!, $roles: [String!]!, $profile: [AttachmentInput!]) {
+  mutation UpdateUser($userId: ID!, $name: String!, $roles: [UserRole!]!, $profile: [AttachmentInput!]) {
     updateUser(id: $userId, name: $name, roles: $roles, profile: $profile) {
       id
       name
@@ -44,7 +51,7 @@ interface RouteProps {
 
 interface FormProps {
   name: string;
-  roles: string[];
+  roles: UserRole[];
   profile?: AttachmentInput[];
 }
 

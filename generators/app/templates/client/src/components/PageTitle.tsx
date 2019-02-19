@@ -1,5 +1,6 @@
 import {
   AppBar,
+  Button,
   IconButton,
   StyleRulesCallback,
   Theme,
@@ -11,6 +12,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import cx from 'classnames';
 import * as React from 'react';
+import { RouteHelper } from '../routes/route-helper';
 
 const styles: StyleRulesCallback = (theme: Theme) => ({
   menuButton: {
@@ -35,30 +37,45 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  title: {
+    paddingLeft: 10,
+  },
+  loginButton: {
+    position: 'absolute',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2,
+  },
 });
 
 interface Props extends WithStyles<typeof styles> {
   open: boolean;
   handleDrawerOpen?: () => void;
+  showDrawer?: boolean;
+  r: RouteHelper;
 }
 
-const PageTitle: React.SFC<Props> = ({ open, classes, handleDrawerOpen }) => (
-  <AppBar
-    position="absolute"
-    className={cx(classes.appBar, open && classes.appBarShift)}
-  >
+const PageTitle: React.FC<Props> = ({ open, classes, handleDrawerOpen, showDrawer, r }) => (
+  <AppBar position="absolute" className={cx(classes.appBar, open && classes.appBarShift)}>
     <Toolbar disableGutters={!open}>
-      <IconButton
-        color="inherit"
-        aria-label="Open drawer"
-        onClick={handleDrawerOpen}
-        className={cx(classes.menuButton, open && classes.hide)}
-      >
-        <MenuIcon />
-      </IconButton>
-      <Typography variant="title" color="inherit">
-        <%= projectName %>
+      {showDrawer && (
+        <IconButton
+          color="inherit"
+          aria-label="Open drawer"
+          onClick={handleDrawerOpen}
+          className={cx(classes.menuButton, open && classes.hide)}
+        >
+          <MenuIcon />
+        </IconButton>
+      )}
+
+      <Typography className={classes.title} variant="title" color="inherit">
+        Test Nest
       </Typography>
+      {r.isNotAuthenticated() && (
+        <Button href="/signin" type="button" color="primary" variant="contained" className={classes.loginButton}>
+          Login
+        </Button>
+      )}
     </Toolbar>
   </AppBar>
 );

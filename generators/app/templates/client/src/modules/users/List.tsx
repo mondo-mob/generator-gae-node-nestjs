@@ -10,27 +10,13 @@ import {
   WithStyles,
 } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
-import gql from 'graphql-tag';
 import * as React from 'react';
 import { Query, QueryResult } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import HeaderWithActions from '../../components/HeaderWithActions';
 import { ListUsers } from '../../graphql';
 import { InviteUserDialog } from './InviteUserDialog';
-
-const listUsersQuery = gql`
-  query ListUsers {
-    users {
-      id
-      name
-      email
-      avatar {
-        url
-      }
-      roles
-    }
-  }
-`;
+import { listUsersQuery } from './queries';
 
 const styles: StyleRulesCallback = (theme: Theme) => ({
   usernameCell: {
@@ -57,29 +43,25 @@ const List: React.SFC<WithStyles<typeof styles>> = ({ classes }) => (
               <TableCell />
             </TableRow>
           </TableHead>
-          {data &&
-            data.users && (
-              <TableBody>
-                {data.users.map(user => (
-                  <TableRow key={user.id}>
-                    <TableCell>
-                      <div className={classes.usernameCell}>
-                        <Avatar
-                          className={classes.avatar}
-                          src={user.avatar.url || undefined}
-                        />
-                        <div>{user.name}</div>
-                      </div>
-                    </TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>{user.roles.join(', ')}</TableCell>
-                    <TableCell>
-                      <Link to={`/users/${user.id}`}>Edit</Link>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            )}
+          {data && data.users && (
+            <TableBody>
+              {data.users.map(user => (
+                <TableRow key={user.id}>
+                  <TableCell>
+                    <div className={classes.usernameCell}>
+                      <Avatar className={classes.avatar} src={user.avatar.url || undefined} />
+                      <div>{user.name}</div>
+                    </div>
+                  </TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.roles.join(', ')}</TableCell>
+                  <TableCell>
+                    <Link to={`/admin/users/${user.id}`}>Edit</Link>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          )}
         </Table>
       )}
     </Query>

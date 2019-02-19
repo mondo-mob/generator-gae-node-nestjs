@@ -1,7 +1,7 @@
 import { StyleRulesCallback, Theme, withStyles, WithStyles } from '@material-ui/core';
 import * as React from 'react';
-import PageTitle from './PageTitle';
-import Sidebar from './Sidebar';
+import { RouteHelper } from '../../routes/route-helper';
+import PageTitle from '../PageTitle';
 
 const styles: StyleRulesCallback = (theme: Theme) => ({
   root: {
@@ -18,13 +18,15 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   toolbar: theme.mixins.toolbar,
 });
 
-interface Props extends WithStyles<typeof styles> {}
+interface Props extends WithStyles<typeof styles> {
+  r: RouteHelper;
+}
 
 interface State {
   open: boolean;
 }
 
-class Page extends React.Component<Props, State> {
+class PublicLayout extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -33,26 +35,24 @@ class Page extends React.Component<Props, State> {
   }
 
   public render() {
-    const { classes, children } = this.props;
+    const { classes, children, r } = this.props;
 
     const { open } = this.state;
 
     return (
       <div>
-        <PageTitle open={open} handleDrawerOpen={this.open} />
+        <PageTitle open={open} handleDrawerOpen={this.open} showDrawer={false} r={r} />
         <main className={classes.root}>
-          <Sidebar open={open} handleDrawerClose={this.close} />
           <div className={classes.content}>
             <div className={classes.toolbar} />
-            <div>{children}</div>
+            <div className={classes.childrenContent}>{children}</div>
           </div>
         </main>
       </div>
     );
   }
 
-  private close = () => this.setState({ open: false });
   private open = () => this.setState({ open: true });
 }
 
-export default withStyles(styles)(Page);
+export default withStyles(styles)(PublicLayout);

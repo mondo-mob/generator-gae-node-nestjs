@@ -7,7 +7,7 @@
 
 export interface Me_me {
   id: string;
-  roles: string[];
+  roles: UserRole[];
 }
 
 export interface Me {
@@ -94,7 +94,7 @@ export interface ListUsers_users {
   name: string | null;
   email: string;
   avatar: ListUsers_users_avatar;
-  roles: string[];
+  roles: UserRole[];
 }
 
 export interface ListUsers {
@@ -116,7 +116,7 @@ export interface UserDetails_userById_credentials {
 export interface UserDetails_userById {
   id: string;
   name: string | null;
-  roles: string[];
+  roles: UserRole[];
   credentials: UserDetails_userById_credentials | null;
 }
 
@@ -143,7 +143,7 @@ export interface UpdateUser_updateUser_profile {
 export interface UpdateUser_updateUser {
   id: string;
   name: string | null;
-  roles: string[];
+  roles: UserRole[];
   profile: UpdateUser_updateUser_profile[] | null;
 }
 
@@ -154,7 +154,7 @@ export interface UpdateUser {
 export interface UpdateUserVariables {
   userId: string;
   name: string;
-  roles: string[];
+  roles: UserRole[];
   profile?: AttachmentInput[] | null;
 }
 
@@ -164,6 +164,12 @@ export interface UpdateUserVariables {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export enum UserRole {
+  admin = 'admin',
+  super = 'super',
+  user = 'user',
+}
 
 //
 export interface AttachmentInput {
