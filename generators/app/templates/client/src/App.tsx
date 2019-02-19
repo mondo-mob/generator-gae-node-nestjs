@@ -1,20 +1,19 @@
 import gql from 'graphql-tag';
-import * as _ from 'lodash';
 import * as React from 'react';
 import { Query } from 'react-apollo';
 import { Redirect, Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-
-import Page from './components/Page';
 import { Me } from './graphql';
 import Activate from './modules/accounts/Activate';
 import ConfirmReset from './modules/accounts/ConfirmReset';
 import Reset from './modules/accounts/Reset';
 import LogIn from './modules/accounts/SignIn';
 import Loading from './modules/pages/Loading';
-import NotFound from './modules/pages/NotFound';
-import List from './modules/users/List';
-import UpdateUserPage from './modules/users/Update';
+import Unauthorised from './modules/pages/Unauthorised';
+import AdminRoutes from './routes/AdminRoutes';
+import PublicRoutes from './routes/PublicRoutes';
+import RedirectForRoles from './routes/RedirectForRoles';
+import { RouteHelper } from './routes/route-helper';
 
 export const meQuery = gql`
   query Me {
@@ -35,48 +34,27 @@ class App extends React.Component {
               return <Loading />;
             }
 
-            if (!data || !data.me) {
+            const r = new RouteHelper(Unauthorised, data && data.me);
+
+            if (r.isNotAuthenticated()) {
               return (
                 <Switch>
                   <Route path="/signin" component={LogIn} />
                   <Route path="/reset" component={Reset} />
                   <Route path="/activate/:code" component={Activate} />
                   <Route path="/confirm-reset/:code" component={ConfirmReset} />
+                  <Route path="/public" render={() => <PublicRoutes r={r} />} />
                   <Redirect to="/signin" />
                 </Switch>
               );
             }
 
-            const { roles } = data.me;
-
-            const hasRole = (role: string, component: React.ComponentType) => {
-              if (_.includes(roles, role)) {
-                return component;
-              }
-
-              return NotFound;
-            };
-
             return (
               <Switch>
-                <Route
-                  render={() => (
-                    <Page>
-                      <Switch>
-                        <Route
-                          path="/users/:userId"
-                          component={hasRole('admin', UpdateUserPage)}
-                        />
-                        <Route
-                          exact
-                          path="/users"
-                          component={hasRole('admin', List)}
-                        />
-                        <Redirect to="/users" />
-                      </Switch>
-                    </Page>
-                  )}
-                />
+                <Switch>
+                  <Route path="/admin" render={() => <AdminRoutes r={r} />} />
+                  <RedirectForRoles r={r} roleMappings={{ admin: '/admin' }} defaultRedirect="/public" />
+                </Switch>
               </Switch>
             );
           }}
