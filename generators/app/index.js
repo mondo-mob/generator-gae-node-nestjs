@@ -55,9 +55,8 @@ module.exports = class extends Generator {
     const copyTpl = (src, dest, additionalContext) => {
       const destName = dest || src;
       const srcParam = _.isArray(src)
-        ? _.map(
-            src,
-            entry => (_.startsWith(entry, '!') ? entry : this.templatePath(entry))
+        ? _.map(src, entry =>
+            _.startsWith(entry, '!') ? entry : this.templatePath(entry)
           )
         : this.templatePath(src);
 
@@ -80,7 +79,7 @@ module.exports = class extends Generator {
     const fileCopyOptions = {
       globOptions: {
         dot: true,
-        ignore: ['**/gitignore']
+        ignore: ['**/gitignore', '**/env.json']
       }
     };
 
