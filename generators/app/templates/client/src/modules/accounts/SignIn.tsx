@@ -8,7 +8,7 @@ import * as React from 'react';
 import { withApollo, WithApolloClient } from 'react-apollo';
 import { Field } from 'react-final-form';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import * as google from '../../assets/google.svg';
+import google from '../../assets/google.svg';
 import Form from '../../components/Form';
 import Input from '../../components/form/TextField';
 import { showMessage } from '../../components/Toast';
@@ -50,10 +50,7 @@ const logIn = (client: ApolloClient<void>) => async ({
   await client.reFetchObservableQueries();
 };
 
-interface Props
-  extends WithStyles<typeof styles>,
-    RouteComponentProps<{}>,
-    WithApolloClient<{}> {}
+interface Props extends WithStyles<typeof styles>, RouteComponentProps<{}>, WithApolloClient<{}> {}
 
 interface State {
   error?: string | string[];
@@ -93,22 +90,9 @@ class SignIn extends React.Component<Props, State> {
         <Form onSubmit={logIn(client)}>
           {({ handleSubmit, submitting }) => (
             <form onSubmit={handleSubmit}>
-              <Field
-                label="Email"
-                fullWidth
-                name="username"
-                margin="normal"
-                component={Input}
-              />
+              <Field label="Email" fullWidth name="username" margin="normal" component={Input} />
 
-              <Field
-                label="Password"
-                fullWidth
-                type="password"
-                name="password"
-                margin="normal"
-                component={Input}
-              />
+              <Field label="Password" fullWidth type="password" name="password" margin="normal" component={Input} />
 
               <Button
                 type="submit"
@@ -120,12 +104,7 @@ class SignIn extends React.Component<Props, State> {
                 Sign in
               </Button>
 
-              <Button
-                variant="contained"
-                component="a"
-                href="/auth/signin/google"
-                className={classes.google}
-              >
+              <Button variant="contained" component="a" href="/auth/signin/google" className={classes.google}>
                 <div className={classes.googleButton}>
                   <img src={google} alt="" />
                   <span>Sign in with google</span>

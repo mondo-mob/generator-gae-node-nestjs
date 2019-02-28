@@ -16,8 +16,8 @@ for pid in $(lsof -i tcp:${tcp_ports} -t); do
 done
 echo "...done"
 
-echo "Killing node processes executing react-scripts-ts start"
-for pid in $(ps | grep node | grep -v grep | grep "react-scripts-ts start" | grep "${path_portion}" | awk '{print $1;}'); do
+echo "Killing node processes executing react-scripts start"
+for pid in $(ps | grep node | grep -v grep | grep "react-scripts start" | grep "${path_portion}" | awk '{print $1;}'); do
     echo "  - killing pid ${pid}"
     kill ${kill_options} ${pid}
 done

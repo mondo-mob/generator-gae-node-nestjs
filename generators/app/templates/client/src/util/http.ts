@@ -68,16 +68,9 @@ export const request = async <T>(
 };
 
 const hasHeader = (headers: Headers = {}, headerName: string) =>
-  Object.keys(headers).some(
-    key => key.toLowerCase() === headerName.toLowerCase(),
-  );
+  Object.keys(headers).some(key => key.toLowerCase() === headerName.toLowerCase());
 
-const requestWithData = (
-  path: string,
-  method: string,
-  data: FormData | object,
-  headers: Headers = {},
-) => {
+const requestWithData = (path: string, method: string, data: FormData | object, headers: Headers = {}) => {
   const headerContentType = 'Content-Type';
   // Don't modify for FormData or request with existing content-type header set
   if (data instanceof FormData || hasHeader(headers, headerContentType)) {
@@ -90,15 +83,8 @@ const requestWithData = (
   });
 };
 
-export const requestJSON = async <T extends object>(
-  path: string,
-  method: string,
-  data: T,
-  headers = {},
-) => {
-  const response = await (data
-    ? requestWithData(path, method, data, headers)
-    : request(path, method, null, headers));
+export const requestJSON = async (path: string, method: string, data: any, headers = {}) => {
+  const response = await (data ? requestWithData(path, method, data, headers) : request(path, method, null, headers));
 
   const text = await response.text();
 

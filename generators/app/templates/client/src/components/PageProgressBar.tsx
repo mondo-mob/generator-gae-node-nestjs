@@ -20,6 +20,7 @@ export class DelayLoading extends React.PureComponent<{}, State> {
   public constructor(props: {}) {
     super(props);
 
+    this.timeout = null;
     this.state = {
       loading: 0,
       visible: false,

@@ -16,7 +16,7 @@ class Form<T, U = {}> extends React.Component<Props<T, U>> {
     return (
       <FinalForm
         {...rest}
-        onSubmit={safeSubmit(onSubmit, {
+        onSubmit={safeSubmit(onSubmit as any, {
           successMessage,
           onSuccess,
         })}

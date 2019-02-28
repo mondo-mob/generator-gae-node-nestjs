@@ -129,7 +129,7 @@ const UpdateUserPage: React.SFC<Props> = ({ match, history, classes }) => (
                       infoText="Drag profile image(s) here, or click to select files to upload."
                       name="profile"
                       margin="normal"
-                      component={DropzoneField}
+                      component={DropzoneField as any}
                       multiple={true}
                       accept="image/jpg, image/jpeg, image/png"
                     />
@@ -147,4 +147,4 @@ const UpdateUserPage: React.SFC<Props> = ({ match, history, classes }) => (
   </Query>
 );
 
-export default withStyles(styles)(UpdateUserPage);
+export default withStyles(styles)(UpdateUserPage as any);

@@ -213,4 +213,4 @@ class DropzoneFieldInner extends React.Component<Props, State> {
   };
 }
 
-export const DropzoneField = withStyles(styles)(DropzoneFieldInner);
+export const DropzoneField = withStyles(styles)(DropzoneFieldInner as any);
