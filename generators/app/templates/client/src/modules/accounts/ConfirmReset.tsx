@@ -6,10 +6,7 @@ import { Field } from 'react-final-form';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import Form from '../../components/Form';
 import Input from '../../components/form/TextField';
-import {
-  ConfirmResetPassword,
-  ConfirmResetPasswordVariables,
-} from '../../graphql';
+import { ConfirmResetPassword, ConfirmResetPasswordVariables } from '../../graphql';
 import { required } from '../../util/validation';
 import AccountPage from './AccountPage';
 
@@ -31,16 +28,14 @@ const resetPassword = gql`
   }
 `;
 
-interface Props
-  extends WithStyles<typeof styles>,
-    RouteComponentProps<{ code: string }> {}
+interface Props extends WithStyles<typeof styles>, RouteComponentProps<{ code: string }> {}
 
 interface FormData {
   password: string;
   confirmPassword: string;
 }
 
-const validatePasswordConfirmation = (value: string, allValues: FormData) =>
+const validatePasswordConfirmation = (value: string, allValues: any) =>
   value !== allValues.password ? 'Password confirmation must match' : undefined;
 
 const ConfirmReset: React.SFC<Props> = ({ classes, match, history }) => (
@@ -52,14 +47,10 @@ const ConfirmReset: React.SFC<Props> = ({ classes, match, history }) => (
       </React.Fragment>
     }
   >
-    <Mutation<ConfirmResetPassword, ConfirmResetPasswordVariables>
-      mutation={resetPassword}
-    >
+    <Mutation<ConfirmResetPassword, ConfirmResetPasswordVariables> mutation={resetPassword}>
       {mutation => (
         <Form<FormData>
-          onSubmit={({ password }) =>
-            mutation({ variables: { password, code: match.params.code } })
-          }
+          onSubmit={({ password }) => mutation({ variables: { password, code: match.params.code } })}
           successMessage="Password successfully reset"
           onSuccess={() => history.push(`/sigin`)}
         >

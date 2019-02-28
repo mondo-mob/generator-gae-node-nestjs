@@ -1,17 +1,15 @@
-import { StyleRulesCallback, Theme, WithStyles, withStyles } from "@material-ui/core";
-import * as React from "react";
-import ProgressBar from "react-progress-bar-plus";
-import "react-progress-bar-plus/lib/progress-bar.css";
+import { StyleRulesCallback, Theme, WithStyles, withStyles } from '@material-ui/core';
+import * as React from 'react';
+import ProgressBar from 'react-progress-bar-plus';
+import 'react-progress-bar-plus/lib/progress-bar.css';
 
 const styles: StyleRulesCallback = (theme: Theme) => ({
   root: {
-    "& .react-progress-bar-percent": {
+    '& .react-progress-bar-percent': {
       backgroundColor: theme.palette.primary.light,
-      boxShadow: `0 0 10px ${theme.palette.primary.light}, 0 0 5px ${
-        theme.palette.primary.light
-        }`
-    }
-  }
+      boxShadow: `0 0 10px ${theme.palette.primary.light}, 0 0 5px ${theme.palette.primary.light}`,
+    },
+  },
 });
 
 interface Props {
@@ -19,7 +17,6 @@ interface Props {
 }
 
 class Progress extends React.PureComponent<Props & WithStyles<typeof styles>> {
-
   public render() {
     return (
       <ProgressBar
