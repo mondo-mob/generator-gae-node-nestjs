@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Context, Transactional } from '@3wks/gae-node-nestjs';
 import * as uuid from 'node-uuid';
 <% if (includeRepository) { %> import { <%= module %>Repository, <%= typeName %> } from './<%= moduleSlugged %>.repository';
-import { QueryInfo } from '@google-cloud/datastore/query';<% } %>
+import { RunQueryInfo } from '@google-cloud/datastore/build/src/query';<% } %>
 
 @Injectable()
 export class <%= module %>Service { 
@@ -14,7 +14,7 @@ export class <%= module %>Service {
 
 
   <% if (includeRepository) { %>
-    async getAll(context: Context, limit?: number, cursor?: string): Promise<[ReadonlyArray<<%= typeName %>>, QueryInfo]> {
+    async getAll(context: Context, limit?: number, cursor?: string): Promise<[ReadonlyArray<<%= typeName %>>, RunQueryInfo]> {
       return await this.repository.query(context, {
         limit,
         start: cursor
