@@ -6,10 +6,10 @@ const <%= lowerTypeName %> = t.intersection([
   t.interface({
     id: t.string,
 
-    //required properties
+    // required properties
   }),
   t.partial({
-    //optional properties
+    // optional properties
   })
 ]);
 
