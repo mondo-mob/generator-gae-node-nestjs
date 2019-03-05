@@ -14,6 +14,7 @@ import AdminRoutes from './routes/AdminRoutes';
 import PublicRoutes from './routes/PublicRoutes';
 import RedirectForRoles from './routes/RedirectForRoles';
 import { RouteHelper } from './routes/route-helper';
+import UserRoutes from './routes/UserRoutes';
 
 export const meQuery = gql`
   query Me {
@@ -53,7 +54,8 @@ class App extends React.Component {
               <Switch>
                 <Switch>
                   <Route path="/admin" render={() => <AdminRoutes r={r} />} />
-                  <RedirectForRoles r={r} roleMappings={{ admin: '/admin' }} defaultRedirect="/public" />
+                  <Route path="/user" render={() => <UserRoutes r={r} />} />
+                  <RedirectForRoles r={r} roleMappings={{ admin: '/admin', user: '/user' }} defaultRedirect="/signin" />
                 </Switch>
               </Switch>
             );
