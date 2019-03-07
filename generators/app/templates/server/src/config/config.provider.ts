@@ -48,6 +48,7 @@ const Config = t.intersection([
     devHooks,
     bootstrap: t.boolean,
     apiEndpoint: t.string,
+    searchServiceEndpoint: t.string,
     twilioNumber: t.string,
     twilioAccountSID: t.string,
     twilioAuthToken: t.string,
@@ -148,6 +149,10 @@ export class ConfigurationProvider implements Configuration {
 
   get devHooks() {
     return this.configuration.devHooks;
+  }
+
+  get searchServiceEndpoint() {
+    return this.configuration.searchServiceEndpoint;
   }
 
   get session(): SessionConfiguration {
