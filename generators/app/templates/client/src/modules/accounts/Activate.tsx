@@ -1,12 +1,12 @@
 import { Button, StyleRulesCallback, Theme, withStyles, WithStyles } from '@material-ui/core';
-import gql from 'graphql-tag';
+import { ApolloClient } from 'apollo-client';
 import * as React from 'react';
-import { Mutation } from 'react-apollo';
+import { withApollo, WithApolloClient } from 'react-apollo';
 import { Field } from 'react-final-form';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import Form from '../../components/Form';
 import Input from '../../components/form/TextField';
-import { ActivateAccount, ActivateAccountVariables } from '../../graphql';
+import { requestJSON } from '../../util/http';
 import { required } from '../../util/validation';
 import AccountPage from './AccountPage';
 
@@ -22,22 +22,27 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   },
 });
 
-const mutation = gql`
-  mutation ActivateAccount($name: String!, $password: String!, $code: String!) {
-    activateAccount(code: $code, name: $name, password: $password)
-  }
-`;
+interface Props extends WithStyles<typeof styles>, RouteComponentProps<{ code: string }>, WithApolloClient<{}> {}
 
-interface Props
-  extends WithStyles<typeof styles>,
-    RouteComponentProps<{ code: string }> {}
-
-interface FormData {
+const activate = (client: ApolloClient<void>, code: string, callback: any) => async ({
+  name,
+  password,
+}: {
   name: string;
   password: string;
-}
+}) => {
+  await requestJSON('/auth/activate', 'post', {
+    name,
+    password,
+    code,
+  });
 
-const ConfirmReset: React.SFC<Props> = ({ classes, match, history }) => (
+  await client.reFetchObservableQueries();
+
+  callback();
+};
+
+const ConfirmReset: React.SFC<Props> = ({ classes, client, match, history }) => (
   <AccountPage
     title="Activate account"
     links={
@@ -46,53 +51,35 @@ const ConfirmReset: React.SFC<Props> = ({ classes, match, history }) => (
       </React.Fragment>
     }
   >
-    <Mutation<ActivateAccount, ActivateAccountVariables> mutation={mutation}>
-      {activateAccount => (
-        <Form<FormData>
-          onSubmit={({ name, password }) =>
-            activateAccount({
-              variables: { name, password, code: match.params.code },
-            })
-          }
-          successMessage="Activated account"
-          onSuccess={() => history.push(`/sigin`)}
-        >
-          {({ handleSubmit, submitting }) => (
-            <form onSubmit={handleSubmit}>
-              <Field
-                label="Name"
-                fullWidth
-                name="name"
-                margin="normal"
-                validate={required('Name is required')}
-                component={Input}
-              />
+    <Form onSubmit={activate(client, match.params.code, () => history.push('/'))}>
+      {({ handleSubmit, submitting }) => (
+        <form onSubmit={handleSubmit}>
+          <Field
+            label="Name"
+            fullWidth
+            name="name"
+            margin="normal"
+            validate={required('Name is required')}
+            component={Input}
+          />
 
-              <Field
-                label="Password"
-                fullWidth
-                name="password"
-                type="password"
-                margin="normal"
-                validate={required('Password is required')}
-                component={Input}
-              />
+          <Field
+            label="Password"
+            fullWidth
+            name="password"
+            type="password"
+            margin="normal"
+            validate={required('Password is required')}
+            component={Input}
+          />
 
-              <Button
-                type="submit"
-                color="primary"
-                variant="contained"
-                className={classes.submit}
-                disabled={submitting}
-              >
-                Activate account
-              </Button>
-            </form>
-          )}
-        </Form>
+          <Button type="submit" color="primary" variant="contained" className={classes.submit} disabled={submitting}>
+            Activate account
+          </Button>
+        </form>
       )}
-    </Mutation>
+    </Form>
   </AccountPage>
 );
 
-export default withStyles(styles)(ConfirmReset);
+export default withApollo(withStyles(styles)(ConfirmReset));
