@@ -95,6 +95,10 @@ To turn auto-bootstrap on/off set the `bootstrap` flag to true/false in the appr
 
 For more information on how the above command works see the migrations section.
 
+## Activate and login (Local)
+
+User can be automatically logged in automatically after successful activation. This is managed by the config `autoLoginAfterActivate` which is enabled by default. Set this config to false if you do not prefer the user to be logged in automatically after successful activation.
+
 ## Google Sign In
 
 1.  Create oauth credentials (client / secret) through the google console as per https://support.google.com/cloud/answer/6158849?hl=en
