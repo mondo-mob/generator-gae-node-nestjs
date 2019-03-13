@@ -38,7 +38,7 @@ interface FormData {
 const validatePasswordConfirmation = (value: string, allValues: any) =>
   value !== allValues.password ? 'Password confirmation must match' : undefined;
 
-const ConfirmReset: React.SFC<Props> = ({ classes, match, history }) => (
+const ConfirmReset: React.FC<Props> = ({ classes, match, history }) => (
   <AccountPage
     title="Reset password"
     links={

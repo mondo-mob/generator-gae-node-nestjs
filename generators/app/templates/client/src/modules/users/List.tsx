@@ -29,7 +29,7 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   },
 });
 
-const List: React.SFC<WithStyles<typeof styles>> = ({ classes }) => (
+const List: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
   <React.Fragment>
     <HeaderWithActions actions={<InviteUserDialog />} title="Users" />
     <Query query={listUsersQuery}>

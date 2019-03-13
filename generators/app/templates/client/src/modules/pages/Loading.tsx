@@ -1,9 +1,4 @@
-import {
-  CircularProgress,
-  Typography,
-  WithStyles,
-  withStyles,
-} from '@material-ui/core';
+import { CircularProgress, Typography, WithStyles, withStyles } from '@material-ui/core';
 import * as React from 'react';
 
 const styles = {
@@ -20,7 +15,7 @@ const styles = {
   },
 };
 
-export const Loading: React.SFC<WithStyles<typeof styles>> = ({ classes }) => (
+export const Loading: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
   <div className={classes.page}>
     <CircularProgress />
     <Typography>Loading...</Typography>

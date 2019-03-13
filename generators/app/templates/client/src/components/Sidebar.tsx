@@ -65,7 +65,7 @@ interface Props extends WithStyles<typeof styles> {
 
 const ListItemLink = ListItem as any;
 
-const Sidebar: React.SFC<Props> = ({ classes, handleDrawerClose, open }) => (
+const Sidebar: React.FC<Props> = ({ classes, handleDrawerClose, open }) => (
   <Drawer
     variant="permanent"
     classes={{
