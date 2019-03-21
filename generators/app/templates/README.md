@@ -97,7 +97,7 @@ For more information on how the above command works see the migrations section.
 
 ## Activate and login (Local)
 
-User can be automatically logged in automatically after successful activation. This is managed by the config `autoLoginAfterActivate` which is enabled by default. Set this config to false if you do not prefer the user to be logged in automatically after successful activation.
+User can be logged in automatically after successful activation. This is managed by the config `autoLoginAfterActivate` which is enabled by default. Set this config to false if you do not prefer the user to be logged in automatically after successful activation.
 
 ## Google Sign In
 
