@@ -1,18 +1,19 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import {
   CredentialRepository,
   newContext,
   DatastoreProvider,
   hashPassword,
-  createLogger, LoginIdentifierRepository
-} from "@3wks/gae-node-nestjs";
-import { ConfigurationProvider } from "../config/config.provider";
-import { UserRepository } from "../users/users.repository";
-import { randomBytes } from "crypto";
-import { UsersService } from "../users/users.service";
+  createLogger,
+  LoginIdentifierRepository,
+  PasswordResetService,
+} from '@3wks/gae-node-nestjs';
+import { ConfigurationProvider } from '../config/config.provider';
+import { UserRepository } from '../users/users.repository';
+import { randomBytes } from 'crypto';
+import { UsersService } from '../users/users.service';
 
-const generatePassword = (bits: number) =>
-  randomBytes(Math.ceil(bits / 8)).toString('base64');
+const generatePassword = (bits: number) => randomBytes(Math.ceil(bits / 8)).toString('base64');
 
 const SUPER_USER_EMAIL = 'admin@3wks.com.au';
 
@@ -27,6 +28,7 @@ export class MigrationService {
     private readonly userService: UsersService,
     private readonly configurationProvider: ConfigurationProvider,
     private readonly datastoreProvider: DatastoreProvider,
+    private readonly passwordResetService: PasswordResetService,
   ) {}
 
   async bootstrap() {
@@ -41,15 +43,10 @@ export class MigrationService {
     }
   }
 
-  async bootstrapSystemUser(
-    password: string = generatePassword(256),
-  ): Promise<void> {
+  async bootstrapSystemUser(password: string = generatePassword(256)): Promise<void> {
     const context = newContext(this.datastoreProvider.datastore);
     const userId = '12345';
 
-    this.logger.info(
-      `Bootstrapping admin account with id ${userId} and password ${password}`,
-    );
     await this.credentialsRepository.save(context, {
       id: SUPER_USER_EMAIL,
       type: 'password',
@@ -70,5 +67,7 @@ export class MigrationService {
       roles: ['super', 'admin'],
       enabled: true,
     });
+
+    await this.passwordResetService.resetPassword(context, SUPER_USER_EMAIL);
   }
 }
