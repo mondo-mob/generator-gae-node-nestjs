@@ -28,7 +28,7 @@ const resetPassword = gql`
   }
 `;
 
-const SignIn: React.SFC<WithStyles<typeof styles>> = ({ classes }) => (
+const SignIn: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
   <AccountPage
     title="Reset password"
     links={

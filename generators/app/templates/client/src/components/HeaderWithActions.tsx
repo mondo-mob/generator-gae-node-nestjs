@@ -22,7 +22,7 @@ interface Props extends WithStyles<typeof styles> {
   actions: JSX.Element;
 }
 
-const HeaderWithActions: React.SFC<Props> = ({ classes, title, actions }) => (
+const HeaderWithActions: React.FC<Props> = ({ classes, title, actions }) => (
   <div className={classes.root}>
     <Typography variant="headline">{title}</Typography>
     <div className={classes.actions}>{actions}</div>

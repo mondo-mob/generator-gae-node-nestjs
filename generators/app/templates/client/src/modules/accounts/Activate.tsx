@@ -42,7 +42,7 @@ const activate = (client: ApolloClient<void>, code: string, callback: any) => as
   callback();
 };
 
-const ConfirmReset: React.SFC<Props> = ({ classes, client, match, history }) => (
+const ConfirmReset: React.FC<Props> = ({ classes, client, match, history }) => (
   <AccountPage
     title="Activate account"
     links={

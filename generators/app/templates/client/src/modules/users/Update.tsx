@@ -64,7 +64,7 @@ const styles = {
 
 interface Props extends RouteComponentProps<RouteProps>, WithStyles<typeof styles> {}
 
-const UpdateUserPage: React.SFC<Props> = ({ match, history, classes }) => (
+const UpdateUserPage: React.FC<Props> = ({ match, history, classes }) => (
   <Query<UserDetails, UserDetailsVariables> query={userDetailsQuery} variables={{ userId: match.params.userId }}>
     {({ data, loading }) => {
       if (loading && (!data || !data.userById)) {

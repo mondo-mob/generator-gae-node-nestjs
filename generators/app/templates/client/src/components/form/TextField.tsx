@@ -3,7 +3,7 @@ import { TextFieldProps } from '@material-ui/core/TextField';
 import * as React from 'react';
 import { FieldRenderProps } from 'react-final-form';
 
-const Input: React.SFC<FieldRenderProps & TextFieldProps> = ({
+const Input: React.FC<FieldRenderProps & TextFieldProps> = ({
   input: { name, onChange, value, ...restInput },
   meta,
   placeholder,

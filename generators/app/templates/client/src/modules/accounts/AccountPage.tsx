@@ -33,7 +33,7 @@ interface Props extends WithStyles<typeof styles> {
   title: string;
 }
 
-const AccountPage: React.SFC<Props> = ({ classes, children, links, title }) => (
+const AccountPage: React.FC<Props> = ({ classes, children, links, title }) => (
   <div className={classes.page}>
     <div className={classes.card}>
       <Typography variant="headline" className={classes.title}>
