@@ -1,4 +1,4 @@
-import { AbstractUserService, Context, LoginIdentifierRepository } from '@3wks/gae-node-nestjs';
+import { AbstractUserService, CurrentContext, LoginIdentifierRepository } from '@3wks/gae-node-nestjs';
 import { Injectable } from '@nestjs/common';
 import * as uuid from 'node-uuid';
 import { User, UserCreate, UserInput, UserRepository } from './users.repository';
@@ -7,13 +7,14 @@ import { User, UserCreate, UserInput, UserRepository } from './users.repository'
 export class UsersService extends AbstractUserService<User> {
   constructor(
     protected readonly loginIdentifierRepository: LoginIdentifierRepository,
-    private readonly userRepository: UserRepository) {
+    private readonly userRepository: UserRepository,
+  ) {
     super(loginIdentifierRepository);
   }
 
-  async listByRole(context: Context, role: string, limit = 1000) {
+  async listByRole(role: string, limit = 1000) {
     // @ts-ignore
-    const [users, ] = await this.userRepository.query(context, {
+    const [users] = await this.userRepository.query(CurrentContext.get(), {
       filters: {
         roles: role,
       },
@@ -22,8 +23,8 @@ export class UsersService extends AbstractUserService<User> {
     return users;
   }
 
-  async getRequired(context: Context, userId: string) {
-    const result = await this.get(context, userId);
+  async getRequired(userId: string) {
+    const result = await this.get(CurrentContext.get(), userId);
     if (!result) {
       throw new Error(`No user found with id: ${userId}`);
     }
@@ -48,6 +49,6 @@ export class UsersService extends AbstractUserService<User> {
   }
 
   protected async updateUser(context: Context, user: User, updates: UserInput): Promise<User> {
-    return this.userRepository.save(context, {...user, ...updates});
+    return this.userRepository.save(context, { ...user, ...updates });
   }
 }
