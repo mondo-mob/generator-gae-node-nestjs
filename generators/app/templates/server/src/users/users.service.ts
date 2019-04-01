@@ -1,4 +1,4 @@
-import { AbstractUserService, CurrentContext, LoginIdentifierRepository } from '@3wks/gae-node-nestjs';
+import { AbstractUserService, Context, CurrentContext, LoginIdentifierRepository } from '@3wks/gae-node-nestjs';
 import { Injectable } from '@nestjs/common';
 import * as uuid from 'node-uuid';
 import { User, UserCreate, UserInput, UserRepository } from './users.repository';
