@@ -73,6 +73,9 @@ export function safeSubmit<T, R = {}>(
       console.log(JSON.stringify(ex));
       if (ex.graphQLErrors) {
         message = _.get(ex.graphQLErrors, [0, 'message'], 'Unexpected error submitting form');
+        if (message === Object(message)) {
+          message = _.get(message, ['message'], 'Unexpected error submitting form');
+        }
       } else {
         message = ex.message || 'Unexpected error submitting form';
       }
