@@ -1,0 +1,21 @@
+{
+  "name": "<%= slugify(project) %>",
+  "version": "1.0.0",
+  "description": "<%= slugify(project) %> app",
+  "main": "index.js",
+  "scripts": {
+    "install:all": "npm install && concurrently \"npm run install:backend\" \"npm run install:frontend\"",
+    "install:backend": "cd server && npm install",
+    "install:frontend": "cd client && npm install",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "cd server && npm run start:dev",
+    "start:frontend": "cd client && npm start",
+    "test:backend": "cd server && npm test -- --coverage\n",
+    "test:frontend": "cd client && npm test --coverage\n",
+    "build": "cd server && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0"
+  },
+  "author": ""
+}

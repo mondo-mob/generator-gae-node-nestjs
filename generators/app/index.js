@@ -86,6 +86,7 @@ module.exports = class extends Generator {
     copy('client', 'client', fileCopyOptions);
     copy('server', 'server', fileCopyOptions);
     copyTpl('README.md');
+    copyTpl('package.json');
     copy('gitignore', '.gitignore');
     copy('client/gitignore', 'client/.gitignore');
     copy('server/gitignore', 'server/.gitignore');
