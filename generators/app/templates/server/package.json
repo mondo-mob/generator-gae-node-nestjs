@@ -53,7 +53,7 @@
     "graphql": "14.1.1",
     "graphql-tools": "4.0.4",
     "html-pdf": "2.2.0",
-    "io-ts": "1.7.1",
+    "io-ts": "1.8.5",
     "io-ts-reporters": "0.0.21",
     "jsonwebtoken": "8.4.0",
     "lodash": "4.17.11",
