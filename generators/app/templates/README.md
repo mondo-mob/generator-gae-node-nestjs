@@ -77,7 +77,7 @@ Note: The first time you run the deploy you may be asked which region to deploy 
 
 The `development` environment is configured to run bootstrap each time the server is started. If not already present, bootstrap will create a system user `admin@3wks.com.au` with password `password`.
 
-For all other environments (`dev`, `uat`, `prod`), auto-bootstrap is off by default.
+For all other environments (`dev`, `uat`, `prod`), auto-bootstrap is off.
 
 To create/update the system user you need to run bootstrap manually by running the following command substituting `development` for your target environment:
 
@@ -90,8 +90,6 @@ A new password will be randomly generated and can be found in the logs. Look for
 ```
 2018-08-08 16:08:54.834 AEST Bootstrapping admin account with id 12345 and password <the password>
 ```
-
-To turn auto-bootstrap on/off set the `bootstrap` flag to true/false in the appropriate environment config file in `server/config/`
 
 For more information on how the above command works see the migrations section.
 
