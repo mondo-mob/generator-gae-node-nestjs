@@ -46,7 +46,6 @@ const Config = t.intersection([
     APP_ENGINE_ENVIRONMENT: t.string,
     GOOGLE_CLOUD_PROJECT: t.string,
     devHooks,
-    bootstrap: t.boolean,
     apiEndpoint: t.string,
     searchServiceEndpoint: t.string,
     twilioNumber: t.string,
@@ -121,10 +120,6 @@ export class ConfigurationProvider implements Configuration {
 
   get bucket(): string {
     return this.configuration.bucket;
-  }
-
-  get bootstrap(): boolean {
-    return this.configuration.bootstrap === true;
   }
 
   get location(): string {
