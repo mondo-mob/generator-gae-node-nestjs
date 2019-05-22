@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
@@ -9,8 +8,6 @@ if (process.env.NODE_ENV !== 'production') {
 } else {
   csrfToken = cookies.get('csrf-token');
 }
-
-console.log(csrfToken);
 
 export const csrfHeaders = {
   'x-csrf-token': csrfToken,
