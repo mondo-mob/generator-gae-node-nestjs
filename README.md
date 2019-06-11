@@ -21,5 +21,5 @@ yo @3wks/gae-node-nestjs
 Apache-2.0 © [Glenn Molnar]()
 
 
-[npm-image]: https://badge.fury.io/js/generator-gae-node-nestjs.svg
-[npm-url]: https://npmjs.org/package/generator-gae-node-nestjs
+[npm-image]: https://badge.fury.io/js/@3wks/generator-gae-node-nestjs.svg
+[npm-url]: https://npmjs.org/package/@3wks/generator-gae-node-nestjs
