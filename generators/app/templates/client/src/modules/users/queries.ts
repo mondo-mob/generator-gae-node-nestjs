@@ -14,16 +14,6 @@ export const listUsersQuery = gql`
   }
 `;
 
-export const getUserForInvite = gql`
-  query GetUserForInvite($code: String!) {
-    userForInvite(code: $code) {
-      id
-      name
-      email
-    }
-  }
-`;
-
 export const meQuery = gql`
   query Me {
     me {

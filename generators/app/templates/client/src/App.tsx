@@ -1,4 +1,3 @@
-import gql from 'graphql-tag';
 import * as React from 'react';
 import { Query } from 'react-apollo';
 import { Redirect, Route, Switch } from 'react-router';
@@ -10,20 +9,12 @@ import Reset from './modules/accounts/Reset';
 import LogIn from './modules/accounts/SignIn';
 import Loading from './modules/pages/Loading';
 import Unauthorised from './modules/pages/Unauthorised';
+import { meQuery } from './modules/users/queries';
 import AdminRoutes from './routes/AdminRoutes';
 import PublicRoutes from './routes/PublicRoutes';
 import RedirectForRoles from './routes/RedirectForRoles';
 import { RouteHelper } from './routes/route-helper';
 import UserRoutes from './routes/UserRoutes';
-
-export const meQuery = gql`
-  query Me {
-    me {
-      id
-      roles
-    }
-  }
-`;
 
 class App extends React.Component {
   public render() {
