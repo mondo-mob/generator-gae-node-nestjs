@@ -1,4 +1,4 @@
-# generator-gae-node-nestjs [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-gae-node-nestjs [![NPM version][npm-image]][npm-url]
 > A generator for building nestjs apps on app engine node
 
 ## Installation
