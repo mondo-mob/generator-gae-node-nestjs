@@ -1,4 +1,4 @@
-# generator-gae-node [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-gae-node-nestjs [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > A generator for building nestjs apps on app engine node
 
 ## Installation
@@ -16,16 +16,9 @@ Then generate your new project:
 yo @3wks/gae-node-nestjs
 ```
 
-## Getting To Know Yeoman
-
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
-
 ## License
 
-Apache-2.0 © [Michael Oates]()
+Apache-2.0 © [Glenn Molnar]()
 
 
 [npm-image]: https://badge.fury.io/js/generator-gae-node.svg
