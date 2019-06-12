@@ -118,11 +118,11 @@ const UpdateUserPage: React.FC<Props> = ({ match, history, classes }) => (
                     />
 
                     <Field
-                      label="Name"
+                      label="Roles"
                       name="roles"
                       margin="normal"
                       fullWidth
-                      validate={required('Name is required')}
+                      validate={required('At least one role is required')}
                       component={Input}
                     />
                     <Field

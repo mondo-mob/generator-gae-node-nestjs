@@ -10,12 +10,13 @@ import {
   WithStyles,
 } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
+import { includes } from 'lodash';
 import * as React from 'react';
 import { Query, QueryResult } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import HeaderWithActions from '../../components/HeaderWithActions';
 import { showMessage } from '../../components/Toast';
-import { ListUsers } from '../../graphql';
+import { ListUsers, ListUsers_users, UserRole } from '../../graphql';
 import { requestJSON } from '../../util/http';
 import { InviteUserDialog } from './InviteUserDialog';
 import { listUsersQuery } from './queries';
@@ -36,6 +37,8 @@ const reinviteUser = async (userId: string) => {
     .then(inviteResponse => showMessage('Invitation email has been resent'))
     .catch(() => showMessage('Error reinviting the user.', true));
 };
+
+const isSuper = (user: ListUsers_users) => includes(user.roles, UserRole.super);
 
 const List: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
   <React.Fragment>
@@ -73,7 +76,7 @@ const List: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
                     )}
                   </TableCell>
                   <TableCell>
-                    <Link to={`/admin/users/${user.id}`}>Edit</Link>
+                    {!isSuper(user) && <Link to={`/admin/users/${user.id}`}>Edit</Link>}
                   </TableCell>
                 </TableRow>
               ))}
