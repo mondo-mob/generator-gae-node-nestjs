@@ -13,6 +13,7 @@ type User {
   name: String
   avatar: Avatar!
   email: String!
+  enabled: Boolean!
   roles: [UserRole!]!
   profile: [Attachment!]
 }

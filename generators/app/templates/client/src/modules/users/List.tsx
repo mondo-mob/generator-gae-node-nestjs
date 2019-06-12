@@ -40,6 +40,7 @@ const List: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Roles</TableCell>
+              <TableCell>Activated</TableCell>
               <TableCell />
             </TableRow>
           </TableHead>
@@ -55,6 +56,7 @@ const List: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
                   </TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.roles.join(', ')}</TableCell>
+                  <TableCell>{user.enabled ? 'Yes' : 'No' }</TableCell>
                   <TableCell>
                     <Link to={`/admin/users/${user.id}`}>Edit</Link>
                   </TableCell>

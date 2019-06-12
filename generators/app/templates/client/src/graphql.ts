@@ -1,35 +1,4 @@
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
 
-// ====================================================
-// GraphQL query operation: Me
-// ====================================================
-
-export interface Me_me {
-  id: string;
-  roles: UserRole[];
-}
-
-export interface Me {
-  me: Me_me | null;
-}
-
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: ActivateAccount
-// ====================================================
-
-export interface ActivateAccount {
-  activateAccount: boolean | null;
-}
-
-export interface ActivateAccountVariables {
-  name: string;
-  password: string;
-  code: string;
-}
 
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
@@ -47,6 +16,7 @@ export interface ConfirmResetPasswordVariables {
   code: string;
 }
 
+
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
 
@@ -61,6 +31,7 @@ export interface ResetPassword {
 export interface ResetPasswordVariables {
   email: string;
 }
+
 
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
@@ -78,28 +49,6 @@ export interface InviteUserVariables {
   roles: string[];
 }
 
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: ListUsers
-// ====================================================
-
-export interface ListUsers_users_avatar {
-  url: string | null;
-}
-
-export interface ListUsers_users {
-  id: string;
-  name: string | null;
-  email: string;
-  avatar: ListUsers_users_avatar;
-  roles: UserRole[];
-}
-
-export interface ListUsers {
-  users: ListUsers_users[];
-}
 
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
@@ -127,6 +76,7 @@ export interface UserDetails {
 export interface UserDetailsVariables {
   userId: string;
 }
+
 
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
@@ -158,6 +108,49 @@ export interface UpdateUserVariables {
   profile?: AttachmentInput[] | null;
 }
 
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: ListUsers
+// ====================================================
+
+export interface ListUsers_users_avatar {
+  url: string | null;
+}
+
+export interface ListUsers_users {
+  id: string;
+  name: string | null;
+  email: string;
+  enabled: boolean;
+  avatar: ListUsers_users_avatar;
+  roles: UserRole[];
+}
+
+export interface ListUsers {
+  users: ListUsers_users[];
+}
+
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: Me
+// ====================================================
+
+export interface Me_me {
+  id: string;
+  name: string | null;
+  roles: UserRole[];
+}
+
+export interface Me {
+  me: Me_me | null;
+}
+
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
 
@@ -166,12 +159,12 @@ export interface UpdateUserVariables {
 //==============================================================
 
 export enum UserRole {
-  admin = 'admin',
-  super = 'super',
-  user = 'user',
+  admin = "admin",
+  super = "super",
+  user = "user",
 }
 
-//
+// 
 export interface AttachmentInput {
   id: string;
   filename: string;
