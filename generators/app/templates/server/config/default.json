@@ -6,8 +6,7 @@
   "bucket": "<%= slugify(project) %>-dev.appspot.com",
   "auth": {
     "local": {
-      "enabled": true,
-      "autoLoginAfterActivate": true
+      "enabled": true
     },
     "google": {
       "enabled": false,

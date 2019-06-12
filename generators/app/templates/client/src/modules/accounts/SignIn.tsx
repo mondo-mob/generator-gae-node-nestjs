@@ -1,5 +1,3 @@
-// tslint:disable:no-console
-
 import { Button, StyleRulesCallback, Theme, withStyles, WithStyles } from '@material-ui/core';
 import { ApolloClient } from 'apollo-client';
 import { isArray } from 'lodash';
