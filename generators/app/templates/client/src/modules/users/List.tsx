@@ -14,7 +14,9 @@ import * as React from 'react';
 import { Query, QueryResult } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import HeaderWithActions from '../../components/HeaderWithActions';
+import { showMessage } from '../../components/Toast';
 import { ListUsers } from '../../graphql';
+import { requestJSON } from '../../util/http';
 import { InviteUserDialog } from './InviteUserDialog';
 import { listUsersQuery } from './queries';
 
@@ -28,6 +30,12 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     marginRight: theme.spacing.unit * 2,
   },
 });
+
+const reinviteUser = async (userId: string) => {
+  await requestJSON('/auth/re-invite', 'post', { userId })
+    .then(inviteResponse => showMessage('Invitation email has been resent'))
+    .catch(() => showMessage('Error reinviting the user.', true));
+};
 
 const List: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
   <React.Fragment>
@@ -56,7 +64,14 @@ const List: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
                   </TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.roles.join(', ')}</TableCell>
-                  <TableCell>{user.enabled ? 'Yes' : 'No' }</TableCell>
+                  <TableCell>
+                    {user.enabled ? 'Yes' : 'No '}
+                    {!user.enabled && (
+                      <a href="#" onClick={() => reinviteUser(user.id)}>
+                        (Reinvite)
+                      </a>
+                    )}
+                  </TableCell>
                   <TableCell>
                     <Link to={`/admin/users/${user.id}`}>Edit</Link>
                   </TableCell>
