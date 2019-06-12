@@ -46,7 +46,7 @@ export class InviteUserDialog extends React.Component<{}, State> {
         </Button>
         <Dialog open={this.state.open} onClose={this.close} fullWidth>
           {this.open && (
-            <Mutation<InviteUser, InviteUserVariables> mutation={mutation}>
+            <Mutation<InviteUser, InviteUserVariables> mutation={mutation} refetchQueries={['ListUsers']}>
               {inviteUser => (
                 <Form<FormProps>
                   onSubmit={({ email, roles }) =>
