@@ -1,18 +1,14 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 import gql from 'graphql-tag';
+import { without } from 'lodash';
 import * as React from 'react';
 import { Mutation } from 'react-apollo';
 import { Field } from 'react-final-form';
 import Form from '../../components/Form';
+import ChecklistField from '../../components/form/ChecklistField';
 import Input from '../../components/form/TextField';
-import { InviteUser, InviteUserVariables } from '../../graphql';
-import {compose, isEmail, required} from '../../util/validation';
+import { InviteUser, InviteUserVariables, UserRole } from '../../graphql';
+import { compose, isEmail, minLength, required } from '../../util/validation';
 
 interface State {
   open: boolean;
@@ -26,7 +22,7 @@ const mutation = gql`
 
 interface FormProps {
   email: string;
-  roles?: string;
+  roles: string[];
 }
 
 export class InviteUserDialog extends React.Component<{}, State> {
@@ -51,9 +47,10 @@ export class InviteUserDialog extends React.Component<{}, State> {
                 <Form<FormProps>
                   onSubmit={({ email, roles }) =>
                     inviteUser({
-                      variables: { email, roles: this.parseRoles(roles) },
+                      variables: { email, roles },
                     })
                   }
+                  initialValues={{ roles: [] }}
                   successMessage="Invited user"
                   onSuccess={this.close}
                 >
@@ -67,8 +64,8 @@ export class InviteUserDialog extends React.Component<{}, State> {
                           name="email"
                           margin="normal"
                           validate={compose(
-                            required("Email address is required"),
-                            isEmail("Must be a valid email address")
+                            required('Email address is required'),
+                            isEmail('Must be a valid email address'),
                           )}
                           component={Input}
                         />
@@ -78,7 +75,9 @@ export class InviteUserDialog extends React.Component<{}, State> {
                           fullWidth
                           name="roles"
                           margin="normal"
-                          component={Input}
+                          options={without(Object.keys(UserRole), 'super')}
+                          validate={minLength('At least one role must be selected', 1)}
+                          component={ChecklistField}
                         />
                       </DialogContent>
                       <DialogActions>
@@ -100,6 +99,4 @@ export class InviteUserDialog extends React.Component<{}, State> {
 
   private open = () => this.setState({ open: true });
   private close = () => this.setState({ open: false });
-  private parseRoles = (roles: string | undefined) =>
-    (roles || '').split(' ').filter(value => value);
 }

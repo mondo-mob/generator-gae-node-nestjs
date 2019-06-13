@@ -10,6 +10,9 @@ export const isEmail = (msg: string) => (value: string) =>
     ? undefined
     : msg;
 
+export const minLength = (msg: string, length: number) => (values: string[]) =>
+  values.length >= length ? undefined : msg;
+  
 export const compose = (...validators: FieldValidator[]): FieldValidator => {
   return (value, allValues) => {
     for (const validator of validators) {

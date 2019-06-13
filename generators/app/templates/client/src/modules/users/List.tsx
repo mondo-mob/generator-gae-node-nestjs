@@ -76,7 +76,7 @@ const List: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
                     )}
                   </TableCell>
                   <TableCell>
-                    {!isSuper(user) && <Link to={`/admin/users/${user.id}`}>Edit</Link>}
+                    {!isSuper(user) && user.enabled && <Link to={`/admin/users/${user.id}`}>Edit</Link>}
                   </TableCell>
                 </TableRow>
               ))}

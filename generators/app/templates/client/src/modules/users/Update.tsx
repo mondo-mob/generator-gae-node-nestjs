@@ -1,10 +1,12 @@
 import { Button, CircularProgress, Typography, WithStyles, withStyles } from '@material-ui/core';
 import gql from 'graphql-tag';
+import { without } from 'lodash';
 import * as React from 'react';
 import { Mutation, Query } from 'react-apollo';
 import { Field } from 'react-final-form';
 import { RouteComponentProps } from 'react-router';
 import Form from '../../components/Form';
+import ChecklistField from '../../components/form/ChecklistField';
 import { DropzoneField } from '../../components/form/DropzoneField';
 import Input from '../../components/form/TextField';
 import {
@@ -15,7 +17,7 @@ import {
   UserDetailsVariables,
   UserRole,
 } from '../../graphql';
-import { required } from '../../util/validation';
+import { minLength, required } from '../../util/validation';
 
 const userDetailsQuery = gql`
   query UserDetails($userId: ID!) {
@@ -101,7 +103,7 @@ const UpdateUserPage: React.FC<Props> = ({ match, history, classes }) => (
                 }
                 initialValues={{
                   name: user.name,
-                  roles: user.roles.join(' '),
+                  roles: user.roles,
                 }}
                 successMessage="Updated user"
                 onSuccess={() => history.push(`/users`)}
@@ -121,10 +123,11 @@ const UpdateUserPage: React.FC<Props> = ({ match, history, classes }) => (
                       label="Roles"
                       name="roles"
                       margin="normal"
-                      fullWidth
-                      validate={required('At least one role is required')}
-                      component={Input}
+                      options={without(Object.keys(UserRole), 'super')}
+                      validate={minLength('At least one role must be selected', 1)}
+                      component={ChecklistField}
                     />
+
                     <Field
                       infoText="Drag profile image(s) here, or click to select files to upload."
                       name="profile"
