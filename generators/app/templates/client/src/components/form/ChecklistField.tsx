@@ -3,8 +3,6 @@ import { includes, without } from 'lodash';
 import * as React from 'react';
 import { FieldRenderProps } from 'react-final-form';
 
-// TODO validation and errors
-
 // FIXME making custom props optional until this is resolved:
 // https://github.com/final-form/react-final-form/issues/175
 interface Props extends FieldRenderProps {
