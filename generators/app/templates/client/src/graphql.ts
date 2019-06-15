@@ -4,6 +4,22 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: CheckActivationCode
+// ====================================================
+
+export interface CheckActivationCode {
+  checkActivationCode: string | null;
+}
+
+export interface CheckActivationCodeVariables {
+  code: string;
+}
+
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: ConfirmResetPassword
 // ====================================================
 
