@@ -5,11 +5,11 @@ import { Me_me, UserRole } from '../graphql';
 export class RouteHelper {
   constructor(private readonly defaultComponent: React.ComponentType, private readonly user?: Me_me | null) {}
 
-  public ifHasAnyRole(component: React.ComponentType, ...roles: string[]) {
+  public ifHasAnyRole(component: React.ComponentType, ...roles: UserRole[]) {
     return this.ifHasAnyRolesElse(component, this.defaultComponent, ...roles);
   }
 
-  public ifHasAnyRolesElse(component: React.ComponentType, otherComponent: React.ComponentType, ...roles: string[]) {
+  public ifHasAnyRolesElse(component: React.ComponentType, otherComponent: React.ComponentType, ...roles: UserRole[]) {
     if (this.hasAnyRole(...roles)) {
       return component;
     }
@@ -17,7 +17,7 @@ export class RouteHelper {
     return otherComponent;
   }
 
-  public hasAnyRole(...roles: string[]) {
+  public hasAnyRole(...roles: UserRole[]) {
     return this.user && this.user.roles.some(r => _.includes(roles, r));
   }
 

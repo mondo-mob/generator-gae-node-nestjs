@@ -1,5 +1,6 @@
 import { StyleRulesCallback, Theme, withStyles, WithStyles } from '@material-ui/core';
 import * as React from 'react';
+import { UserRole } from '../../graphql';
 import { RouteHelper } from '../../routes/route-helper';
 import PageTitle from '../PageTitle';
 import AdminSidebar from './AdminSidebar';
@@ -21,7 +22,7 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
 
 interface Props extends WithStyles<typeof styles> {
   r: RouteHelper;
-  anyRoles: string[];
+  anyRoles: UserRole[];
 }
 
 interface State {
