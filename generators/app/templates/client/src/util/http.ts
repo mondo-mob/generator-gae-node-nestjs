@@ -1,4 +1,4 @@
-import { csrfHeaders } from './csrf';
+import { getCsrfHeaders } from './csrf';
 
 type Headers = Record<string, string>;
 
@@ -14,7 +14,7 @@ const commonHeaders = () => ({
   Pragma: 'no-cache',
   'Cache-Control': 'no-cache', // required so IE11 does not automatically cache all GET requests
   'X-Requested-With': 'XMLHttpRequest', // Suppress the gray basic auth dialog in the browser on 401
-  ...csrfHeaders,
+  ...getCsrfHeaders(),
 });
 
 export const formEncode = (obj: Record<string, string>) =>

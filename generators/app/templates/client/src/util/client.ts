@@ -5,7 +5,7 @@ import { BatchHttpLink } from 'apollo-link-batch-http';
 import { onError } from 'apollo-link-error';
 import { finishLoading, startLoading } from '../components/PageProgressBar';
 import { showMessage } from '../components/Toast';
-import { csrfHeaders } from './csrf';
+import { getCsrfHeaders } from './csrf';
 
 const cache: InMemoryCache = new InMemoryCache({});
 
@@ -66,8 +66,14 @@ const client = new ApolloClient({
       credentials: 'same-origin',
       headers: {
         'X-Requested-With': 'XMLHttpRequest', // Suppress the gray basic auth dialog in the browser on 401
-        ...csrfHeaders,
       },
+      fetch: (uri, options) => {
+        options!.headers = {
+          ...options!.headers,
+          ...getCsrfHeaders(),
+        }
+        return fetch(uri, options);
+      }
     }),
   ]),
   cache,
