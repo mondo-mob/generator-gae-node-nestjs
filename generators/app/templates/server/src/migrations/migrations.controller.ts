@@ -9,6 +9,9 @@ export class MigrationController {
 
   @Post("/bootstrap")
   async createSystemUser() {
-    await this.migrationService.bootstrapSystemUser();
-  }
+    const password = await this.migrationService.bootstrapSystemUser();
+    return {
+      password
+    }
+  };
 }

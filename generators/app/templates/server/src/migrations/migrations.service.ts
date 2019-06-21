@@ -6,7 +6,6 @@ import {
   hashPassword,
   createLogger,
   LoginIdentifierRepository,
-  PasswordResetService,
 } from '@3wks/gae-node-nestjs';
 import { ConfigurationProvider } from '../config/config.provider';
 import { UserRepository } from '../users/users.repository';
@@ -28,7 +27,6 @@ export class MigrationService {
     private readonly userService: UsersService,
     private readonly configurationProvider: ConfigurationProvider,
     private readonly datastoreProvider: DatastoreProvider,
-    private readonly passwordResetService: PasswordResetService,
   ) {}
 
   async bootstrap() {
@@ -43,7 +41,7 @@ export class MigrationService {
     }
   }
 
-  async bootstrapSystemUser(password: string = generatePassword(256)): Promise<void> {
+  async bootstrapSystemUser(password: string = generatePassword(256)): Promise<string> {
     const context = newContext(this.datastoreProvider.datastore);
     const userId = '12345';
 
@@ -68,6 +66,6 @@ export class MigrationService {
       enabled: true,
     });
 
-    await this.passwordResetService.resetPassword(context, SUPER_USER_EMAIL);
+    return password;
   }
 }

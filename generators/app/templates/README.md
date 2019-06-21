@@ -79,17 +79,13 @@ The `development` environment is configured to run bootstrap each time the serve
 
 For all other environments (`dev`, `uat`, `prod`), auto-bootstrap is off.
 
-To create/update the system user you need to run bootstrap manually by running the following command substituting `development` for your target environment:
+To create/update the system user you need to run bootstrap manually by running the following command substituting `dev` for your target environment:
 
 ```
 npx server s c --env dev /system/migrate/bootstrap
 ```
 
-A new password will be randomly generated and can be found in the logs. Look for an entry in the form of:
-
-```
-2018-08-08 16:08:54.834 AEST Bootstrapping admin account with id 12345 and password <the password>
-```
+A new password will be randomly generated and will be returned from the npx command.
 
 For more information on how the above command works see the migrations section.
 
