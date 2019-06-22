@@ -1,5 +1,5 @@
 {
-  "name": "test-nest-client",
+  "name": "<%= slugify(project) %>-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
