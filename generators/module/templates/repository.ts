@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import * as t from "@3wks/gae-node-nestjs/dist/validator";
+import * as t from "@3wks/gae-node-nestjs/dist/types";
 import { Repository, DatastoreProvider } from '@3wks/gae-node-nestjs';
 
 const <%= lowerTypeName %> = t.intersection([
