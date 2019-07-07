@@ -1,21 +1,15 @@
 {
-  "extends": [
-    "tslint:recommended",
-    "tslint-react",
-    "tslint-config-prettier"
-  ],
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier", "tslint-react-hooks"],
   "rules": {
     "interface-name": false,
     "jsx-boolean-value": false,
     "object-literal-sort-keys": false,
     "jsx-no-lambda": false,
     "no-unnecessary-initializer": false,
-    "no-console": false
+    "no-console": false,
+    "react-hooks-nesting": "error"
   },
   "linterOptions": {
-    "exclude": [
-      "config/**/*.js",
-      "node_modules/**/*.ts"
-    ]
+    "exclude": ["config/**/*.js", "node_modules/**/*.ts"]
   }
 }
