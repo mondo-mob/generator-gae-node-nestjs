@@ -1,4 +1,4 @@
-import { Button, StyleRulesCallback, Theme, withStyles, WithStyles } from '@material-ui/core';
+import { Button, Theme, withStyles, WithStyles } from '@material-ui/core';
 import { ApolloClient } from 'apollo-client';
 import { isArray } from 'lodash';
 import * as qs from 'query-string';
@@ -13,21 +13,21 @@ import { showMessage } from '../../components/Toast';
 import { requestJSON } from '../../util/http';
 import AccountPage from './AccountPage';
 
-const styles: StyleRulesCallback = (theme: Theme) => ({
+const styles = (theme: Theme) => ({
   submit: {
     width: '100%',
-    marginTop: theme.spacing.unit * 4,
+    marginTop: theme.spacing(4),
   },
   google: {
     width: '100%',
-    marginTop: theme.spacing.unit * 4,
+    marginTop: theme.spacing(4),
     background: theme.palette.common.white,
   },
   googleButton: {
     display: 'flex',
     alignItems: 'center',
     '& img': {
-      marginRight: theme.spacing.unit,
+      marginRight: theme.spacing(1),
       height: 18,
     },
   },
@@ -102,7 +102,7 @@ class SignIn extends React.Component<Props, State> {
                 Sign in
               </Button>
 
-              <Button variant="contained" component="a" href="/auth/signin/google" className={classes.google}>
+              <Button variant="contained" href="/auth/signin/google" className={classes.google}>
                 <div className={classes.googleButton}>
                   <img src={google} alt="" />
                   <span>Sign in with google</span>

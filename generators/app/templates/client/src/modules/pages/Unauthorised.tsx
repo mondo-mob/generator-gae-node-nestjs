@@ -3,7 +3,7 @@ import * as React from 'react';
 
 const Unauthorised = () => (
   <React.Fragment>
-    <Typography paragraph variant="headline">
+    <Typography paragraph variant="h5">
       Unauthorised
     </Typography>
 

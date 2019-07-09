@@ -1,4 +1,4 @@
-import { Snackbar, SnackbarContent, StyleRulesCallback, Theme, withStyles, WithStyles } from '@material-ui/core';
+import { Snackbar, SnackbarContent, Theme, withStyles, WithStyles } from '@material-ui/core';
 import green from '@material-ui/core/colors/green';
 import cx from 'classnames';
 import * as React from 'react';
@@ -14,9 +14,9 @@ let showToast: (message: string, isError: boolean) => void = (message: string, i
   // do nothing by default
 };
 
-const styles: StyleRulesCallback = (theme: Theme) => ({
+const styles = (theme: Theme) => ({
   snackbar: {
-    marginBottom: theme.spacing.unit * 2,
+    marginBottom: theme.spacing(2),
   },
   error: {
     backgroundColor: theme.palette.error.dark,

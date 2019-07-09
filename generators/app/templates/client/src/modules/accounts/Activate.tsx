@@ -1,4 +1,4 @@
-import { Button, StyleRulesCallback, Theme, withStyles, WithStyles } from '@material-ui/core';
+import { Button, Theme, withStyles, WithStyles } from '@material-ui/core';
 import { ApolloClient } from 'apollo-client';
 import gql from 'graphql-tag';
 import * as React from 'react';
@@ -20,18 +20,18 @@ const checkActivationCodeQuery = gql`
   }
 `;
 
-const styles: StyleRulesCallback = (theme: Theme) => ({
+const styles = (theme: Theme) => ({
   submit: {
     width: '100%',
-    marginTop: theme.spacing.unit * 4,
+    marginTop: theme.spacing(4),
   },
   google: {
     width: '100%',
-    marginTop: theme.spacing.unit * 4,
+    marginTop: theme.spacing(4),
     background: theme.palette.common.white,
   },
   errorMessage: {
-    marginTop: theme.spacing.unit * 6,
+    marginTop: theme.spacing(6),
   },
 });
 

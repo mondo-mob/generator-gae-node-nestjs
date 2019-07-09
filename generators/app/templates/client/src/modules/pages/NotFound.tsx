@@ -3,7 +3,7 @@ import * as React from 'react';
 
 const NotFound = () => (
   <React.Fragment>
-    <Typography paragraph variant="headline">
+    <Typography paragraph variant="h5">
       Not found
     </Typography>
 

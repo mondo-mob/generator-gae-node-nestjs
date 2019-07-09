@@ -1,17 +1,4 @@
-import {
-  Avatar,
-  FormHelperText,
-  IconButton,
-  LinearProgress,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  ListItemText,
-  StyleRulesCallback,
-  WithStyles,
-  withStyles,
-} from '@material-ui/core';
+import { Avatar, FormHelperText, IconButton, LinearProgress, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, WithStyles, withStyles } from '@material-ui/core';
 import Attachment from '@material-ui/icons/Attachment';
 import Delete from '@material-ui/icons/Delete';
 import * as React from 'react';
@@ -19,10 +6,10 @@ import Dropzone, { DropFilesEventHandler } from 'react-dropzone';
 import { FieldRenderProps } from 'react-final-form';
 import { request } from '../../util/http';
 
-const styles: StyleRulesCallback = () => ({
+const styles = () => ({
   dropzone: {
     width: '100%',
-    textAlign: 'center',
+    textAlign: 'center' as 'center',
     margin: '20px 0',
     padding: 10,
     height: 'none',
@@ -37,7 +24,7 @@ const styles: StyleRulesCallback = () => ({
   },
   uploadProgress: {
     margin: 10,
-    textAlign: 'center',
+    textAlign: 'center' as 'center',
     fontSize: 14,
     color: '#666',
   },

@@ -3,7 +3,7 @@ import * as React from 'react';
 
 const UserHome = () => (
   <React.Fragment>
-    <Typography paragraph variant="headline">
+    <Typography paragraph variant="h5">
       User home page
     </Typography>
 

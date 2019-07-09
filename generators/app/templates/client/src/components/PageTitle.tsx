@@ -1,21 +1,11 @@
-import {
-  AppBar,
-  Button,
-  IconButton,
-  StyleRulesCallback,
-  Theme,
-  Toolbar,
-  Typography,
-  WithStyles,
-  withStyles,
-} from '@material-ui/core';
+import { AppBar, Button, IconButton, Theme, Toolbar, Typography, WithStyles, withStyles } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import cx from 'classnames';
 import * as React from 'react';
 import { RouteHelper } from '../routes/route-helper';
 import { request } from '../util/http';
 
-const styles: StyleRulesCallback = (theme: Theme) => ({
+const styles = (theme: Theme) => ({
   menuButton: {
     marginLeft: 12,
     marginRight: 36,
@@ -42,9 +32,9 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     paddingLeft: 10,
   },
   loginButton: {
-    position: 'absolute',
-    bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 2,
+    position: 'absolute' as 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
   },
 });
 
@@ -74,7 +64,7 @@ const PageTitle: React.FC<Props> = ({ open, classes, handleDrawerOpen, showDrawe
         </IconButton>
       )}
 
-      <Typography className={classes.title} variant="title" color="inherit">
+      <Typography className={classes.title} variant="h6" color="inherit">
         Test Nest
       </Typography>
       {r.isNotAuthenticated() && (

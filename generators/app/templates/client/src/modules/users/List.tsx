@@ -1,14 +1,4 @@
-import {
-  Avatar,
-  StyleRulesCallback,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core';
+import { Avatar, Table, TableBody, TableCell, TableHead, TableRow, withStyles, WithStyles } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { includes } from 'lodash';
 import * as React from 'react';
@@ -21,14 +11,14 @@ import { requestJSON } from '../../util/http';
 import { InviteUserDialog } from './InviteUserDialog';
 import { listUsersQuery } from './queries';
 
-const styles: StyleRulesCallback = (theme: Theme) => ({
+const styles = (theme: Theme) => ({
   usernameCell: {
     display: 'flex',
   },
   avatar: {
     height: 16,
     width: 16,
-    marginRight: theme.spacing.unit * 2,
+    marginRight: theme.spacing(2),
   },
 });
 

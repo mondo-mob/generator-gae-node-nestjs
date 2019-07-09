@@ -81,18 +81,18 @@ const UpdateUserPage: React.FC<Props> = ({ match, history, classes }) => (
 
       return (
         <React.Fragment>
-          <Typography variant="title" paragraph>
+          <Typography variant="h6" paragraph>
             {user.name}
           </Typography>
 
-          <Typography variant="headline">Login</Typography>
+          <Typography variant="h5">Login</Typography>
 
           <Typography variant="body1" paragraph>
             Type: {user.credentials && user.credentials.type} <br />
             Email: {user.credentials && user.credentials.username}
           </Typography>
 
-          <Typography variant="headline">Update</Typography>
+          <Typography variant="h5">Update</Typography>
           <Mutation<UpdateUser, UpdateUserVariables> mutation={mutation}>
             {updateUser => (
               <Form<FormProps>

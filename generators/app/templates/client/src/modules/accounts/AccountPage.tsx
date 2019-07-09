@@ -1,7 +1,7 @@
-import { StyleRulesCallback, Theme, Typography, withStyles, WithStyles } from '@material-ui/core';
+import { Theme, Typography, withStyles, WithStyles } from '@material-ui/core';
 import * as React from 'react';
 
-const styles: StyleRulesCallback = (theme: Theme) => ({
+const styles = (theme: Theme) => ({
   page: {
     minHeight: '100vh',
     display: 'flex',
@@ -14,7 +14,7 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
     width: 400,
   },
   links: {
-    margin: theme.spacing.unit * 2,
+    margin: theme.spacing(2),
 
     '& a': {
       color: theme.palette.grey[800],
@@ -36,7 +36,7 @@ interface Props extends WithStyles<typeof styles> {
 const AccountPage: React.FC<Props> = ({ classes, children, links, title }) => (
   <div className={classes.page}>
     <div className={classes.card}>
-      <Typography variant="headline" className={classes.title}>
+      <Typography variant="h5" className={classes.title}>
         {title}
       </Typography>
 

@@ -1,11 +1,11 @@
-import { StyleRulesCallback, Theme, withStyles, WithStyles } from '@material-ui/core';
+import { Theme, withStyles, WithStyles } from '@material-ui/core';
 import * as React from 'react';
 import { UserRole } from '../../graphql';
 import { RouteHelper } from '../../routes/route-helper';
 import PageTitle from '../PageTitle';
 import AdminSidebar from './AdminSidebar';
 
-const styles: StyleRulesCallback = (theme: Theme) => ({
+const styles = (theme: Theme) => ({
   root: {
     minHeight: '100vh',
     width: '100%',
@@ -15,7 +15,7 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
   },
   toolbar: theme.mixins.toolbar,
 });
@@ -53,7 +53,7 @@ class AdminLayout extends React.Component<Props, State> {
           <AdminSidebar r={r} open={open} handleDrawerClose={this.close} />
           <div className={classes.content}>
             <div className={classes.toolbar} />
-            <div className={classes.childrenContent}>{children}</div>
+            <div>{children}</div>
           </div>
         </main>
       </div>
