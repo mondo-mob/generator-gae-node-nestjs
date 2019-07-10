@@ -140,7 +140,7 @@ class DropzoneFieldInner extends React.Component<Props, State> {
     }));
     if (!this.isUploading()) {
       if (this.props.onUploadingChanged) {
-        this.props.onUploadingChanged(true);
+        this.props.onUploadingChanged(false);
       }
     }
   };
