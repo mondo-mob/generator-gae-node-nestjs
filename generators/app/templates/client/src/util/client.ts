@@ -12,7 +12,7 @@ const cache: InMemoryCache = new InMemoryCache({});
 const client = new ApolloClient({
   defaultOptions: {
     query: {
-      fetchPolicy: 'cache-and-network',
+      fetchPolicy: 'cache-first',
     },
     watchQuery: {
       fetchPolicy: 'cache-and-network',
