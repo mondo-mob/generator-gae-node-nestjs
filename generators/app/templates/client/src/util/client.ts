@@ -36,6 +36,10 @@ const client = new ApolloClient({
         });
       }
       if (networkError) {
+        // @ts-ignore
+        if (message.statusCode && message.statusCode === 403 && location.pathname !== '/signin') {
+          location.href = '/signin';
+        }
         showMessage(`[Network error]: ${networkError}`, true);
       }
     }),
