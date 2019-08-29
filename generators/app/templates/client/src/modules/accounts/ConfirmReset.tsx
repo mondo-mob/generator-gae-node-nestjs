@@ -1,7 +1,7 @@
 import { Button, Theme, withStyles, WithStyles } from '@material-ui/core';
 import gql from 'graphql-tag';
 import * as React from 'react';
-import { Mutation } from 'react-apollo';
+import { Mutation, withApollo, WithApolloClient } from 'react-apollo';
 import { Field } from 'react-final-form';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import Form from '../../components/Form';
@@ -28,7 +28,7 @@ const resetPassword = gql`
   }
 `;
 
-interface Props extends WithStyles<typeof styles>, RouteComponentProps<{ code: string }> {}
+interface Props extends WithStyles<typeof styles>, RouteComponentProps<{ code: string }>, WithApolloClient<{}> {}
 
 interface FormData {
   password: string;
@@ -93,4 +93,4 @@ const ConfirmReset: React.FC<Props> = ({ classes, match, history }) => (
   </AccountPage>
 );
 
-export default withStyles(styles)(ConfirmReset);
+export default withApollo(withStyles(styles)(ConfirmReset));

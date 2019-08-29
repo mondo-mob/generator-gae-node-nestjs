@@ -2,7 +2,7 @@ import { Avatar, Table, TableBody, TableCell, TableHead, TableRow, withStyles, W
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { includes } from 'lodash';
 import * as React from 'react';
-import { Query, QueryResult } from 'react-apollo';
+import {Query, QueryResult, withApollo, WithApolloClient} from 'react-apollo';
 import { Link } from 'react-router-dom';
 import HeaderWithActions from '../../components/HeaderWithActions';
 import { showMessage } from '../../components/Toast';
@@ -30,7 +30,9 @@ const reinviteUser = async (userId: string) => {
 
 const isSuper = (user: ListUsers_users) => includes(user.roles, UserRole.super);
 
-const List: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
+interface Props extends WithStyles<typeof styles>, WithApolloClient<{}> {}
+
+const List: React.FC<Props> = ({ classes }) => (
   <React.Fragment>
     <HeaderWithActions actions={<InviteUserDialog />} title="Users" />
     <Query query={listUsersQuery}>
@@ -78,4 +80,4 @@ const List: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
   </React.Fragment>
 );
 
-export default withStyles(styles)(List);
+export default withApollo(withStyles(styles)(List) as any);

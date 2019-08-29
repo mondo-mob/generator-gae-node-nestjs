@@ -1,7 +1,7 @@
 import { Button, Theme, withStyles, WithStyles } from '@material-ui/core';
 import gql from 'graphql-tag';
 import * as React from 'react';
-import { Mutation } from 'react-apollo';
+import {Mutation, withApollo, WithApolloClient} from 'react-apollo';
 import { Field } from 'react-final-form';
 import { Link } from 'react-router-dom';
 import Form from '../../components/Form';
@@ -28,7 +28,9 @@ const resetPassword = gql`
   }
 `;
 
-const SignIn: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
+interface Props extends WithStyles<typeof styles>, WithApolloClient<{}> {}
+
+const SignIn: React.FC<Props> = ({ classes }) => (
   <AccountPage
     title="Reset password"
     links={
@@ -71,4 +73,4 @@ const SignIn: React.FC<WithStyles<typeof styles>> = ({ classes }) => (
   </AccountPage>
 );
 
-export default withStyles(styles)(SignIn);
+export default withApollo(withStyles(styles)(SignIn));

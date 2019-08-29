@@ -2,7 +2,7 @@ import { Button, CircularProgress, Typography, WithStyles, withStyles } from '@m
 import gql from 'graphql-tag';
 import { without } from 'lodash';
 import * as React from 'react';
-import { Mutation, Query } from 'react-apollo';
+import { Mutation, Query, withApollo, WithApolloClient } from 'react-apollo';
 import { Field } from 'react-final-form';
 import { RouteComponentProps } from 'react-router';
 import Form from '../../components/Form';
@@ -64,7 +64,7 @@ const styles = {
   },
 };
 
-interface Props extends RouteComponentProps<RouteProps>, WithStyles<typeof styles> {}
+interface Props extends RouteComponentProps<RouteProps>, WithStyles<typeof styles>, WithApolloClient<{}> {}
 
 const UpdateUserPage: React.FC<Props> = ({ match, history, classes }) => (
   <Query<UserDetails, UserDetailsVariables> query={userDetailsQuery} variables={{ userId: match.params.userId }}>
@@ -150,4 +150,4 @@ const UpdateUserPage: React.FC<Props> = ({ match, history, classes }) => (
   </Query>
 );
 
-export default withStyles(styles)(UpdateUserPage as any);
+export default withApollo(withStyles(styles)(UpdateUserPage) as any);
