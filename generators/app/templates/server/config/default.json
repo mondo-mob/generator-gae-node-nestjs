@@ -4,6 +4,7 @@
   "location": "<%= appEngineRegion %>",
   "gmailUser": "<%= adminEmail %>",
   "bucket": "<%= slugify(project) %>-dev.appspot.com",
+  "sessionTimeoutInMinutes": 120,
   "auth": {
     "local": {
       "enabled": true

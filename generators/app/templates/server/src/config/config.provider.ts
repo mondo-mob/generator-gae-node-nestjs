@@ -51,6 +51,7 @@ const Config = t.intersection([
     twilioNumber: t.string,
     twilioAccountSID: t.string,
     twilioAuthToken: t.string,
+    sessionTimeoutInMinutes: t.number,
   }),
 ]);
 
@@ -148,6 +149,10 @@ export class ConfigurationProvider implements Configuration {
 
   get searchServiceEndpoint() {
     return this.configuration.searchServiceEndpoint;
+  }
+
+  get sessionTimeoutInMinutes() {
+    return this.configuration.sessionTimeoutInMinutes;
   }
 
   get session(): SessionConfiguration {

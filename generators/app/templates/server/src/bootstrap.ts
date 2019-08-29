@@ -21,6 +21,7 @@ export async function bootstrap() {
   const expressApp = express();
   configureExpress(expressApp, {
     session: configurationProvider.session,
+    sessionTimeoutInMinutes: configurationProvider.sessionTimeoutInMinutes
   });
 
   rootLogger.info(`Configuring server`);
