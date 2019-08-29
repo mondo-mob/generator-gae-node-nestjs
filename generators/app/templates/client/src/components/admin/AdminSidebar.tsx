@@ -56,6 +56,8 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 const ListItemLink = ListItem as any;
+// @ts-ignore
+const NavLinkRef = React.forwardRef((props, ref) => <NavLink {...props}/>);
 
 const AdminSidebar: React.FC<Props> = ({ classes, handleDrawerClose, open, r }) => (
   <Drawer
@@ -76,7 +78,7 @@ const AdminSidebar: React.FC<Props> = ({ classes, handleDrawerClose, open, r }) 
         <ListItemLink
           button
           title="Users"
-          component={NavLink}
+          component={NavLinkRef}
           to={`/admin/users`}
           activeClassName={classes.active}
           className={classes.linkIcon}
