@@ -8,7 +8,7 @@ import HeaderWithActions from '../../components/HeaderWithActions';
 import { showMessage } from '../../components/Toast';
 import { ListUsers, ListUsers_users, UserRole } from '../../graphql';
 import { requestJSON } from '../../util/http';
-import { InviteUserDialog } from './InviteUserDialog';
+import InviteUserDialog from './InviteUserDialog';
 import { listUsersQuery } from './queries';
 
 const styles = (theme: Theme) => ({
