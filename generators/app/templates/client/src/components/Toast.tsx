@@ -3,14 +3,20 @@ import green from '@material-ui/core/colors/green';
 import cx from 'classnames';
 import * as React from 'react';
 
+interface NestHttpException {
+  statusCode: number;
+  error: string;
+  message: string;
+}
+
 interface State {
-  message?: string;
+  message?: string | NestHttpException;
   isOpen: boolean;
   autoHide?: boolean;
   isError?: boolean;
 }
 
-let showToast: (message: string, isError: boolean) => void = (message: string, isError: boolean) => {
+let showToast: (message: string | NestHttpException, isError: boolean) => void = (message: string | NestHttpException, isError: boolean) => {
   // do nothing by default
 };
 
@@ -34,7 +40,6 @@ const styles = (theme: Theme) => ({
 class Toast extends React.PureComponent<WithStyles<typeof styles>, State> {
   public constructor(props: WithStyles<typeof styles>) {
     super(props);
-
     showToast = this.showToast;
 
     this.state = {
@@ -42,7 +47,7 @@ class Toast extends React.PureComponent<WithStyles<typeof styles>, State> {
     };
   }
 
-  public showToast = (message: string, isError: boolean) => {
+  public showToast = (message: string | NestHttpException, isError: boolean) => {
     this.setState({
       isOpen: true,
       message,
@@ -55,25 +60,31 @@ class Toast extends React.PureComponent<WithStyles<typeof styles>, State> {
     const { classes } = this.props;
 
     const { isError, isOpen, message, autoHide } = this.state;
-
     return (
-      <Snackbar
-        className={cx(classes.snackbar)}
-        open={isOpen}
-        onClose={this.close}
-        autoHideDuration={autoHide ? 5000 : undefined}
-      >
-        {message && (
-          <SnackbarContent
-            className={cx({
-              [classes.error]: isError,
-              [classes.success]: !isError,
-            })}
-            message={message}
-          />
-        )}
-      </Snackbar>
+        <Snackbar
+            className={cx(classes.snackbar)}
+            open={isOpen}
+            onClose={this.close}
+            autoHideDuration={autoHide ? 5000 : undefined}
+        >
+          {message && (
+              <SnackbarContent
+                  className={cx({
+                    [classes.error]: isError,
+                    [classes.success]: !isError,
+                  })}
+                  message={this.getMessageText(message)}
+              />
+          )}
+        </Snackbar>
     );
+  }
+
+  private getMessageText(message: string | NestHttpException): string {
+    if (typeof message === 'string') {
+      return message;
+    }
+    return message.message;
   }
 
   private close = () => {
@@ -84,6 +95,6 @@ class Toast extends React.PureComponent<WithStyles<typeof styles>, State> {
 }
 
 export default withStyles(styles)(Toast);
-export const showMessage = (message: string, isError: boolean = false) => {
+export const showMessage = (message: string | NestHttpException, isError: boolean = false) => {
   showToast(message, isError);
 };
