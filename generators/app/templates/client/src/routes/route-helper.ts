@@ -48,4 +48,15 @@ export class RouteHelper {
   public defaultElement(props = {}) {
     return React.createElement(this.defaultComponent, props);
   }
+
+  public isActive() {
+    return this.user && this.user.enabled;
+  }
+
+  public isNotActive() {
+    if (!this.user) {
+      return true;
+    }
+    return !this.user.enabled;
+  }
 }

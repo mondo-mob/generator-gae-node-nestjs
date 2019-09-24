@@ -34,5 +34,5 @@ type Attachment {
 }
 
 type Mutation {
-  updateUser(id: ID!, name: String, roles: [UserRole!]!, profile: [AttachmentInput!]): User!
+  updateUser(id: ID!, name: String, roles: [UserRole!]!, profile: [AttachmentInput!], enabled: Boolean): User!
 }

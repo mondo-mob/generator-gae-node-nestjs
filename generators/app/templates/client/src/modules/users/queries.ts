@@ -21,6 +21,7 @@ export const meQuery = gql`
       id
       name
       roles
+      enabled
     }
   }
 `;

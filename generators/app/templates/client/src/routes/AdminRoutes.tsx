@@ -13,7 +13,7 @@ interface Props {
 const AdminRoutes: React.FC<Props> = ({ r }) => (
   <AdminLayout r={r} anyRoles={[UserRole.admin, UserRole.super]}>
     <Switch>
-      <Route path="/admin/users/:userId" component={r.ifHasAnyRole(UpdateUserPage, UserRole.admin)} />
+      <Route path="/admin/users/:userId" component={r.ifHasAnyRole(UpdateUserPage as any, UserRole.admin)} />
       <Route exact path="/admin/users" component={r.ifHasAnyRole(List, UserRole.admin)} />
       <Redirect to="/admin/users" />
     </Switch>

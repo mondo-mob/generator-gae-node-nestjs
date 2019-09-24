@@ -16,30 +16,30 @@ const ChecklistField: React.FC<Props> = ({
   label,
   options,
 }) => (
-  <FormControl style={{ marginTop: '1.5rem' }}>
-    <FormLabel htmlFor={name}>{label}</FormLabel>
-    <FormGroup>
-      {options!.map(option => (
-        <FormControlLabel
-          key={option}
-          control={
-            <Checkbox
-              checked={includes(value, option)}
-              onChange={(event, checked) => {
-                if (checked) {
-                  onChange([...value, option]);
-                } else {
-                  onChange(without(value, option));
-                }
-              }}
-            />
-          }
-          label={option}
-        />
-      ))}
-    </FormGroup>
-    {touched && error && <FormHelperText error={touched && invalid}>{error}</FormHelperText>}
-  </FormControl>
-);
+    <FormControl style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+      <FormLabel htmlFor={name}>{label}</FormLabel>
+      <FormGroup>
+        {options!.map(option => (
+          <FormControlLabel
+            key={option}
+            control={
+              <Checkbox
+                checked={includes(value, option)}
+                onChange={(event, checked) => {
+                  if (checked) {
+                    onChange([...value, option]);
+                  } else {
+                    onChange(without(value, option));
+                  }
+                }}
+              />
+            }
+            label={option}
+          />
+        ))}
+      </FormGroup>
+      {touched && error && <FormHelperText error={touched && invalid}>{error}</FormHelperText>}
+    </FormControl>
+  );
 
 export default ChecklistField;

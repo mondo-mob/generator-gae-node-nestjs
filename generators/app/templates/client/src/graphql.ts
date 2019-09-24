@@ -1,6 +1,5 @@
-
-
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -15,8 +14,8 @@ export interface CheckActivationCodeVariables {
   code: string;
 }
 
-
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -32,8 +31,8 @@ export interface ConfirmResetPasswordVariables {
   code: string;
 }
 
-
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -48,8 +47,8 @@ export interface ResetPasswordVariables {
   email: string;
 }
 
-
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -65,67 +64,8 @@ export interface InviteUserVariables {
   roles: string[];
 }
 
-
 /* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: UserDetails
-// ====================================================
-
-export interface UserDetails_userById_credentials {
-  type: string | null;
-  username: string | null;
-}
-
-export interface UserDetails_userById {
-  id: string;
-  name: string | null;
-  roles: UserRole[];
-  credentials: UserDetails_userById_credentials | null;
-}
-
-export interface UserDetails {
-  userById: UserDetails_userById | null;
-}
-
-export interface UserDetailsVariables {
-  userId: string;
-}
-
-
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: UpdateUser
-// ====================================================
-
-export interface UpdateUser_updateUser_profile {
-  id: string;
-  filename: string;
-}
-
-export interface UpdateUser_updateUser {
-  id: string;
-  name: string | null;
-  roles: UserRole[];
-  profile: UpdateUser_updateUser_profile[] | null;
-}
-
-export interface UpdateUser {
-  updateUser: UpdateUser_updateUser;
-}
-
-export interface UpdateUserVariables {
-  userId: string;
-  name: string;
-  roles: UserRole[];
-  profile?: AttachmentInput[] | null;
-}
-
-
-/* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -133,10 +73,12 @@ export interface UpdateUserVariables {
 // ====================================================
 
 export interface ListUsers_users_avatar {
+  __typename: 'Avatar';
   url: string | null;
 }
 
 export interface ListUsers_users {
+  __typename: 'User';
   id: string;
   name: string | null;
   email: string;
@@ -149,8 +91,8 @@ export interface ListUsers {
   users: ListUsers_users[];
 }
 
-
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -158,9 +100,11 @@ export interface ListUsers {
 // ====================================================
 
 export interface Me_me {
+  __typename: 'User';
   id: string;
   name: string | null;
   roles: UserRole[];
+  enabled: boolean;
 }
 
 export interface Me {
@@ -168,6 +112,80 @@ export interface Me {
 }
 
 /* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: UserDetails
+// ====================================================
+
+export interface UserDetails_userById_credentials {
+  __typename: 'Credentials';
+  type: string | null;
+  username: string | null;
+}
+
+export interface UserDetails_userById_profile {
+  __typename: 'Attachment';
+  id: string;
+  filename: string;
+}
+
+export interface UserDetails_userById {
+  __typename: 'User';
+  id: string;
+  name: string | null;
+  roles: UserRole[];
+  credentials: UserDetails_userById_credentials | null;
+  profile: UserDetails_userById_profile[] | null;
+  enabled: boolean;
+}
+
+export interface UserDetails {
+  userById: UserDetails_userById | null;
+}
+
+export interface UserDetailsVariables {
+  userId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UpdateUser
+// ====================================================
+
+export interface UpdateUser_updateUser_profile {
+  __typename: 'Attachment';
+  id: string;
+  filename: string;
+}
+
+export interface UpdateUser_updateUser {
+  __typename: 'User';
+  id: string;
+  name: string | null;
+  roles: UserRole[];
+  profile: UpdateUser_updateUser_profile[] | null;
+  enabled: boolean;
+}
+
+export interface UpdateUser {
+  updateUser: UpdateUser_updateUser;
+}
+
+export interface UpdateUserVariables {
+  userId: string;
+  name: string;
+  roles: UserRole[];
+  profile?: AttachmentInput[] | null;
+  enabled?: boolean | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 //==============================================================
@@ -175,12 +193,11 @@ export interface Me {
 //==============================================================
 
 export enum UserRole {
-  admin = "admin",
-  super = "super",
-  user = "user",
+  admin = 'admin',
+  super = 'super',
+  user = 'user',
 }
 
-// 
 export interface AttachmentInput {
   id: string;
   filename: string;

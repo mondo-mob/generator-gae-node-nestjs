@@ -5,17 +5,10 @@ import { UsersService } from './users.service';
 
 @Resolver('User')
 export class UsersResolver {
-  constructor(
-    private readonly userRepository: UserRepository,
-    private readonly userService: UsersService,
-  ) {}
+  constructor(private readonly userRepository: UserRepository, private readonly userService: UsersService) {}
 
   @Query('users')
-  async getUsers(
-    _obj: {},
-    _args: {},
-    context: Context,
-  ): Promise<ReadonlyArray<User>> {
+  async getUsers(_obj: {}, _args: {}, context: Context): Promise<ReadonlyArray<User>> {
     const [users] = await this.userRepository.query(context);
 
     return users;
@@ -30,10 +23,10 @@ export class UsersResolver {
   @Mutation()
   async updateUser(
     _req: void,
-    { id, name, roles }: { id: string; name: string; roles: string[] },
+    { id, name, roles, enabled }: { id: string; name: string; roles: string[]; enabled: boolean },
     context: Context,
   ) {
-    return await this.userService.update(context, id, { name, roles });
+    return await this.userService.update(context, id, { name, roles, enabled });
   }
 
   avatar({ avatar }: User) {
