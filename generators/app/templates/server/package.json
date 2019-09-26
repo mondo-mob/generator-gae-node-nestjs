@@ -27,12 +27,12 @@
     "clear-datastore": "rm -rf ~/.config/gcloud/emulators/datastore"
   },
   "dependencies": {
-    "@3wks/gae-node-nestjs": "2.0.1",
+    "@3wks/gae-node-nestjs": "2.1.1",
     "@google-cloud/connect-datastore": "2.0.1",
     "@google-cloud/datastore": "3.1.0",
     "@google-cloud/debug-agent": "3.0.1",
     "@google-cloud/logging-bunyan": "0.9.5",
-    "@google-cloud/storage": "2.4.0",
+    "@google-cloud/storage": "2.5.0",
     "@google-cloud/trace-agent": "3.5.2",
     "@nestjs/common": "5.6.2",
     "@nestjs/core": "5.6.2",
