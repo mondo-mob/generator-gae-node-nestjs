@@ -48,9 +48,6 @@ const Config = t.intersection([
     devHooks,
     apiEndpoint: t.string,
     searchServiceEndpoint: t.string,
-    twilioNumber: t.string,
-    twilioAccountSID: t.string,
-    twilioAuthToken: t.string,
     sessionTimeoutInMinutes: t.number,
   }),
 ]);
