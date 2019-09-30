@@ -21,16 +21,16 @@ export async function bootstrap() {
   const expressApp = express();
   configureExpress(expressApp, {
     session: configurationProvider.session,
-    sessionTimeoutInMinutes: configurationProvider.sessionTimeoutInMinutes
+    sessionTimeoutInMinutes: configurationProvider.sessionTimeoutInMinutes,
+    staticAssets: {
+      root: 'public',
+    },
   });
 
   rootLogger.info(`Configuring server`);
   const app = await NestFactory.create(AppModule, expressApp, {
     logger: new BunyanLogger(),
   });
-
-  rootLogger.info(`Setting up asset hosting`);
-  app.useStaticAssets('public');
 
   const stopListener = async () => {
     rootLogger.info('Killing process');
