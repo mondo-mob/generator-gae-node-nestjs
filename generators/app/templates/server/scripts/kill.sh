@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-server_path_portion="iecl-scheduler/server"
+server_path_portion="<%= slugify(projectName) %>/server"
 server_tcp_ports="8080,4000,9000"
 kill_options="$@"
 
