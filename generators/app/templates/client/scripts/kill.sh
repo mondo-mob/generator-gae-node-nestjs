@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-path_portion="<%= slugify(projectName) %>/client"
+path_portion="<%= slugify(project) %>/client"
 tcp_ports="3000"
 kill_options="$@"
 

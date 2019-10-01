@@ -114,6 +114,8 @@ module.exports = class extends Generator {
       secret: generateKey(512),
       cookieSecret: generateKey(512)
     });
+    copyTpl('client/scripts/kill.sh');
+    copyTpl('server/scripts/kill.sh');
   }
 
   install() {
