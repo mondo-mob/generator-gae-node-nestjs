@@ -3,7 +3,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import cx from 'classnames';
 import * as React from 'react';
 import { RouteHelper } from '../routes/route-helper';
-import { request } from '../util/http';
 
 const styles = (theme: Theme) => ({
   menuButton: {
@@ -45,11 +44,6 @@ interface Props extends WithStyles<typeof styles> {
   r: RouteHelper;
 }
 
-const logout = async () => {
-  await request('/auth/signout/local', 'POST');
-  window.location.reload();
-};
-
 const PageTitle: React.FC<Props> = ({ open, classes, handleDrawerOpen, showDrawer, r }) => (
   <AppBar position="absolute" className={cx(classes.appBar, open && classes.appBarShift)}>
     <Toolbar disableGutters={!open}>
@@ -74,7 +68,7 @@ const PageTitle: React.FC<Props> = ({ open, classes, handleDrawerOpen, showDrawe
       )}
       {r.isAuthenticated() && (
         <Button
-          onClick={() => logout()}
+          href="/auth/signout/local"
           type="button"
           color="primary"
           variant="contained"
