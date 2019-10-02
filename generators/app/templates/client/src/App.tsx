@@ -10,7 +10,6 @@ import Reset from './modules/accounts/Reset';
 import LogIn from './modules/accounts/SignIn';
 import Loading from './modules/pages/Loading';
 import Unauthorised from './modules/pages/Unauthorised';
-import DisabledAccount from './modules/users/DisabledAccount';
 import { meQuery } from './modules/users/queries';
 import AdminRoutes from './routes/AdminRoutes';
 import PublicRoutes from './routes/PublicRoutes';
@@ -36,10 +35,6 @@ const App: React.FC = () => {
             }
 
             const r = new RouteHelper(Unauthorised, data && data.me);
-
-            if (r.isAuthenticated() && r.isNotActive()) {
-              return <DisabledAccount r={r} />
-            }
 
             if (r.isNotAuthenticated()) {
               return (
