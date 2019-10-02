@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import HeaderWithActions from '../../components/HeaderWithActions';
 import { ListUsers, ListUsers_users, UserRole } from '../../graphql';
 import { listUsersQuery } from './queries';
+import InviteUserDialog from './InviteUserDialog';
 
 const useStyles = makeStyles((theme: Theme) => ({
   usernameCell: {
@@ -32,7 +33,7 @@ const List: React.FC = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <HeaderWithActions actions={<React.Fragment />} title="Users" />
+      <HeaderWithActions actions={<InviteUserDialog />} title="Users" />
       <Query query={listUsersQuery}>
         {({ data }: QueryResult<ListUsers>) => (
           <Table>
