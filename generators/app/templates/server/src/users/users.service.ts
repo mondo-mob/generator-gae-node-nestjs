@@ -1,6 +1,6 @@
 import { AbstractUserService, Context, LoginIdentifierRepository } from '@3wks/gae-node-nestjs';
 import { Injectable } from '@nestjs/common';
-import * as uuid from 'node-uuid';
+import * as uuidv4 from 'uuid/v4';
 import { User, UserCreate, UserInput, UserRepository } from './users.repository';
 
 @Injectable()
@@ -41,7 +41,7 @@ export class UsersService extends AbstractUserService<User> {
   protected async createUser(context: Context, user: UserCreate) {
     const entity = { ...user } as User;
 
-    entity.id = entity.id || uuid.v4();
+    entity.id = entity.id || uuidv4();
     entity.avatar = '';
     entity.enabled = entity.enabled === undefined || entity.enabled;
 

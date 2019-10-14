@@ -2,7 +2,7 @@ import { Context, createLogger, Ctxt, Roles, StorageProvider } from '@3wks/gae-n
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import * as Logger from 'bunyan';
 import { Response } from 'express';
-import * as uuid from 'uuid';
+import * as uuidv4 from 'uuid/v4';
 import { ConfigurationProvider } from '../config/config.provider';
 
 @Controller('api/attachments')
@@ -20,7 +20,7 @@ export class AttachmentsController {
   @Post('/upload')
   async uploadAttachment(@Body('contentType') contentType: string) {
     this.logger.info('Generating Google Cloud Storage attachment URL');
-    const id = uuid.v4();
+    const id = uuidv4();
     const file = this.storageProvider.defaultBucket.file(`attachment/${id}`);
     const [url] = await file.createResumableUpload({
       origin: this.configurationProvider.host,
