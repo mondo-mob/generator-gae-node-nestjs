@@ -1,6 +1,6 @@
-import {Module} from '@nestjs/common';
-import {ConfigurationModule} from '../config/config.module';
-import {AttachmentsController} from "./attachments.controller";
+import { Module } from '@nestjs/common';
+import { ConfigurationModule } from '../config/config.module';
+import { AttachmentsController } from './attachments.controller';
 
 @Module({
   imports: [ConfigurationModule],

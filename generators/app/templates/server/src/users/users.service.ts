@@ -7,13 +7,14 @@ import { User, UserCreate, UserInput, UserRepository } from './users.repository'
 export class UsersService extends AbstractUserService<User> {
   constructor(
     protected readonly loginIdentifierRepository: LoginIdentifierRepository,
-    private readonly userRepository: UserRepository) {
+    private readonly userRepository: UserRepository,
+  ) {
     super(loginIdentifierRepository);
   }
 
   async listByRole(context: Context, role: string, limit = 1000) {
     // @ts-ignore
-    const [users, ] = await this.userRepository.query(context, {
+    const [users] = await this.userRepository.query(context, {
       filters: {
         roles: role,
       },
@@ -48,6 +49,6 @@ export class UsersService extends AbstractUserService<User> {
   }
 
   protected async updateUser(context: Context, user: User, updates: UserInput): Promise<User> {
-    return this.userRepository.save(context, {...user, ...updates});
+    return this.userRepository.save(context, { ...user, ...updates });
   }
 }

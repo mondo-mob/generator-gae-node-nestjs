@@ -8,10 +8,7 @@ bootstrap().then(({ stop }) => {
 
   if (module.hot) {
     module.hot.accept((ex: Error) => {
-      rootLogger.error(
-        'Unable to hot-reload due to error - killing process!',
-        ex,
-      );
+      rootLogger.error('Unable to hot-reload due to error - killing process!', ex);
       process.exit(1);
     });
     module.hot.dispose(() => stop());

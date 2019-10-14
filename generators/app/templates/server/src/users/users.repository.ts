@@ -7,9 +7,7 @@ const userBase = t.partial({
 });
 
 // TODO: Customise roles enum for your application
-const rolesArray = t.array(
-  t.union([t.literal('super'), t.literal('admin'), t.literal('user')]),
-);
+const rolesArray = t.array(t.union([t.literal('super'), t.literal('admin'), t.literal('user')]));
 
 const userInputSchema = t.intersection([
   userBase,
@@ -18,7 +16,7 @@ const userInputSchema = t.intersection([
     email: t.string,
     roles: rolesArray,
     enabled: t.boolean,
-  })
+  }),
 ]);
 
 const userCreateSchema = t.intersection([
@@ -26,7 +24,7 @@ const userCreateSchema = t.intersection([
   t.interface({
     email: t.string,
     roles: rolesArray,
-  })
+  }),
 ]);
 
 const userSchema = t.intersection([

@@ -81,10 +81,7 @@ export class ConfigurationProvider implements Configuration {
       nodeConfig.util.extendDeep(mergedConfig, config.parsed);
     });
 
-    const withEnvironment = nodeConfig.util.extendDeep(
-      mergedConfig,
-      process.env,
-    );
+    const withEnvironment = nodeConfig.util.extendDeep(mergedConfig, process.env);
 
     const decodedConfig = Config.decode(withEnvironment);
 
@@ -159,5 +156,4 @@ export class ConfigurationProvider implements Configuration {
       projectId: this.projectId,
     };
   }
-
 }
