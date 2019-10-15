@@ -52,7 +52,7 @@ interface AttachmentInput {
   filename: string;
 }
 
-interface Props extends FieldRenderProps, WithStyles<typeof styles> {
+interface Props extends FieldRenderProps<any, any>, WithStyles<typeof styles> {
   infoText: string;
   multiple: boolean;
   accept: string;

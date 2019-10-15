@@ -5,7 +5,7 @@ import { FieldRenderProps } from 'react-final-form';
 
 // FIXME making custom props optional until this is resolved:
 // https://github.com/final-form/react-final-form/issues/175
-interface Props extends FieldRenderProps {
+interface Props extends FieldRenderProps<string[], HTMLElement> {
   options?: string[];
   label?: string;
 }
