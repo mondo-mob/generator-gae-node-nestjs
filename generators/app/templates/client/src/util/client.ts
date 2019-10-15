@@ -21,7 +21,7 @@ const client = new ApolloClient({
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
-        graphQLErrors.map(({ message, locations, path }) => {
+        graphQLErrors.forEach(({ message, locations, path }) => {
           if (process.env.NODE_ENV !== 'production') {
             showMessage(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`, true);
           } else {
@@ -32,8 +32,8 @@ const client = new ApolloClient({
       }
       if (networkError) {
         // @ts-ignore
-        if (message.statusCode && message.statusCode === 403 && location.pathname !== '/signin') {
-          location.href = '/signin';
+        if (message.statusCode && message.statusCode === 403 && window.location.pathname !== '/signin') {
+          window.location.href = '/signin';
         }
         showMessage(`[Network error]: ${networkError}`, true);
       }

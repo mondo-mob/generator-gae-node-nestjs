@@ -109,7 +109,7 @@ class DropzoneFieldInner extends React.Component<Props, State> {
                     <Attachment />
                   </Avatar>
                 </ListItemAvatar>
-                <a href={`/api/attachments/${attachment.id}/download`} target="_blank">
+                <a href={`/api/attachments/${attachment.id}/download`} target="_blank" rel="noopener noreferrer">
                   <ListItemText primary={attachment.filename} />
                 </a>
                 <ListItemSecondaryAction>

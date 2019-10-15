@@ -11,7 +11,7 @@ interface Props extends FieldRenderProps {
 }
 
 const ChecklistField: React.FC<Props> = ({
-  input: { onChange, value },
+  input: { name, onChange, value },
   meta: { touched, error, invalid },
   label,
   options,
