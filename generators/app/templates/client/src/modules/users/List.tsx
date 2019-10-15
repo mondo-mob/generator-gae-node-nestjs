@@ -1,11 +1,4 @@
-import {
-  makeStyles,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from '@material-ui/core';
+import { makeStyles, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { includes } from 'lodash';
 import * as React from 'react';
@@ -58,9 +51,7 @@ const List: React.FC = () => {
                     <TableCell>{user.email}</TableCell>
                     <TableCell>{user.roles.join(', ')}</TableCell>
                     <TableCell>{user.enabled ? 'Yes' : 'No '}</TableCell>
-                    <TableCell>
-                      {!isSuper(user) && <Link to={`/admin/users/${user.id}`}>Edit</Link>}
-                    </TableCell>
+                    <TableCell>{!isSuper(user) && <Link to={`/admin/users/${user.id}`}>Edit</Link>}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -70,6 +61,6 @@ const List: React.FC = () => {
       </Query>
     </React.Fragment>
   );
-}
+};
 
 export default List;

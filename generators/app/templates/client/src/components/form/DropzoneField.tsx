@@ -1,4 +1,16 @@
-import { Avatar, FormHelperText, IconButton, LinearProgress, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, WithStyles, withStyles } from '@material-ui/core';
+import {
+  Avatar,
+  FormHelperText,
+  IconButton,
+  LinearProgress,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  ListItemText,
+  WithStyles,
+  withStyles,
+} from '@material-ui/core';
 import Attachment from '@material-ui/icons/Attachment';
 import Delete from '@material-ui/icons/Delete';
 import * as React from 'react';

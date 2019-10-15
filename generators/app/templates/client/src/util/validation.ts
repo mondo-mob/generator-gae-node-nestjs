@@ -1,18 +1,13 @@
-import { FieldValidator } from "final-form";
+import { FieldValidator } from 'final-form';
 
-export const required = (msg: string) => (value: any) =>
-  value ? undefined : msg;
+export const required = (msg: string) => (value: any) => (value ? undefined : msg);
 
 export const isEmail = (msg: string) => (value: string) =>
-  value.match(
-    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-  )
-    ? undefined
-    : msg;
+  value.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) ? undefined : msg;
 
 export const minLength = (msg: string, length: number) => (values: string[]) =>
   values.length >= length ? undefined : msg;
-  
+
 export const compose = (...validators: FieldValidator[]): FieldValidator => {
   return (value, allValues) => {
     for (const validator of validators) {

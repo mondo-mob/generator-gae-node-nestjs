@@ -11,7 +11,14 @@ import Form from '../../components/Form';
 import ChecklistField from '../../components/form/ChecklistField';
 import { DropzoneField } from '../../components/form/DropzoneField';
 import Input from '../../components/form/TextField';
-import { AttachmentInput, UpdateUser, UpdateUserVariables, UserDetails, UserDetailsVariables, UserRole } from '../../graphql';
+import {
+  AttachmentInput,
+  UpdateUser,
+  UpdateUserVariables,
+  UserDetails,
+  UserDetailsVariables,
+  UserRole,
+} from '../../graphql';
 import { minLength, required } from '../../util/validation';
 
 const userDetailsQuery = gql`
@@ -34,7 +41,13 @@ const userDetailsQuery = gql`
 `;
 
 const mutation = gql`
-  mutation UpdateUser($userId: ID!, $name: String!, $roles: [UserRole!]!, $profile: [AttachmentInput!], $enabled: Boolean) {
+  mutation UpdateUser(
+    $userId: ID!
+    $name: String!
+    $roles: [UserRole!]!
+    $profile: [AttachmentInput!]
+    $enabled: Boolean
+  ) {
     updateUser(id: $userId, name: $name, roles: $roles, profile: $profile, enabled: $enabled) {
       id
       name
@@ -59,32 +72,30 @@ interface FormProps {
   enabled: boolean;
 }
 
-
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     maxWidth: 300,
   },
   form: {
     display: 'flex',
-    'flexDirection': 'column'
+    flexDirection: 'column',
   },
   subtitle: {
     color: 'gray',
   },
   enabledContainer: {
-    marginBottom: theme.spacing(4)
-  }
+    marginBottom: theme.spacing(4),
+  },
 }));
 
-interface Props extends RouteComponentProps<RouteProps> { }
+interface Props extends RouteComponentProps<RouteProps> {}
 
 const UpdateUserPage: React.FC<Props> = ({ match, history }) => {
   const classes = useStyles();
 
   const { data, loading } = useQuery<UserDetails, UserDetailsVariables>(userDetailsQuery, {
-    variables: { userId: match.params.userId }
+    variables: { userId: match.params.userId },
   });
-
 
   if (loading && (!data || !data.userById)) {
     return <CircularProgress />;
@@ -101,7 +112,6 @@ const UpdateUserPage: React.FC<Props> = ({ match, history }) => {
       {me => {
         return (
           <div className={classes.container}>
-
             <Typography variant="h5" paragraph>
               {user.name}
             </Typography>
@@ -111,24 +121,28 @@ const UpdateUserPage: React.FC<Props> = ({ match, history }) => {
             </Typography>
 
             <Typography variant="body1" paragraph component="div">
-              <label className="MuiFormLabel-root">Email</label> <div>{user.credentials && user.credentials.username}</div>
+              <label className="MuiFormLabel-root">Email</label>{' '}
+              <div>{user.credentials && user.credentials.username}</div>
             </Typography>
 
             <Mutation<UpdateUser, UpdateUserVariables> mutation={mutation}>
               {updateUser => (
                 <Form<FormProps>
                   onSubmit={({ name, roles, profile, enabled }) => {
-                    return (updateUser({
+                    return updateUser({
                       variables: {
-                        userId: match.params.userId, name, roles, profile, enabled: !!enabled
+                        userId: match.params.userId,
+                        name,
+                        roles,
+                        profile,
+                        enabled: !!enabled,
                       },
-                    }))
-                  }
-                  }
+                    });
+                  }}
                   initialValues={{
                     name: user.name,
                     roles: user.roles,
-                    enabled: user.enabled
+                    enabled: user.enabled,
                   }}
                   successMessage="Updated user"
                   onSuccess={() => history.push(`/users`)}
@@ -165,7 +179,6 @@ const UpdateUserPage: React.FC<Props> = ({ match, history }) => {
                           accept="image/jpg, image/jpeg, image/png"
                         />
 
-
                         <div className={classes.enabledContainer}>
                           <Field name="enabled" type="checkbox">
                             {props => {
@@ -180,15 +193,20 @@ const UpdateUserPage: React.FC<Props> = ({ match, history }) => {
                                     />
                                   }
                                   label="Active"
-                                />)
+                                />
+                              );
                             }}
                           </Field>
-                          {!values.enabled && <Typography className={classes.subtitle} variant="subtitle1" gutterBottom>*Note, saving the user as inactive will result in them not being able to login</Typography>}
+                          {!values.enabled && (
+                            <Typography className={classes.subtitle} variant="subtitle1" gutterBottom>
+                              *Note, saving the user as inactive will result in them not being able to login
+                            </Typography>
+                          )}
                         </div>
 
                         <Button variant="contained" color="primary" type="submit">
                           Save changes
-                    </Button>
+                        </Button>
                       </form>
                     );
                   }}
@@ -196,10 +214,10 @@ const UpdateUserPage: React.FC<Props> = ({ match, history }) => {
               )}
             </Mutation>
           </div>
-        )
+        );
       }}
     </UserContext.Consumer>
   );
-}
+};
 
 export default UpdateUserPage;

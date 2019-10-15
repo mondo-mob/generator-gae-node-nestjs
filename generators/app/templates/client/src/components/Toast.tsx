@@ -16,7 +16,10 @@ interface State {
   isError?: boolean;
 }
 
-let showToast: (message: string | NestHttpException, isError: boolean) => void = (message: string | NestHttpException, isError: boolean) => {
+let showToast: (message: string | NestHttpException, isError: boolean) => void = (
+  message: string | NestHttpException,
+  isError: boolean,
+) => {
   // do nothing by default
 };
 
@@ -61,22 +64,22 @@ class Toast extends React.PureComponent<WithStyles<typeof styles>, State> {
 
     const { isError, isOpen, message, autoHide } = this.state;
     return (
-        <Snackbar
-            className={cx(classes.snackbar)}
-            open={isOpen}
-            onClose={this.close}
-            autoHideDuration={autoHide ? 5000 : undefined}
-        >
-          {message && (
-              <SnackbarContent
-                  className={cx({
-                    [classes.error]: isError,
-                    [classes.success]: !isError,
-                  })}
-                  message={this.getMessageText(message)}
-              />
-          )}
-        </Snackbar>
+      <Snackbar
+        className={cx(classes.snackbar)}
+        open={isOpen}
+        onClose={this.close}
+        autoHideDuration={autoHide ? 5000 : undefined}
+      >
+        {message && (
+          <SnackbarContent
+            className={cx({
+              [classes.error]: isError,
+              [classes.success]: !isError,
+            })}
+            message={this.getMessageText(message)}
+          />
+        )}
+      </Snackbar>
     );
   }
 

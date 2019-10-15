@@ -23,15 +23,10 @@ const client = new ApolloClient({
       if (graphQLErrors) {
         graphQLErrors.map(({ message, locations, path }) => {
           if (process.env.NODE_ENV !== 'production') {
-            showMessage(
-              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-              true,
-            );
+            showMessage(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`, true);
           } else {
             // tslint:disable:no-console
-            console.error(
-              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-            );
+            console.error(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
           }
         });
       }
@@ -75,9 +70,9 @@ const client = new ApolloClient({
         options!.headers = {
           ...options!.headers,
           ...getCsrfHeaders(),
-        }
+        };
         return fetch(uri, options);
-      }
+      },
     }),
   ]),
   cache,

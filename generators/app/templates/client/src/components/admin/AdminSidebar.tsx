@@ -1,4 +1,15 @@
-import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Theme, withStyles, WithStyles } from '@material-ui/core';
+import {
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Theme,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Users from '@material-ui/icons/SupervisorAccount';
 import cx from 'classnames';
@@ -57,7 +68,7 @@ interface Props extends WithStyles<typeof styles> {
 
 const ListItemLink = ListItem as any;
 // @ts-ignore
-const NavLinkRef = React.forwardRef((props, ref) => <NavLink {...props}/>);
+const NavLinkRef = React.forwardRef((props, ref) => <NavLink {...props} />);
 
 const AdminSidebar: React.FC<Props> = ({ classes, handleDrawerClose, open, r }) => (
   <Drawer

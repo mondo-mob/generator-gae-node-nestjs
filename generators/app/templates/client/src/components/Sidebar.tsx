@@ -1,4 +1,15 @@
-import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Theme, withStyles, WithStyles } from '@material-ui/core';
+import {
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Theme,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Users from '@material-ui/icons/SupervisorAccount';
 import cx from 'classnames';
@@ -24,7 +35,7 @@ const styles = (theme: Theme) => ({
     }),
     width: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9)
+      width: theme.spacing(9),
     },
   },
   toolbar: {

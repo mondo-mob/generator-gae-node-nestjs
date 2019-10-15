@@ -16,13 +16,13 @@ const styles = {
 };
 
 interface Props extends WithStyles<typeof styles> {
-  message?: string
+  message?: string;
 }
 
 const Loading: React.FC<Props> = ({ classes, message }) => (
   <div className={classes.page}>
     <CircularProgress />
-    <Typography>{message ? message : "Loading..."}</Typography>
+    <Typography>{message ? message : 'Loading...'}</Typography>
   </div>
 );
 

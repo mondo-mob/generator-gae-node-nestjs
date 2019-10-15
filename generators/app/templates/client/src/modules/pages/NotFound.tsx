@@ -7,9 +7,7 @@ const NotFound = () => (
       Not found
     </Typography>
 
-    <Typography variant="body1">
-      The page you were looking for was not found
-    </Typography>
+    <Typography variant="body1">The page you were looking for was not found</Typography>
   </React.Fragment>
 );
 
