@@ -83,7 +83,7 @@ export interface ListUsers_users {
   name: string | null;
   email: string;
   enabled: boolean;
-  avatar: ListUsers_users_avatar;
+  avatar: ListUsers_users_avatar | null;
   roles: UserRole[];
 }
 

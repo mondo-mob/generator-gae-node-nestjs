@@ -2,6 +2,7 @@ import { BunyanLogger, rootLogger, configureExpress } from '@mondomob/gae-node-n
 import * as debug from '@google-cloud/debug-agent';
 import * as trace from '@google-cloud/trace-agent';
 import { NestFactory } from '@nestjs/core';
+import { ExpressAdapter } from '@nestjs/platform-express';
 import * as express from 'express';
 import { AppModule } from './app.module';
 import { configurationProvider } from './config/config.module';
@@ -24,7 +25,7 @@ export async function bootstrap() {
   });
 
   rootLogger.info(`Configuring server`);
-  const app = await NestFactory.create(AppModule, expressApp, {
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp), {
     logger: new BunyanLogger(),
   });
 

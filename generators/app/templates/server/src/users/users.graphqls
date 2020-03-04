@@ -11,7 +11,7 @@ enum UserRole {
 type User {
   id: ID!
   name: String
-  avatar: Avatar!
+  avatar: Avatar
   email: String!
   enabled: Boolean!
   roles: [UserRole!]!
