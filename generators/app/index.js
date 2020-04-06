@@ -11,7 +11,9 @@ const generateKey = bits => crypto.randomBytes(Math.ceil(bits / 8)).toString('ba
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
-    this.log(yosay(`Welcome to the ${chalk.red('@3wks/gae-node-nestjs')} generator!`));
+    this.log(
+      yosay(`Welcome to the ${chalk.red('@mondomob/gae-node-nestjs')} generator!`)
+    );
 
     const prompts = [
       {
@@ -35,7 +37,7 @@ module.exports = class extends Generator {
         name: 'appEngineRegion',
         message: 'What google cloud region will this project run in?',
         store: true,
-        default: 'us-central1'
+        default: 'australia-southeast1'
       }
     ];
 

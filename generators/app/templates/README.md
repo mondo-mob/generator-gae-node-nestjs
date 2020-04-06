@@ -38,7 +38,7 @@ Clear datastore state: remove files from `~/.config/gcloud/emulators/datastore`
 
 ## New: Adding server modules
 
-Run `yo @3wks/gae-node-nestjs:module tests` from root directory (directory containing client / server) where `tests` is the name of your module (by convention this is plural). This generator can bootstrap a new module with repository + service + graphql.
+Run `yo @mondomob/gae-node-nestjs:module tests` from root directory (directory containing client / server) where `tests` is the name of your module (by convention this is plural). This generator can bootstrap a new module with repository + service + graphql.
 
 **NOTE:** Remember to add new modules to your AppModule
 
@@ -75,7 +75,7 @@ Note: The first time you run the deploy you may be asked which region to deploy 
 
 ## System user bootstrap
 
-The `development` environment is configured to run bootstrap each time the server is started. If not already present, bootstrap will create a system user `admin@3wks.com.au` with password `password`.
+The `development` environment is configured to run bootstrap each time the server is started. If not already present, bootstrap will create a system user `admin@mondomob.com.au` with password `password`.
 
 For all other environments (`dev`, `uat`, `prod`), auto-bootstrap is off.
 
@@ -99,7 +99,7 @@ For more information on how the above command works see the migrations section.
 ## Google Sign Up
 
 1.  Follow the above steps
-2.  Add allowed email domains to the `signUpDomains` setting (e.g. 3wks.com.au)
+2.  Add allowed email domains to the `signUpDomains` setting (e.g. mondomob.com)
 3.  Add any roles users should have by default
 
 ## Emails + Invites + Password Reset
@@ -170,7 +170,7 @@ There should only be one module per folder within your solution, and there shoul
 
 To create a new module run the following from your root project directory:
 
-`yo @3wks/gae-node-nestjs:module tests`
+`yo @mondomob/gae-node-nestjs:module tests`
 
 To create a module by hand:
 
@@ -189,8 +189,8 @@ class BlahModule {}
 ## New Datastore Entities
 
 1.  Create a new repository file - usually there should be 1 per module
-2.  Create a new repository class extending from the `Repository` base class provided by `@3wks/gae-node-nestjs`.
-3.  Define a validation schema using the `validation` namespace exported by `@3wks/gae-node-nestjs`. See io-ts documentation to see how this works (https://github.com/gcanti/io-ts)
+2.  Create a new repository class extending from the `Repository` base class provided by `@mondomob/gae-node-nestjs`.
+3.  Define a validation schema using the `validation` namespace exported by `@mondomob/gae-node-nestjs`. See io-ts documentation to see how this works (https://github.com/gcanti/io-ts)
 4.  Optional define default values / indexed fields via the repository options
 
 ## Anonymous Access

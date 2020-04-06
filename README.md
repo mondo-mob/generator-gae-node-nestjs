@@ -3,17 +3,17 @@
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and `@3wks/generator-gae-node-nestjs` using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and `@mondomob/generator-gae-node-nestjs` using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
-npm install -g @3wks/generator-gae-node-nestjs
+npm install -g @mondomob/generator-gae-node-nestjs
 ```
 
 Then generate your new project:
 
 ```bash
-yo @3wks/gae-node-nestjs
+yo @mondomob/gae-node-nestjs
 ```
 
 ## License
@@ -21,5 +21,5 @@ yo @3wks/gae-node-nestjs
 Apache-2.0 © [Glenn Molnar]()
 
 
-[npm-image]: https://badge.fury.io/js/@3wks/generator-gae-node-nestjs.svg
-[npm-url]: https://npmjs.org/package/@3wks/generator-gae-node-nestjs
+[npm-image]: https://badge.fury.io/js/@mondomob/generator-gae-node-nestjs.svg
+[npm-url]: https://npmjs.org/package/@mondomob/generator-gae-node-nestjs

@@ -1,4 +1,4 @@
-import { AUTH_LISTENER, USER_SERVICE } from '@3wks/gae-node-nestjs';
+import { AUTH_LISTENER, USER_SERVICE } from '@mondomob/gae-node-nestjs';
 import { Module } from '@nestjs/common';
 import { ConfigurationModule } from '../config/config.module';
 import { AuthListenerImpl } from './auth.listener';

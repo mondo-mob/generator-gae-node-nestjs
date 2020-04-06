@@ -1,4 +1,4 @@
-import { BunyanLogger, rootLogger, configureExpress } from '@3wks/gae-node-nestjs';
+import { BunyanLogger, rootLogger, configureExpress } from '@mondomob/gae-node-nestjs';
 import * as debug from '@google-cloud/debug-agent';
 import * as trace from '@google-cloud/trace-agent';
 import { NestFactory } from '@nestjs/core';

@@ -1,4 +1,4 @@
-import { Context, createLogger, Ctxt, Roles, StorageProvider } from '@3wks/gae-node-nestjs';
+import { Context, createLogger, Ctxt, Roles, StorageProvider } from '@mondomob/gae-node-nestjs';
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import * as Logger from 'bunyan';
 import { Response } from 'express';

@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { Context, Transactional } from '@3wks/gae-node-nestjs';
+import { Context, Transactional } from '@mondomob/gae-node-nestjs';
 import * as uuid from 'node-uuid';
 <% if (includeRepository) { %> import { <%= module %>Repository, <%= typeName %> } from './<%= moduleSlugged %>.repository';
 import { RunQueryInfo } from '@google-cloud/datastore/build/src/query';<% } %>
 
 @Injectable()
-export class <%= module %>Service { 
+export class <%= module %>Service {
   constructor(
     <% if (includeRepository) { %>
       private readonly repository: <%= module %>Repository,
@@ -50,4 +50,4 @@ export class <%= module %>Service {
       return await this.repository.delete(context, id);
     }
   <% } %>
-} 
+}

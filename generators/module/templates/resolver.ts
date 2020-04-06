@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation } from '@nestjs/graphql';
-import { Context, IUser } from '@3wks/gae-node-nestjs';
+import { Context, IUser } from '@mondomob/gae-node-nestjs';
 import { <%= module %>Service } from './<%= moduleSlugged %>.service';
 <% if (includeRepository) { %> import { <%= typeName %> } from './<%= moduleSlugged %>.repository'; <% } %>
 

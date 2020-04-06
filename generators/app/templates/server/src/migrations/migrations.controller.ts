@@ -1,5 +1,5 @@
 import { Controller, Post } from '@nestjs/common';
-import { System } from '@3wks/gae-node-nestjs';
+import { System } from '@mondomob/gae-node-nestjs';
 import { MigrationService } from './migrations.service';
 
 @Controller('/system/migrate')

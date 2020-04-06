@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import * as t from "@3wks/gae-node-nestjs/dist/types";
-import { Repository, DatastoreProvider } from '@3wks/gae-node-nestjs';
+import * as t from "@mondomob/gae-node-nestjs/dist/types";
+import { Repository, DatastoreProvider } from '@mondomob/gae-node-nestjs';
 
 const <%= lowerTypeName %> = t.intersection([
   t.interface({

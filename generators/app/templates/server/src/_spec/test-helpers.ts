@@ -1,5 +1,5 @@
-import { Context, IUser } from '@3wks/gae-node-nestjs';
-import { DatastoreLoader } from '@3wks/gae-node-nestjs/dist/datastore/loader';
+import { Context, IUser } from '@mondomob/gae-node-nestjs';
+import { DatastoreLoader } from '@mondomob/gae-node-nestjs/dist/datastore/loader';
 import * as _ from 'lodash';
 import { anyFunction, instance, mock, when } from 'ts-mockito';
 import { User } from '../users/users.repository';

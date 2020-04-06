@@ -6,7 +6,7 @@ import {
   hashPassword,
   createLogger,
   LoginIdentifierRepository,
-} from '@3wks/gae-node-nestjs';
+} from '@mondomob/gae-node-nestjs';
 import { ConfigurationProvider } from '../config/config.provider';
 import { UserRepository } from '../users/users.repository';
 import { randomBytes } from 'crypto';
@@ -14,7 +14,7 @@ import { UsersService } from '../users/users.service';
 
 const generatePassword = (bits: number) => randomBytes(Math.ceil(bits / 8)).toString('base64');
 
-const SUPER_USER_EMAIL = 'admin@3wks.com.au';
+const SUPER_USER_EMAIL = 'admin@mondomob.com.au';
 
 @Injectable()
 export class MigrationService {

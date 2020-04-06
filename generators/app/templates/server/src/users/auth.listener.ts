@@ -1,4 +1,4 @@
-import { AuthListener } from '@3wks/gae-node-nestjs';
+import { AuthListener } from '@mondomob/gae-node-nestjs';
 import { Injectable } from '@nestjs/common';
 import { Request } from 'express';
 

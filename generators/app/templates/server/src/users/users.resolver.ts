@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation } from '@nestjs/graphql';
-import { Context, Roles } from '@3wks/gae-node-nestjs';
+import { Context, Roles } from '@mondomob/gae-node-nestjs';
 import { UserRepository, User } from './users.repository';
 import { UsersService } from './users.service';
 

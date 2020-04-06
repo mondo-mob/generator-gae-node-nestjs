@@ -3,7 +3,7 @@ import { reporter } from 'io-ts-reporters';
 import { ThrowReporter } from 'io-ts/lib/ThrowReporter';
 import * as _ from 'lodash';
 import * as Logger from 'bunyan';
-import { Configuration, createLogger } from '@3wks/gae-node-nestjs';
+import { Configuration, createLogger } from '@mondomob/gae-node-nestjs';
 
 const auth = t.partial({
   local: t.interface({

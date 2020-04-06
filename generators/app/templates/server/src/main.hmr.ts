@@ -1,5 +1,5 @@
 import { bootstrap } from './bootstrap';
-import { rootLogger } from '@3wks/gae-node-nestjs';
+import { rootLogger } from '@mondomob/gae-node-nestjs';
 
 declare const module: any;
 
