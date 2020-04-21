@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -16,6 +17,7 @@ export interface CheckActivationCodeVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -33,6 +35,7 @@ export interface ConfirmResetPasswordVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -49,6 +52,7 @@ export interface ResetPasswordVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -66,6 +70,7 @@ export interface InviteUserVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -73,12 +78,12 @@ export interface InviteUserVariables {
 // ====================================================
 
 export interface ListUsers_users_avatar {
-  __typename: 'Avatar';
+  __typename: "Avatar";
   url: string | null;
 }
 
 export interface ListUsers_users {
-  __typename: 'User';
+  __typename: "User";
   id: string;
   name: string | null;
   email: string;
@@ -93,6 +98,7 @@ export interface ListUsers {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -100,7 +106,7 @@ export interface ListUsers {
 // ====================================================
 
 export interface Me_me {
-  __typename: 'User';
+  __typename: "User";
   id: string;
   name: string | null;
   roles: UserRole[];
@@ -113,6 +119,7 @@ export interface Me {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -120,19 +127,19 @@ export interface Me {
 // ====================================================
 
 export interface UserDetails_userById_credentials {
-  __typename: 'Credentials';
+  __typename: "Credentials";
   type: string | null;
   username: string | null;
 }
 
 export interface UserDetails_userById_profile {
-  __typename: 'Attachment';
+  __typename: "Attachment";
   id: string;
   filename: string;
 }
 
 export interface UserDetails_userById {
-  __typename: 'User';
+  __typename: "User";
   id: string;
   name: string | null;
   roles: UserRole[];
@@ -151,6 +158,7 @@ export interface UserDetailsVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -158,13 +166,13 @@ export interface UserDetailsVariables {
 // ====================================================
 
 export interface UpdateUser_updateUser_profile {
-  __typename: 'Attachment';
+  __typename: "Attachment";
   id: string;
   filename: string;
 }
 
 export interface UpdateUser_updateUser {
-  __typename: 'User';
+  __typename: "User";
   id: string;
   name: string | null;
   roles: UserRole[];
@@ -186,6 +194,7 @@ export interface UpdateUserVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 //==============================================================
@@ -193,9 +202,9 @@ export interface UpdateUserVariables {
 //==============================================================
 
 export enum UserRole {
-  admin = 'admin',
-  super = 'super',
-  user = 'user',
+  admin = "admin",
+  super = "super",
+  user = "user",
 }
 
 export interface AttachmentInput {

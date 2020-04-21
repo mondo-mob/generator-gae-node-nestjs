@@ -22,6 +22,17 @@ export async function bootstrap() {
     staticAssets: {
       root: 'public',
     },
+    csp: {
+      directives: {
+        defaultSrc: ["'none'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+        fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+        imgSrc: ["'self'", 'data: ', 'https://secure.gravatar.com/'],
+        connectSrc: ["'self'", 'https://www.googleapis.com'],
+        manifestSrc: ["'self'"],
+      },
+    },
   });
 
   rootLogger.info(`Configuring server`);

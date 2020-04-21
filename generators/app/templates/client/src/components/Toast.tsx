@@ -63,6 +63,9 @@ class Toast extends React.PureComponent<WithStyles<typeof styles>, State> {
     const { classes } = this.props;
 
     const { isError, isOpen, message, autoHide } = this.state;
+    if (!message) {
+      return null;
+    }
     return (
       <Snackbar
         className={cx(classes.snackbar)}
@@ -70,15 +73,13 @@ class Toast extends React.PureComponent<WithStyles<typeof styles>, State> {
         onClose={this.close}
         autoHideDuration={autoHide ? 5000 : undefined}
       >
-        {message && (
-          <SnackbarContent
-            className={cx({
-              [classes.error]: isError,
-              [classes.success]: !isError,
-            })}
-            message={this.getMessageText(message)}
-          />
-        )}
+        <SnackbarContent
+          className={cx({
+            [classes.error]: isError,
+            [classes.success]: !isError,
+          })}
+          message={this.getMessageText(message)}
+        />
       </Snackbar>
     );
   }

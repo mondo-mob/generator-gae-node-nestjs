@@ -1,7 +1,7 @@
 import { AbstractUserService, Context, LoginIdentifierRepository } from '@mondomob/gae-node-nestjs';
 import { Injectable } from '@nestjs/common';
 import * as uuidv4 from 'uuid/v4';
-import { User, UserCreate, UserInput, UserRepository } from './users.repository';
+import { User, UserCreate, UserInput, UserRepository, UserRole } from './users.repository';
 
 @Injectable()
 export class UsersService extends AbstractUserService<User> {
@@ -12,8 +12,7 @@ export class UsersService extends AbstractUserService<User> {
     super(loginIdentifierRepository);
   }
 
-  async listByRole(context: Context, role: string, limit = 1000) {
-    // @ts-ignore
+  async listByRole(context: Context, role: UserRole, limit = 1000) {
     const [users] = await this.userRepository.query(context, {
       filters: {
         roles: role,

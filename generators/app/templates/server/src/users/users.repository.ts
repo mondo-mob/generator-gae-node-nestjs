@@ -41,6 +41,7 @@ const userSchema = t.intersection([
 export type UserInput = t.TypeOf<typeof userInputSchema>;
 export type UserCreate = t.TypeOf<typeof userCreateSchema>;
 export type User = t.TypeOf<typeof userSchema>;
+export type UserRole = t.TypeOf<typeof rolesArray>;
 
 @Injectable()
 export class UserRepository extends Repository<User> {

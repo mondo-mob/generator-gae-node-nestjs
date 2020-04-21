@@ -14,7 +14,7 @@ import { UsersService } from '../users/users.service';
 
 const generatePassword = (bits: number) => randomBytes(Math.ceil(bits / 8)).toString('base64');
 
-const SUPER_USER_EMAIL = 'admin@mondomob.com.au';
+const SUPER_USER_EMAIL = 'admin@mondomob.com';
 
 @Injectable()
 export class MigrationService {

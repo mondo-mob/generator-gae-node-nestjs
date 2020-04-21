@@ -61,7 +61,7 @@ class SignIn extends React.Component<Props, State> {
     const { error } = qs.parse(this.props.location.search);
 
     this.state = {
-      error,
+      error: error || undefined,
     };
   }
 

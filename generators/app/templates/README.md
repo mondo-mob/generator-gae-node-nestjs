@@ -75,7 +75,7 @@ Note: The first time you run the deploy you may be asked which region to deploy 
 
 ## System user bootstrap
 
-The `development` environment is configured to run bootstrap each time the server is started. If not already present, bootstrap will create a system user `admin@mondomob.com.au` with password `password`.
+The `development` environment is configured to run bootstrap each time the server is started. If not already present, bootstrap will create a system user `admin@mondomob.com` with password `password`.
 
 For all other environments (`dev`, `uat`, `prod`), auto-bootstrap is off.
 
