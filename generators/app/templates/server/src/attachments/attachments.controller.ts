@@ -2,7 +2,7 @@ import { Context, createLogger, Ctxt, Roles, StorageProvider } from '@mondomob/g
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import * as Logger from 'bunyan';
 import { Response } from 'express';
-import * as uuidv4 from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import { ConfigurationProvider } from '../config/config.provider';
 
 @Controller('api/attachments')

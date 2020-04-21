@@ -1,6 +1,6 @@
 import { AbstractUserService, Context, LoginIdentifierRepository } from '@mondomob/gae-node-nestjs';
 import { Injectable } from '@nestjs/common';
-import * as uuidv4 from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import { User, UserCreate, UserInput, UserRepository, UserRole } from './users.repository';
 
 @Injectable()

@@ -29,7 +29,7 @@
   "dependencies": {
     "@google-cloud/debug-agent": "4.2.2",
     "@google-cloud/trace-agent": "4.2.5",
-    "@mondomob/gae-node-nestjs": "6.0.0-rc.1",
+    "@mondomob/gae-node-nestjs": "6.0.1",
     "@nestjs/common": "6.11.11",
     "@nestjs/core": "6.11.11",
     "@nestjs/graphql": "6.6.2",
@@ -46,7 +46,7 @@
     "lodash": "4.17.15",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.5",
-    "uuid": "3.3.3"
+    "uuid": "7.0.3"
   },
   "devDependencies": {
     "@streamrail/dsui": "0.2.2",
@@ -57,7 +57,7 @@
     "@types/lodash": "4.14.150",
     "@types/node": "10.17.20",
     "@types/supertest": "2.0.8",
-    "@types/uuid": "3.4.5",
+    "@types/uuid": "7.0.2",
     "chokidar": "3.3.1",
     "jest": "25.4.0",
     "prettier": "2.0.4",

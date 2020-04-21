@@ -1,1 +1,7 @@
 indexes:
+  - kind: ReportLog
+    properties:
+      - name: type
+        direction: asc
+      - name: createdAt
+        direction: desc
