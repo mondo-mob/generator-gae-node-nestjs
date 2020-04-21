@@ -1,11 +1,11 @@
 {
   "name": "@mondomob/generator-gae-node-nestjs",
-  "version": "0.8.3",
+  "version": "1.0.0",
   "description": "A generator for building nestjs apps on app engine node",
   "repository": "https://github.com/mondo-mob/generator-gae-node-nestjs",
   "author": {
     "name": "Glenn Molnar",
-    "email": "glenn.molnar@growthops.com.au",
+    "email": "glenn@mondomob.com",
     "url": ""
   },
   "files": [
