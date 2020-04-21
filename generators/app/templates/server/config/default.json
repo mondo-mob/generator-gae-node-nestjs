@@ -3,6 +3,7 @@
   "host": "http://localhost:3000",
   "location": "<%= appEngineRegion %>",
   "gmailUser": "<%= adminEmail %>",
+  "bootstrapAdminUser": "<%= adminEmail %>",
   "bucket": "<%= slugify(project) %>-dev.appspot.com",
   "sessionTimeoutInMinutes": 120,
   "auth": {

@@ -38,6 +38,7 @@ const Config = t.intersection([
     bucket: t.string,
     location: t.string,
     gmailUser: t.string,
+    bootstrapAdminUser: t.string,
     systemSecret: t.string,
     cookieSecret: t.string,
     auth,
@@ -127,6 +128,10 @@ export class ConfigurationProvider implements Configuration {
 
   get gmailUser(): string {
     return this.configuration.gmailUser;
+  }
+
+  get bootstrapAdminUser(): string {
+    return this.configuration.bootstrapAdminUser;
   }
 
   get systemSecret(): Buffer {

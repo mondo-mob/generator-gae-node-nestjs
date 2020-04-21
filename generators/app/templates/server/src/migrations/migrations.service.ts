@@ -14,8 +14,6 @@ import { UsersService } from '../users/users.service';
 
 const generatePassword = (bits: number) => randomBytes(Math.ceil(bits / 8)).toString('base64');
 
-const SUPER_USER_EMAIL = 'admin@mondomob.com';
-
 @Injectable()
 export class MigrationService {
   private readonly logger = createLogger('migration-service');
@@ -33,7 +31,7 @@ export class MigrationService {
     if (this.configurationProvider.isDevelopment()) {
       const context = newContext(this.datastoreProvider.datastore);
 
-      const match = await this.userService.getByEmail(context, SUPER_USER_EMAIL);
+      const match = await this.userService.getByEmail(context, this.configurationProvider.bootstrapAdminUser);
 
       if (!match) {
         await this.bootstrapSystemUser('password');
@@ -46,21 +44,21 @@ export class MigrationService {
     const userId = '12345';
 
     await this.credentialsRepository.save(context, {
-      id: SUPER_USER_EMAIL,
+      id: this.configurationProvider.bootstrapAdminUser,
       type: 'password',
       userId,
       password: await hashPassword(password),
     });
 
     await this.loginIdentifierRepository.save(context, {
-      id: SUPER_USER_EMAIL,
+      id: this.configurationProvider.bootstrapAdminUser,
       createdAt: new Date(),
       userId,
     });
 
     await this.userRepository.save(context, {
       id: userId,
-      email: SUPER_USER_EMAIL,
+      email: this.configurationProvider.bootstrapAdminUser,
       name: 'Admin',
       roles: ['super', 'admin'],
       enabled: true,
