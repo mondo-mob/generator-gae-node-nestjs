@@ -1,7 +1,25 @@
 indexes:
-  - kind: ReportLog
+  - kind: User
     properties:
-      - name: type
-        direction: asc
-      - name: createdAt
+      - name: email
         direction: desc
+      - name: roles
+# Composite index included above for example purposes. Most query types no longer require composite indexes, see below.
+# Below taken from: https://cloud.google.com/datastore/docs/concepts/indexes
+# Firestore in Datastore mode provides built-in, or automatic, indexes for queries of the following forms:
+# - Kindless queries using only ancestor and key filters
+# - Queries using only ancestor and equality filters
+# - Queries using only inequality filters (which are limited to a single property)
+# - Queries using only ancestor filters, equality filters on properties, and inequality filters on keys
+# - Queries with no filters and only one sort order on a property, either ascending or descending
+
+# As an example, by default, Datastore mode databases automatically predefine two single property indexes for each property of each entity kind, one in ascending order and one in descending order. If you do not want your database to maintain an index for a property, exclude the property from your indexes. Note that excluding a property removes it from any composite indexes.
+
+# Built-in indexes are sufficient to perform many simple queries, such as equality-only queries and simple inequality queries.
+# Built-in indexes do not appear in the Indexes page of the Google Cloud Console.
+# For more complex queries, an application must define composite, or manual, indexes. Composite indexes are required for queries of the following form:
+# - Queries with ancestor and inequality filters
+# - Queries with one or more inequality filters on a property and one or more equality filters on other properties
+# - Queries with a sort order on keys in descending order
+# - Queries with multiple sort orders
+# - Queries with one or more filters and one or more sort orders
