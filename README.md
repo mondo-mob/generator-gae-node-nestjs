@@ -16,6 +16,10 @@ Then generate your new project:
 yo @mondomob/gae-node-nestjs
 ```
 
+## Releases
+
+See the [changelog](./CHANGELOG.md)
+
 ## License
 
 Apache-2.0 © [Glenn Molnar]()
