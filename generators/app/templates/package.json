@@ -10,8 +10,8 @@
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
     "start:backend": "cd server && npm run start:dev",
     "start:frontend": "cd client && npm start",
-    "test:backend": "cd server && npm test -- --coverage\n",
-    "test:frontend": "cd client && npm test --coverage\n",
+    "test:backend": "cd server && npm test --coverage",
+    "test:frontend": "cd client && npm test --coverage",
     "build": "cd server && npm run build"
   },
   "devDependencies": {

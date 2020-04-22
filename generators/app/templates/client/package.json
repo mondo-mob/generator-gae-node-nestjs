@@ -38,6 +38,7 @@
     "start": "npm run lint && react-scripts start",
     "build": "npm run lint && react-scripts build && mv ./build/ ../server/public",
     "eject": "react-scripts eject",
+    "test": "react-scripts test",
     "introspect": "apollo service:download --endpoint=http://localhost:8080/api/graphql --header='x-csrf-token:development'",
     "generate": "apollo client:codegen --includes=\"src/**/*.ts{,?}\" --tagName=gql --localSchemaFile=schema.json --target=typescript --outputFlat src/graphql.ts",
     "graphql": "npm run introspect && npm run generate",
