@@ -8,7 +8,8 @@
     "no-unnecessary-initializer": false,
     "no-console": false,
     "react-hooks-nesting": "error",
-    "ordered-imports": false
+    "ordered-imports": false,
+    "no-floating-promises": true
   },
   "linterOptions": {
     "exclude": ["config/**/*.js", "node_modules/**/*.ts"]

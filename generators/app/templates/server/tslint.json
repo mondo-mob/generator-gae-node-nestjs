@@ -9,6 +9,7 @@
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "ordered-imports": false,
     "member-access": false,
+    "no-floating-promises": true,
     "no-import-zones": [
       true,
       {

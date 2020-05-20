@@ -4,11 +4,7 @@
     "declaration": false,
     "strict": true,
     "removeComments": true,
-    "lib": [
-      "dom",
-      "es2017",
-      "esnext.asynciterable"
-    ],
+    "lib": ["dom", "es2017", "esnext.asynciterable"],
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -20,14 +16,9 @@
     "baseUrl": ".",
     "outDir": "./dist",
     "downlevelIteration": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "allowUnreachableCode": false
   },
-  "include": [
-    "src/**/*",
-    "typings/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+  "include": ["src/**/*", "typings/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
