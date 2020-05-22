@@ -34,6 +34,7 @@ export class MigrationService {
       const match = await this.userService.getByEmail(context, this.configurationProvider.bootstrapAdminUser);
 
       if (!match) {
+        this.logger.info('Bootsrapping system user');
         await this.bootstrapSystemUser('password');
       }
     }

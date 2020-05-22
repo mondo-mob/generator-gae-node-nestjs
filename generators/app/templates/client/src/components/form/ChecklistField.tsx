@@ -25,7 +25,7 @@ const ChecklistField: React.FC<Props> = ({
           control={
             <Checkbox
               checked={includes(value, option)}
-              onChange={(event, checked) => {
+              onChange={(_event, checked) => {
                 if (checked) {
                   onChange([...value, option]);
                 } else {

@@ -17,8 +17,8 @@ interface State {
 }
 
 let showToast: (message: string | NestHttpException, isError: boolean) => void = (
-  message: string | NestHttpException,
-  isError: boolean,
+  _message: string | NestHttpException,
+  _isError: boolean,
 ) => {
   // do nothing by default
 };

@@ -1,4 +1,4 @@
-import { Context, createLogger, Ctxt, Roles, StorageProvider } from '@mondomob/gae-node-nestjs';
+import { createLogger, Roles, StorageProvider } from '@mondomob/gae-node-nestjs';
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import * as Logger from 'bunyan';
 import { Response } from 'express';
@@ -37,7 +37,7 @@ export class AttachmentsController {
 
   @Roles('admin')
   @Get('/:id/download')
-  async download(@Param('id') id: string, @Ctxt() context: Context, @Res() res: Response) {
+  async download(@Param('id') id: string, @Res() res: Response) {
     const [url] = await this.storageProvider.defaultBucket.file(`attachment/${id}`).getSignedUrl({
       action: 'read',
       expires: Date.now() + 1000 * 60 * 5,

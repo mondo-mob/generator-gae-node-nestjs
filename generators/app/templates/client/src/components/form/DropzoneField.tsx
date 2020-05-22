@@ -146,7 +146,7 @@ class DropzoneFieldInner extends React.Component<Props, State> {
     }
   };
 
-  private finishUpload = (success: boolean) => {
+  private finishUpload = () => {
     this.setState(previousState => ({
       uploads: previousState.uploads - 1,
     }));
@@ -186,11 +186,11 @@ class DropzoneFieldInner extends React.Component<Props, State> {
     const reader = new FileReader();
 
     reader.onabort = () => {
-      this.finishUpload(false);
+      this.finishUpload();
     };
 
     reader.onerror = () => {
-      this.finishUpload(false);
+      this.finishUpload();
     };
 
     reader.onload = async () => {
@@ -205,7 +205,7 @@ class DropzoneFieldInner extends React.Component<Props, State> {
       });
 
       onChange([...value, { id: upload.id, filename: file.name }]);
-      this.finishUpload(true);
+      this.finishUpload();
     };
 
     reader.readAsBinaryString(file);

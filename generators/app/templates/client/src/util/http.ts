@@ -22,7 +22,7 @@ export const formEncode = (obj: Record<string, string>) =>
     .map(k => `${k}=${encodeURIComponent(obj[k])}`)
     .join('&');
 
-export const request = async <T>(
+export const request = async (
   path: string,
   method: string = 'GET',
   body: string | FormData | null = null,

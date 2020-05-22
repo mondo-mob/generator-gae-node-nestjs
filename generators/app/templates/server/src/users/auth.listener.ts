@@ -4,7 +4,7 @@ import { Request } from 'express';
 
 @Injectable()
 export class AuthListenerImpl implements AuthListener {
-  onLogin(req: Request) {
+  onLogin(_req: Request) {
     // implement me if you like
   }
 }

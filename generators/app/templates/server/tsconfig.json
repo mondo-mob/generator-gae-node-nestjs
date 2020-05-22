@@ -17,7 +17,9 @@
     "outDir": "./dist",
     "downlevelIteration": true,
     "moduleResolution": "node",
-    "allowUnreachableCode": false
+    "allowUnreachableCode": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "include": ["src/**/*", "typings/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

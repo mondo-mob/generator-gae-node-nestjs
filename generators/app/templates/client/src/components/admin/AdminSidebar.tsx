@@ -70,7 +70,7 @@ const ListItemLink = ListItem as any;
 // @ts-ignore
 const NavLinkRef = React.forwardRef((props, ref) => <NavLink {...props} />);
 
-const AdminSidebar: React.FC<Props> = ({ classes, handleDrawerClose, open, r }) => (
+const AdminSidebar: React.FC<Props> = ({ classes, handleDrawerClose, open }) => (
   <Drawer
     variant="permanent"
     classes={{

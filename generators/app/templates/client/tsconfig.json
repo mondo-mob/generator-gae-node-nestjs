@@ -17,6 +17,7 @@
     "downlevelIteration": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "keyofStringsOnly": false,
