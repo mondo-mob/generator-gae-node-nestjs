@@ -6,6 +6,10 @@
   "bootstrapAdminUser": "<%= adminEmail %>",
   "bucket": "<%= slugify(project) %>-dev.appspot.com",
   "sessionTimeoutInMinutes": 120,
+  "requestScope": {
+    "enabled": true,
+    "logBundlingEnabled": true
+  },
   "auth": {
     "local": {
       "enabled": true

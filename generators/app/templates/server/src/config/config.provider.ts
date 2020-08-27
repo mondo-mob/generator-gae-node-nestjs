@@ -2,7 +2,7 @@ import * as t from 'io-ts';
 import { reporter } from 'io-ts-reporters';
 import { ThrowReporter } from 'io-ts/lib/ThrowReporter';
 import * as _ from 'lodash';
-import * as Logger from 'bunyan';
+import { Logger } from '@mondomob/gae-node-nestjs';
 import { Configuration, createLogger } from '@mondomob/gae-node-nestjs';
 
 const auth = t.partial({
@@ -30,6 +30,10 @@ const devHooks = t.partial({
   emailSubjectPrefix: t.string,
 });
 
+const requestScope = t.partial({
+  enabled: t.boolean,
+});
+
 // tslint:disable-next-line:variable-name
 const Config = t.intersection([
   t.interface({
@@ -50,6 +54,7 @@ const Config = t.intersection([
     apiEndpoint: t.string,
     searchServiceEndpoint: t.string,
     sessionTimeoutInMinutes: t.number,
+    requestScope,
   }),
 ]);
 
@@ -92,6 +97,10 @@ export class ConfigurationProvider implements Configuration {
     }
 
     this.configuration = decodedConfig.value;
+  }
+
+  get requestScope() {
+    return this.configuration.requestScope;
   }
 
   get projectId(): string {

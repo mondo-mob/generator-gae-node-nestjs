@@ -1,6 +1,6 @@
 import { createLogger, Roles, StorageProvider } from '@mondomob/gae-node-nestjs';
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
-import * as Logger from 'bunyan';
+import { Logger } from '@mondomob/gae-node-nestjs';
 import { Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { ConfigurationProvider } from '../config/config.provider';

@@ -16,7 +16,7 @@ if (process.env.APP_ENGINE_ENVIRONMENT) {
 
 export async function bootstrap() {
   const expressApp = express();
-  configureExpress(expressApp, {
+  await configureExpress(expressApp, {
     session: configurationProvider.session,
     sessionTimeoutInMinutes: configurationProvider.sessionTimeoutInMinutes,
     staticAssets: {
