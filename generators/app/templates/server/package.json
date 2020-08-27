@@ -42,7 +42,7 @@
     "graphql-tools": "4.0.8",
     "io-ts": "1.10.4",
     "io-ts-reporters": "0.0.21",
-    "lodash": "4.17.15",
+    "lodash": "4.17.20",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.5",
     "uuid": "7.0.3"
