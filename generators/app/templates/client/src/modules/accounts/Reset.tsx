@@ -30,7 +30,7 @@ const resetPassword = gql`
 
 interface Props extends WithStyles<typeof styles>, WithApolloClient<{}> {}
 
-const SignIn: React.FC<Props> = ({ classes }) => (
+const Reset: React.FC<Props> = ({ classes }) => (
   <AccountPage
     title="Reset password"
     links={
@@ -73,4 +73,4 @@ const SignIn: React.FC<Props> = ({ classes }) => (
   </AccountPage>
 );
 
-export default withApollo(withStyles(styles)(SignIn));
+export default withApollo(withStyles(styles)(Reset));
