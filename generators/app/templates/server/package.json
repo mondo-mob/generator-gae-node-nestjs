@@ -29,7 +29,7 @@
   "dependencies": {
     "@google-cloud/debug-agent": "4.2.2",
     "@google-cloud/trace-agent": "4.2.5",
-    "@mondomob/gae-node-nestjs": "7.2.0",
+    "@mondomob/gae-node-nestjs": "7.3.0",
     "@nestjs/common": "6.11.11",
     "@nestjs/core": "6.11.11",
     "@nestjs/graphql": "6.6.2",
