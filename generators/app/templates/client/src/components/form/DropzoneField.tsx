@@ -196,7 +196,6 @@ class DropzoneFieldInner extends React.Component<Props, State> {
     reader.onload = async () => {
       await fetch(upload.url, {
         method: 'POST',
-        mode: 'no-cors',
         body: file,
         headers: {
           'Content-Type': file.type,
