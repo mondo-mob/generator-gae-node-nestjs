@@ -6,6 +6,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import * as express from 'express';
 import { AppModule } from './app.module';
 import { configurationProvider } from './config/config.module';
+import { getBuildInfo } from './util/buildVersionUtils';
 
 if (process.env.APP_ENGINE_ENVIRONMENT) {
   trace.start();
@@ -16,11 +17,28 @@ if (process.env.APP_ENGINE_ENVIRONMENT) {
 
 export async function bootstrap() {
   const expressApp = express();
+  const buildTs = getBuildInfo()?.version;
   await configureExpress(expressApp, {
     session: configurationProvider.session,
     sessionTimeoutInMinutes: configurationProvider.sessionTimeoutInMinutes,
     staticAssets: {
       root: 'public',
+      options: {
+        index: false,
+        setHeaders: (res, path) => {
+          if (buildTs) {
+            const etag = `W/"${buildTs}"`;
+            const lastModified = new Date(buildTs).toUTCString();
+
+            rootLogger.info(
+              `Setting static resource etag: ${etag}, last-modified: ${lastModified} headers for path ${path}`,
+            );
+
+            res.set('etag', etag);
+            res.set('last-modified', lastModified);
+          }
+        },
+      },
     },
     csp: {
       directives: {
