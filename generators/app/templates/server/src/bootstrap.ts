@@ -34,8 +34,8 @@ export async function bootstrap() {
               `Setting static resource etag: ${etag}, last-modified: ${lastModified} headers for path ${path}`,
             );
 
-            res.set('etag', etag);
-            res.set('last-modified', lastModified);
+            res.setHeader('etag', etag);
+            res.setHeader('last-modified', lastModified);
           }
         },
       },

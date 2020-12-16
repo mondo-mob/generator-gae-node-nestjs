@@ -11,7 +11,7 @@ export class BuildVersionMiddleware implements NestMiddleware {
   }
 
   // tslint:disable-next-line:ban-types
-  use(req: Request, res: Response, next: Function) {
+  use(_req: Request, res: Response, next: Function) {
     res.setHeader('build-time', this.buildTs || '0');
     next();
   }
