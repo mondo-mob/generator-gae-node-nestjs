@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Query } from 'react-apollo';
+import { Query } from '@apollo/client/react/components';
 import { Redirect, Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { Me, Me_me } from './graphql';

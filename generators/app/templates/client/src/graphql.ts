@@ -60,7 +60,7 @@ export interface ResetPasswordVariables {
 // ====================================================
 
 export interface InviteUser {
-  inviteUser: string | null;
+  inviteUser: string;
 }
 
 export interface InviteUserVariables {
@@ -77,18 +77,12 @@ export interface InviteUserVariables {
 // GraphQL query operation: ListUsers
 // ====================================================
 
-export interface ListUsers_users_avatar {
-  __typename: "Avatar";
-  url: string | null;
-}
-
 export interface ListUsers_users {
   __typename: "User";
   id: string;
-  name: string | null;
+  name: string;
   email: string;
   enabled: boolean;
-  avatar: ListUsers_users_avatar | null;
   roles: UserRole[];
 }
 
@@ -108,7 +102,7 @@ export interface ListUsers {
 export interface Me_me {
   __typename: "User";
   id: string;
-  name: string | null;
+  name: string;
   roles: UserRole[];
   enabled: boolean;
 }
@@ -126,30 +120,17 @@ export interface Me {
 // GraphQL query operation: UserDetails
 // ====================================================
 
-export interface UserDetails_userById_credentials {
-  __typename: "Credentials";
-  type: string | null;
-  username: string | null;
-}
-
-export interface UserDetails_userById_profile {
-  __typename: "Attachment";
-  id: string;
-  filename: string;
-}
-
 export interface UserDetails_userById {
   __typename: "User";
   id: string;
-  name: string | null;
+  email: string;
+  name: string;
   roles: UserRole[];
-  credentials: UserDetails_userById_credentials | null;
-  profile: UserDetails_userById_profile[] | null;
   enabled: boolean;
 }
 
 export interface UserDetails {
-  userById: UserDetails_userById | null;
+  userById: UserDetails_userById;
 }
 
 export interface UserDetailsVariables {
@@ -165,18 +146,12 @@ export interface UserDetailsVariables {
 // GraphQL mutation operation: UpdateUser
 // ====================================================
 
-export interface UpdateUser_updateUser_profile {
-  __typename: "Attachment";
-  id: string;
-  filename: string;
-}
-
 export interface UpdateUser_updateUser {
   __typename: "User";
   id: string;
-  name: string | null;
+  email: string;
+  name: string;
   roles: UserRole[];
-  profile: UpdateUser_updateUser_profile[] | null;
   enabled: boolean;
 }
 
@@ -187,9 +162,7 @@ export interface UpdateUser {
 export interface UpdateUserVariables {
   userId: string;
   name: string;
-  roles: UserRole[];
-  profile?: AttachmentInput[] | null;
-  enabled?: boolean | null;
+  roles: string[];
 }
 
 /* tslint:disable */
@@ -205,11 +178,6 @@ export enum UserRole {
   admin = "admin",
   super = "super",
   user = "user",
-}
-
-export interface AttachmentInput {
-  id: string;
-  filename: string;
 }
 
 //==============================================================

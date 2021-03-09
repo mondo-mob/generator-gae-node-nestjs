@@ -6,12 +6,18 @@ import { MigrationModule } from './migrations/migrations.module';
 import { AttachmentsModule } from './attachments/attachments.module';
 import { BuildVersionMiddleware } from './util/buildVersion.middleware';
 import { CacheHeadersMiddleware } from './util/cacheHeaders.middleware';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
     GCloudModule.forConfiguration({
       configurationModule: ConfigurationModule,
       userModule: UserModule,
+      graphQLModule: GraphQLModule.forRoot({
+        path: '/api/graphql',
+        context: (props: any) => props.req?.context,
+        autoSchemaFile: 'schema.gql',
+      }),      
     }),
     ConfigurationModule,
     UserModule,

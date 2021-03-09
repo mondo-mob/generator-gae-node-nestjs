@@ -1,40 +1,25 @@
+import { useQuery } from '@apollo/client';
+import { Mutation } from '@apollo/client/react/components';
 import { Button, CircularProgress, FormControlLabel, makeStyles, Switch, Theme, Typography } from '@material-ui/core';
 import gql from 'graphql-tag';
 import { without } from 'lodash';
 import * as React from 'react';
-import { Mutation } from 'react-apollo';
-import { useQuery } from 'react-apollo-hooks';
-import { Field } from 'react-final-form';
+import { Field, FormRenderProps } from 'react-final-form';
 import { RouteComponentProps } from 'react-router';
 import { UserContext } from '../../App';
 import Form from '../../components/Form';
 import ChecklistField from '../../components/form/ChecklistField';
-import { DropzoneField } from '../../components/form/DropzoneField';
 import Input from '../../components/form/TextField';
-import {
-  AttachmentInput,
-  UpdateUser,
-  UpdateUserVariables,
-  UserDetails,
-  UserDetailsVariables,
-  UserRole,
-} from '../../graphql';
+import { UpdateUser, UpdateUserVariables, UserDetails, UserDetailsVariables, UserRole, } from '../../graphql';
 import { minLength, required } from '../../util/validation';
 
 const userDetailsQuery = gql`
   query UserDetails($userId: ID!) {
     userById(id: $userId) {
       id
+      email
       name
       roles
-      credentials {
-        type
-        username
-      }
-      profile {
-        id
-        filename
-      }
       enabled
     }
   }
@@ -44,18 +29,13 @@ const mutation = gql`
   mutation UpdateUser(
     $userId: ID!
     $name: String!
-    $roles: [UserRole!]!
-    $profile: [AttachmentInput!]
-    $enabled: Boolean
+    $roles: [String!]!
   ) {
-    updateUser(id: $userId, name: $name, roles: $roles, profile: $profile, enabled: $enabled) {
+    updateUser(id: $userId, name: $name, roles: $roles) {
       id
+      email
       name
       roles
-      profile {
-        id
-        filename
-      }
       enabled
     }
   }
@@ -68,7 +48,6 @@ interface RouteProps {
 interface FormProps {
   name: string;
   roles: UserRole[];
-  profile?: AttachmentInput[];
   enabled: boolean;
 }
 
@@ -117,25 +96,19 @@ const UpdateUserPage: React.FC<Props> = ({ match, history }) => {
             </Typography>
 
             <Typography variant="body1" paragraph component="div">
-              <label className="MuiFormLabel-root">Type</label> <div>{user.credentials && user.credentials.type}</div>
-            </Typography>
-
-            <Typography variant="body1" paragraph component="div">
               <label className="MuiFormLabel-root">Email</label>{' '}
-              <div>{user.credentials && user.credentials.username}</div>
+              <div>{user.email}</div>
             </Typography>
 
             <Mutation<UpdateUser, UpdateUserVariables> mutation={mutation}>
               {updateUser => (
                 <Form<FormProps>
-                  onSubmit={({ name, roles, profile, enabled }) => {
+                  onSubmit={({ name, roles }) => {
                     return updateUser({
                       variables: {
                         userId: match.params.userId,
                         name,
                         roles,
-                        profile,
-                        enabled: !!enabled,
                       },
                     });
                   }}
@@ -146,9 +119,7 @@ const UpdateUserPage: React.FC<Props> = ({ match, history }) => {
                   }}
                   successMessage="Updated user"
                   onSuccess={() => history.push(`/users`)}
-                >
-                  {({ handleSubmit, values }) => {
-                    return (
+                  render={({ handleSubmit, values }: FormRenderProps) => (
                       <form onSubmit={handleSubmit} className={classes.form}>
                         <Field
                           label="Name"
@@ -169,15 +140,6 @@ const UpdateUserPage: React.FC<Props> = ({ match, history }) => {
                             component={ChecklistField}
                           />
                         </div>
-
-                        <Field
-                          infoText="Drag profile image(s) here, or click to select files to upload."
-                          name="profile"
-                          margin="normal"
-                          component={DropzoneField as any}
-                          multiple={true}
-                          accept="image/jpg, image/jpeg, image/png"
-                        />
 
                         <div className={classes.enabledContainer}>
                           <Field name="enabled" type="checkbox">
@@ -208,9 +170,8 @@ const UpdateUserPage: React.FC<Props> = ({ match, history }) => {
                           Save changes
                         </Button>
                       </form>
-                    );
-                  }}
-                </Form>
+                    )}
+                />
               )}
             </Mutation>
           </div>

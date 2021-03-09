@@ -1,15 +1,4 @@
-import {
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Theme,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core';
+import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Users from '@material-ui/icons/SupervisorAccount';
 import cx from 'classnames';
@@ -19,7 +8,7 @@ import { UserRole } from '../../graphql';
 import { RouteHelper } from '../../routes/route-helper';
 import Authorised from '../Authorised';
 
-const styles = (theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     position: 'relative' as 'relative',
     whiteSpace: 'nowrap' as 'nowrap',
@@ -58,9 +47,9 @@ const styles = (theme: Theme) => ({
       color: theme.palette.primary.main,
     },
   },
-});
+}));
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   open: boolean;
   handleDrawerClose?: () => void;
   r: RouteHelper;
@@ -68,40 +57,46 @@ interface Props extends WithStyles<typeof styles> {
 
 const ListItemLink = ListItem as any;
 // @ts-ignore
-const NavLinkRef = React.forwardRef((props, ref) => <NavLink {...props} />);
+// The usage of React.forwardRef will no longer be required for react-router-dom v6.
+// see https://github.com/ReactTraining/react-router/issues/6056
+const NavLinkRef = React.forwardRef((props: any, ref: any) => <NavLink {...props} innerRef={ref} />);
 
-const AdminSidebar: React.FC<Props> = ({ classes, handleDrawerClose, open }) => (
-  <Drawer
-    variant="permanent"
-    classes={{
-      paper: cx(classes.drawerPaper, !open && classes.drawerPaperClose),
-    }}
-    open={open}
-  >
-    <div className={classes.toolbar}>
-      <IconButton onClick={handleDrawerClose}>
-        <ChevronLeftIcon />
-      </IconButton>
-    </div>
-    <Divider />
-    <List>
-      <Authorised roles={UserRole.admin}>
-        <ListItemLink
-          button
-          title="Users"
-          component={NavLinkRef}
-          to={`/admin/users`}
-          activeClassName={classes.active}
-          className={classes.linkIcon}
-        >
-          <ListItemIcon className={classes.icon}>
-            <Users />
-          </ListItemIcon>
-          <ListItemText primary="Users" />
-        </ListItemLink>
-      </Authorised>
-    </List>
-  </Drawer>
-);
+const AdminSidebar: React.FC<Props> = ({ handleDrawerClose, open }) => {
+  const classes = useStyles();
 
-export default withStyles(styles)(AdminSidebar);
+  return (
+    <Drawer
+      variant="permanent"
+      classes={{
+        paper: cx(classes.drawerPaper, !open && classes.drawerPaperClose),
+      }}
+      open={open}
+    >
+      <div className={classes.toolbar}>
+        <IconButton onClick={handleDrawerClose}>
+          <ChevronLeftIcon/>
+        </IconButton>
+      </div>
+      <Divider/>
+      <List>
+        <Authorised roles={UserRole.admin}>
+          <ListItemLink
+            button
+            title="Users"
+            component={NavLinkRef}
+            to={`/admin/users`}
+            activeClassName={classes.active}
+            className={classes.linkIcon}
+          >
+            <ListItemIcon className={classes.icon}>
+              <Users/>
+            </ListItemIcon>
+            <ListItemText primary="Users"/>
+          </ListItemLink>
+        </Authorised>
+      </List>
+    </Drawer>
+  );
+};
+
+export default AdminSidebar;

@@ -2,7 +2,8 @@ import { makeStyles, Table, TableBody, TableCell, TableHead, TableRow } from '@m
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { includes } from 'lodash';
 import * as React from 'react';
-import { Query, QueryResult } from 'react-apollo';
+import { QueryResult } from '@apollo/client';
+import { Query } from '@apollo/client/react/components';
 import { Link } from 'react-router-dom';
 import HeaderWithActions from '../../components/HeaderWithActions';
 import { ListUsers, ListUsers_users, UserRole } from '../../graphql';

@@ -3,8 +3,8 @@ import gql from 'graphql-tag';
 import { without } from 'lodash';
 import { useState } from 'react';
 import * as React from 'react';
-import { Mutation } from 'react-apollo';
-import { Field } from 'react-final-form';
+import { Mutation } from '@apollo/client/react/components';
+import { Field, FormRenderProps } from 'react-final-form';
 import Form from '../../components/Form';
 import ChecklistField from '../../components/form/ChecklistField';
 import Input from '../../components/form/TextField';
@@ -42,8 +42,7 @@ const InviteUserDialog = () => {
                 initialValues={{ roles: [] }}
                 successMessage="Invited user"
                 onSuccess={() => updateOpen(false)}
-              >
-                {({ handleSubmit, submitting }) => (
+                render={({ handleSubmit, submitting }: FormRenderProps) => (
                   <form onSubmit={handleSubmit}>
                     <DialogTitle>Invite user</DialogTitle>
                     <DialogContent>
@@ -77,7 +76,7 @@ const InviteUserDialog = () => {
                     </DialogActions>
                   </form>
                 )}
-              </Form>
+              />
             )}
           </Mutation>
         )}

@@ -1,6 +1,6 @@
 import { isArray } from 'lodash';
 import * as React from 'react';
-import { Query } from 'react-apollo';
+import { Query } from '@apollo/client/react/components';
 import { Me, UserRole } from '../graphql';
 import Unauthorised from '../modules/pages/Unauthorised';
 import { meQuery } from '../modules/users/queries';

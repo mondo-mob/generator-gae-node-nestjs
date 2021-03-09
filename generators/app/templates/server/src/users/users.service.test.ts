@@ -1,6 +1,6 @@
 import { instance, mock, when } from 'ts-mockito';
 import { LoginIdentifierRepository, Context } from '@mondomob/gae-node-nestjs';
-import { DEFAULT_USER, DEFAULT_USER_ID, testContext } from '../_test/test-helpers';
+import { DEFAULT_USER, DEFAULT_USER_ID, testContext } from '../__test/test-helpers';
 import { UserRepository } from './users.repository';
 import { UsersService } from './users.service';
 

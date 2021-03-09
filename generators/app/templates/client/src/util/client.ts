@@ -1,8 +1,6 @@
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloClient } from 'apollo-client';
-import { ApolloLink } from 'apollo-link';
-import { BatchHttpLink } from 'apollo-link-batch-http';
-import { onError } from 'apollo-link-error';
+import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
+import { BatchHttpLink } from '@apollo/client/link/batch-http';
+import { onError } from '@apollo/client/link/error';
 import { finishLoading, startLoading } from '../components/PageProgressBar';
 import { showMessage } from '../components/Toast';
 import { getCsrfHeaders } from './csrf';

@@ -1,10 +1,10 @@
 import { Button, Theme, withStyles, WithStyles } from '@material-ui/core';
-import { ApolloClient } from 'apollo-client';
+import { ApolloClient } from '@apollo/client';
 import { isArray } from 'lodash';
 import * as qs from 'query-string';
 import * as React from 'react';
-import { withApollo, WithApolloClient } from 'react-apollo';
-import { Field } from 'react-final-form';
+import { withApollo, WithApolloClient } from '@apollo/client/react/hoc';
+import { Field, FormRenderProps } from 'react-final-form';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import google from '../../assets/google.svg';
 import Form from '../../components/Form';
@@ -85,8 +85,9 @@ class SignIn extends React.Component<Props, State> {
           </React.Fragment>
         }
       >
-        <Form onSubmit={logIn(client)}>
-          {({ handleSubmit, submitting }) => (
+        <Form
+          onSubmit={logIn(client!)}
+          render={({ handleSubmit, submitting }: FormRenderProps) => (
             <form onSubmit={handleSubmit}>
               <Field label="Email" fullWidth name="username" margin="normal" component={Input} />
 
@@ -110,10 +111,10 @@ class SignIn extends React.Component<Props, State> {
               </Button>
             </form>
           )}
-        </Form>
+        />
       </AccountPage>
     );
   }
 }
 
-export default withApollo(withStyles(styles)(SignIn));
+export default withStyles(styles)(withApollo<Props>(SignIn));

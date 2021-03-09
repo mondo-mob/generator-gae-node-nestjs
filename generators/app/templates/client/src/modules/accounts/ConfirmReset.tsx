@@ -1,8 +1,9 @@
-import { Button, Theme, withStyles, WithStyles } from '@material-ui/core';
+import { Mutation } from '@apollo/client/react/components';
+import { withApollo, WithApolloClient } from '@apollo/client/react/hoc';
+import { Button, makeStyles, Theme } from '@material-ui/core';
 import gql from 'graphql-tag';
 import * as React from 'react';
-import { Mutation, withApollo, WithApolloClient } from 'react-apollo';
-import { Field } from 'react-final-form';
+import { Field, FormRenderProps } from 'react-final-form';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import Form from '../../components/Form';
 import Input from '../../components/form/TextField';
@@ -10,7 +11,7 @@ import { ConfirmResetPassword, ConfirmResetPasswordVariables } from '../../graph
 import { required } from '../../util/validation';
 import AccountPage from './AccountPage';
 
-const styles = (theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   submit: {
     width: '100%',
     marginTop: theme.spacing(4),
@@ -20,7 +21,7 @@ const styles = (theme: Theme) => ({
     marginTop: theme.spacing(4),
     background: theme.palette.common.white,
   },
-});
+}));
 
 const resetPassword = gql`
   mutation ConfirmResetPassword($password: String!, $code: String!) {
@@ -28,7 +29,7 @@ const resetPassword = gql`
   }
 `;
 
-interface Props extends WithStyles<typeof styles>, RouteComponentProps<{ code: string }>, WithApolloClient<{}> {}
+interface Props extends RouteComponentProps<{ code: string }>, WithApolloClient<{}> {}
 
 interface FormData {
   password: string;
@@ -38,59 +39,61 @@ interface FormData {
 const validatePasswordConfirmation = (value: string, allValues: any) =>
   value !== allValues.password ? 'Password confirmation must match' : undefined;
 
-const ConfirmReset: React.FC<Props> = ({ classes, match, history }) => (
-  <AccountPage
-    title="Reset password"
-    links={
-      <React.Fragment>
-        <Link to="/signin">Signing in?</Link>
-      </React.Fragment>
-    }
-  >
-    <Mutation<ConfirmResetPassword, ConfirmResetPasswordVariables> mutation={resetPassword}>
-      {mutation => (
-        <Form<FormData>
-          onSubmit={({ password }) => mutation({ variables: { password, code: match.params.code } })}
-          successMessage="Password successfully reset"
-          onSuccess={() => history.push(`/sigin`)}
-        >
-          {({ handleSubmit, submitting }) => (
-            <form onSubmit={handleSubmit}>
-              <Field
-                label="New password"
-                fullWidth
-                name="password"
-                type="password"
-                margin="normal"
-                validate={required('Password is required')}
-                component={Input}
-              />
+const ConfirmReset: React.FC<Props> = ({ match, history }) => {
+  const classes = useStyles();
+  return (
+    <AccountPage
+      title="Reset password"
+      links={
+        <React.Fragment>
+          <Link to="/signin">Signing in?</Link>
+        </React.Fragment>
+      }
+    >
+      <Mutation<ConfirmResetPassword, ConfirmResetPasswordVariables> mutation={resetPassword}>
+        {mutation => (
+          <Form<FormData>
+            onSubmit={({password}) => mutation({variables: {password, code: match.params.code}})}
+            successMessage="Password successfully reset"
+            onSuccess={() => history.push(`/sigin`)}
+            render={({handleSubmit, submitting}: FormRenderProps) => (
+              <form onSubmit={handleSubmit}>
+                <Field
+                  label="New password"
+                  fullWidth
+                  name="password"
+                  type="password"
+                  margin="normal"
+                  validate={required('Password is required')}
+                  component={Input}
+                />
 
-              <Field
-                label="Confirm new password"
-                fullWidth
-                name="confirm_password"
-                type="password"
-                margin="normal"
-                validate={validatePasswordConfirmation}
-                component={Input}
-              />
+                <Field
+                  label="Confirm new password"
+                  fullWidth
+                  name="confirm_password"
+                  type="password"
+                  margin="normal"
+                  validate={validatePasswordConfirmation}
+                  component={Input}
+                />
 
-              <Button
-                type="submit"
-                color="primary"
-                variant="contained"
-                className={classes.submit}
-                disabled={submitting}
-              >
-                Reset password
-              </Button>
-            </form>
-          )}
-        </Form>
-      )}
-    </Mutation>
-  </AccountPage>
-);
+                <Button
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  className={classes.submit}
+                  disabled={submitting}
+                >
+                  Reset password
+                </Button>
+              </form>
+            )}
+          />
+        )}
+      </Mutation>
+    </AccountPage>
+  );
+};
 
-export default withApollo(withStyles(styles)(ConfirmReset));
+export default withApollo<Props>(ConfirmReset);

@@ -7,9 +7,6 @@ export const listUsersQuery = gql`
       name
       email
       enabled
-      avatar {
-        url
-      }
       roles
     }
   }
