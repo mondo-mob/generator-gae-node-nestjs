@@ -1,3 +1,6 @@
+## 2.0.1 (2021-03-09)
+ - FIX: Tweak to only generate a graphql schema file locally for development and help troubleshooting. Within GCP's read-only filesystem we use the in-memory schema. See `app.module.ts` for changes.
+
 ## 2.0.0 (2021-03-09)
  - Use version 8 of [@mondomob/gae-node-nestjs](https://github.com/mondo-mob/gae-node-nestjs) which is code-first approach to GraphQl.
  - Upgrade a bunch of libs
