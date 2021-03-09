@@ -91,7 +91,7 @@ class SignIn extends React.Component<Props, State> {
             <form onSubmit={handleSubmit}>
               <Field label="Email" fullWidth name="username" margin="normal" component={Input} />
 
-              <Field label="Password" fullWidth type="password" name="password" margin="normal" component={Input} />
+              <Field label="Password" fullWidth type="password" name="password" margin="normal" component={Input} autoComplete="current-password" />
 
               <Button
                 type="submit"
