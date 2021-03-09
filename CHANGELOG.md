@@ -1,3 +1,7 @@
+## 2.0.0 (2021-03-09)
+ - Use version 8 of [@mondomob/gae-node-nestjs](https://github.com/mondo-mob/gae-node-nestjs) which is code-first approach to GraphQl.
+ - Upgrade a bunch of libs
+
 ## 1.0.1 (2020-04-22)
  - Update npm test scripts, test names and added default client test
  - Update internal dependencies
