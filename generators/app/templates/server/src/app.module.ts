@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { GCloudModule } from '@mondomob/gae-node-nestjs';
-import { ConfigurationModule } from './config/config.module';
+import { ConfigurationModule, configurationProvider } from './config/config.module';
 import { UserModule } from './users/users.module';
 import { MigrationModule } from './migrations/migrations.module';
 import { AttachmentsModule } from './attachments/attachments.module';
@@ -16,8 +16,8 @@ import { GraphQLModule } from '@nestjs/graphql';
       graphQLModule: GraphQLModule.forRoot({
         path: '/api/graphql',
         context: (props: any) => props.req?.context,
-        autoSchemaFile: 'schema.gql',
-      }),      
+        autoSchemaFile: configurationProvider.isDevelopment() ? 'schema.gql' : true,  // in-memory for GCP but generate file locally to help troubleshoot
+      }),
     }),
     ConfigurationModule,
     UserModule,

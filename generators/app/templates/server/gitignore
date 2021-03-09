@@ -2,3 +2,4 @@ public/
 dist/
 node_modules/
 buildinfo.json
+schema.gql
