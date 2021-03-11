@@ -1,11 +1,18 @@
 import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
 import { BatchHttpLink } from '@apollo/client/link/batch-http';
 import { onError } from '@apollo/client/link/error';
+import { isArray } from 'lodash';
 import { finishLoading, startLoading } from '../components/PageProgressBar';
 import { showMessage } from '../components/Toast';
 import { getCsrfHeaders } from './csrf';
 
 const cache: InMemoryCache = new InMemoryCache({});
+
+const extractOperationNames = (options: any) => {
+  const body = options?.body ? JSON.parse(options.body) : [];
+  const array = isArray(body) ? body : [body];
+  return array.map((operation) => operation.operationName).filter((name) => !!name);
+};
 
 const client = new ApolloClient({
   defaultOptions: {
@@ -69,7 +76,7 @@ const client = new ApolloClient({
           ...options!.headers,
           ...getCsrfHeaders(),
         };
-        return fetch(uri, options);
+        return fetch(`${uri}?op=${extractOperationNames(options)}`, options);
       },
     }),
   ]),
