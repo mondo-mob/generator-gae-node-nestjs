@@ -17,6 +17,7 @@ import { GraphQLModule } from '@nestjs/graphql';
         path: '/api/graphql',
         context: (props: any) => props.req?.context,
         autoSchemaFile: configurationProvider.isDevelopment() ? 'schema.gql' : true,  // in-memory for GCP but generate file locally to help troubleshoot
+        fieldResolverEnhancers: ['filters', 'interceptors'],
       }),
     }),
     ConfigurationModule,

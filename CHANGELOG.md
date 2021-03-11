@@ -1,14 +1,34 @@
+## 2.0.3 (2021-03-11)
+
+- Turn on nest 'enhancers' for field resolvers by default. Without this, @ResolveField functions do not execute NestInterceptor implementations, nor ExceptionFilters. This hides any error logging that may occur as a result of an error inside field resolution functions or skip specific response handling. There is a risk of a performance issue as described in: https://docs.nestjs.com/graphql/other-features#exception-filters but only in the case of returning 'thousands' of records from field resolvers. By default, we do not have any enhancers so this seems a better default. The link also provides a way to skip an enhancer if you only want to skip execution of an enhancer that is not necessary for your field resolver:
+
+  ```
+  export function isResolvingGraphQLField(context: ExecutionContext): boolean {
+  if (context.getType<GqlContextType>() === 'graphql') {
+      const gqlContext = GqlExecutionContext.create(context);
+      const info = gqlContext.getInfo();
+      const parentType = info.parentType.name;
+      return parentType !== 'Query' && parentType !== 'Mutation';
+  }
+  return false;
+  }
+  ```
+
 ## 2.0.1 (2021-03-09)
- - FIX: Tweak to only generate a graphql schema file locally for development and help troubleshooting. Within GCP's read-only filesystem we use the in-memory schema. See `app.module.ts` for changes.
+
+- FIX: Tweak to only generate a graphql schema file locally for development and help troubleshooting. Within GCP's read-only filesystem we use the in-memory schema. See `app.module.ts` for changes.
 
 ## 2.0.0 (2021-03-09)
- - Use version 8 of [@mondomob/gae-node-nestjs](https://github.com/mondo-mob/gae-node-nestjs) which is code-first approach to GraphQl.
- - Upgrade a bunch of libs
+
+- Use version 8 of [@mondomob/gae-node-nestjs](https://github.com/mondo-mob/gae-node-nestjs) which is code-first approach to GraphQl.
+- Upgrade a bunch of libs
 
 ## 1.0.1 (2020-04-22)
- - Update npm test scripts, test names and added default client test
- - Update internal dependencies
- - Add composite index as example and to stop deployment warning about empty index
+
+- Update npm test scripts, test names and added default client test
+- Update internal dependencies
+- Add composite index as example and to stop deployment warning about empty index
 
 ## 1.0.0 (2020-04-21)
- - NestJS 6 support and updated internal dependencies
+
+- NestJS 6 support and updated internal dependencies
