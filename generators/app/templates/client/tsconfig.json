@@ -6,7 +6,7 @@
     "lib": ["es2017", "dom", "esnext.asynciterable"],
     "sourceMap": true,
     "allowJs": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "moduleResolution": "node",
     "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
@@ -16,7 +16,6 @@
     "strictNullChecks": true,
     "downlevelIteration": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "keyofStringsOnly": false,
@@ -25,7 +24,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "allowUnreachableCode": false
+    "allowUnreachableCode": false,
+    "noFallthroughCasesInSwitch": true
   },
   "exclude": [
     "node_modules",

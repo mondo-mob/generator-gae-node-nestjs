@@ -8,6 +8,7 @@ export function get<T, K extends keyof NonNullable<T>>(
   path: K,
   defaultValue: NonNullable<T>[K],
 ): NonNullable<T>[K];
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function get<T, K extends keyof NonNullable<T>, R extends NonNullable<T>[K] | undefined>(
   value: T,
   path: K,

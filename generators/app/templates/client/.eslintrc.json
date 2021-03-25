@@ -1,0 +1,12 @@
+{
+  "plugins": ["prettier"],
+  "extends": ["react-app"],
+  "rules": {
+    "prettier/prettier": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts?(x)"]
+    }
+  ]
+}
