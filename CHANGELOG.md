@@ -1,3 +1,8 @@
+## 2.0.4 (2021-03-11)
+- Update GQL HTTP requests with operations query string. This makes it easier to troubleshoot network traffic without 
+  inspecting the payload by simply adding the operation names as a query string parameter client-side and these parameters get ignored.
+  This also appears in the app-engine logs and is easier to trace server-side too.
+
 ## 2.0.3 (2021-03-11)
 
 - Turn on nest 'enhancers' for field resolvers by default. Without this, @ResolveField functions do not execute NestInterceptor implementations, nor ExceptionFilters. This hides any error logging that may occur as a result of an error inside field resolution functions or skip specific response handling. There is a risk of a performance issue as described in: https://docs.nestjs.com/graphql/other-features#exception-filters but only in the case of returning 'thousands' of records from field resolvers. By default, we do not have any enhancers so this seems a better default. The link also provides a way to skip an enhancer if you only want to skip execution of an enhancer that is not necessary for your field resolver:
