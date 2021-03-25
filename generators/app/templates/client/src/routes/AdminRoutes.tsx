@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import AdminLayout from '../components/admin/AdminLayout';
+import { UserContext } from '../components/context/UserContext';
 import { UserRole } from '../graphql';
-import List from '../modules/users/List';
-import UpdateUserPage from '../modules/users/Update';
-import { RouteHelper } from './route-helper';
+import ListUsers from '../modules/users/ListUsers';
+import UpdateUser from '../modules/users/UpdateUser';
 
-interface Props {
-  r: RouteHelper;
-}
+export const listUsersRoute = '/admin/users';
+export const updateUserRoute = (id: string) => `/admin/users/${id}`;
 
-const AdminRoutes: React.FC<Props> = ({ r }) => (
-  <AdminLayout r={r} anyRoles={[UserRole.admin, UserRole.super]}>
-    <Switch>
-      <Route path="/admin/users/:userId" component={r.ifHasAnyRole(UpdateUserPage as any, UserRole.admin)} />
-      <Route exact path="/admin/users" component={r.ifHasAnyRole(List, UserRole.admin)} />
-      <Redirect to="/admin/users" />
-    </Switch>
-  </AdminLayout>
-);
+const AdminRoutes = () => {
+  const { ifHasRole } = useContext(UserContext);
+
+  return (
+    <AdminLayout anyRoles={[UserRole.admin, UserRole.super]}>
+      <Switch>
+        <Route path="/admin/users/:userId" component={ifHasRole(UpdateUser as any, UserRole.admin)} />
+        <Route exact path={listUsersRoute} component={ifHasRole(ListUsers, UserRole.admin)} />
+        <Redirect to="/admin/users" />
+      </Switch>
+    </AdminLayout>
+  );
+};
 
 export default AdminRoutes;

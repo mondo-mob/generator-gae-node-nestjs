@@ -1,16 +1,20 @@
-import React from 'react';
+import { toPairs } from 'lodash';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import { RouteHelper } from './route-helper';
+import { UserContext } from '../components/context/UserContext';
+import { UserRole } from '../graphql';
 
 interface Props {
-  r: RouteHelper;
-  roleMappings: any;
+  roleMappings: Record<string, string>;
   defaultRedirect: string;
 }
 
-const RedirectForRoles: React.FC<Props> = ({ r, roleMappings, defaultRedirect }) => {
-  const mappedRole = r.roles().find(role => !!roleMappings[role]);
-  const redirectPath = mappedRole ? roleMappings[mappedRole] : defaultRedirect;
+const RedirectForRoles: React.FC<Props> = ({ roleMappings, defaultRedirect }) => {
+  const { hasRole } = useContext(UserContext);
+
+  const matchedMapping = toPairs(roleMappings).find(([role]) => hasRole(role as UserRole));
+
+  const redirectPath = matchedMapping ? matchedMapping[1] : defaultRedirect;
   return <Redirect to={redirectPath} />;
 };
 

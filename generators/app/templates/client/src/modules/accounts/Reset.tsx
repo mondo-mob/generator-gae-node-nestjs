@@ -1,4 +1,4 @@
-import { Mutation } from '@apollo/client/react/components';
+import { useMutation } from '@apollo/client';
 import { withApollo, WithApolloClient } from '@apollo/client/react/hoc';
 import { Button, makeStyles, Theme } from '@material-ui/core';
 import gql from 'graphql-tag';
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const resetPassword = gql`
+const resetPasswordMutation = gql`
   mutation ResetPassword($email: String!) {
     resetPassword(email: $email)
   }
@@ -33,45 +33,36 @@ interface Props extends WithApolloClient<{}> {}
 
 const Reset: React.FC<Props> = () => {
   const classes = useStyles();
+  const [resetPassword] = useMutation<ResetPassword, ResetPasswordVariables>(resetPasswordMutation);
   return (
     <AccountPage
       title="Reset password"
       links={
-        <React.Fragment>
+        <>
           <Link to="/signin">Signing in?</Link>
-        </React.Fragment>
+        </>
       }
     >
-      <Mutation<ResetPassword, ResetPasswordVariables> mutation={resetPassword}>
-        {mutation => (
-          <Form<{ email: string }>
-            onSubmit={variables => mutation({variables})}
-            successMessage="Password reset email has been sent"
-            render={({handleSubmit, submitting}: FormRenderProps) => (
-              <form onSubmit={handleSubmit}>
-                <Field
-                  label="Email"
-                  fullWidth
-                  name="email"
-                  margin="normal"
-                  validate={required('Email address is required')}
-                  component={Input}
-                />
+      <Form<{ email: string }>
+        onSubmit={variables => resetPassword({ variables })}
+        successMessage="Password reset email has been sent"
+        render={({ handleSubmit, submitting }: FormRenderProps) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              label="Email"
+              fullWidth
+              name="email"
+              margin="normal"
+              validate={required('Email address is required')}
+              component={Input}
+            />
 
-                <Button
-                  type="submit"
-                  color="primary"
-                  variant="contained"
-                  className={classes.submit}
-                  disabled={submitting}
-                >
-                  Reset password
-                </Button>
-              </form>
-            )}
-          />
+            <Button type="submit" color="primary" variant="contained" className={classes.submit} disabled={submitting}>
+              Reset password
+            </Button>
+          </form>
         )}
-      </Mutation>
+      />
     </AccountPage>
   );
 };

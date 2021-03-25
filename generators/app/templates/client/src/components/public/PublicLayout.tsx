@@ -1,9 +1,9 @@
-import { Theme, withStyles, WithStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import * as React from 'react';
-import { RouteHelper } from '../../routes/route-helper';
-import PageTitle from '../PageTitle';
+import { FC, useState } from 'react';
+import AppHeader from '../common/layout/AppHeader';
 
-const styles = (theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     minHeight: '100vh',
     width: '100%',
@@ -16,43 +16,22 @@ const styles = (theme: Theme) => ({
     padding: theme.spacing(3),
   },
   toolbar: theme.mixins.toolbar,
-});
+}));
 
-interface Props extends WithStyles<typeof styles> {
-  r: RouteHelper;
-}
+const PublicLayout: FC = ({ children }) => {
+  const [open, setOpen] = useState(false);
+  const classes = useStyles();
 
-interface State {
-  open: boolean;
-}
-
-class PublicLayout extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      open: false,
-    };
-  }
-
-  public render() {
-    const { classes, children, r } = this.props;
-
-    const { open } = this.state;
-
-    return (
-      <div>
-        <PageTitle open={open} handleDrawerOpen={this.open} showDrawer={false} r={r} />
-        <main className={classes.root}>
-          <div className={classes.content}>
-            <div className={classes.toolbar} />
-            <div>{children}</div>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
-  private open = () => this.setState({ open: true });
-}
-
-export default withStyles(styles)(PublicLayout);
+  return (
+    <div>
+      <AppHeader open={open} handleDrawerOpen={() => setOpen(true)} showDrawer />
+      <main className={classes.root}>
+        <div className={classes.content}>
+          <div className={classes.toolbar} />
+          <div>{children}</div>
+        </div>
+      </main>
+    </div>
+  );
+};
+export default PublicLayout;

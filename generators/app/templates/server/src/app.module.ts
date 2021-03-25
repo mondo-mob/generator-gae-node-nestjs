@@ -16,7 +16,7 @@ import { GraphQLModule } from '@nestjs/graphql';
       graphQLModule: GraphQLModule.forRoot({
         path: '/api/graphql',
         context: (props: any) => props.req?.context,
-        autoSchemaFile: configurationProvider.isDevelopment() ? 'schema.gql' : true,  // in-memory for GCP but generate file locally to help troubleshoot
+        autoSchemaFile: configurationProvider.isDevelopment() ? 'schema.gql' : true, // in-memory for GCP but generate file locally to help troubleshoot
         fieldResolverEnhancers: ['filters', 'interceptors'],
       }),
     }),
@@ -30,9 +30,9 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(BuildVersionMiddleware)
-        .forRoutes({ path: '*', method: RequestMethod.ALL })
+      .forRoutes({ path: '*', method: RequestMethod.ALL })
       .apply(CacheHeadersMiddleware)
-        .exclude('(api|tasks|system)/(.*)')
-        .forRoutes({ path: '*', method: RequestMethod.GET });
+      .exclude('(api|tasks|system)/(.*)')
+      .forRoutes({ path: '*', method: RequestMethod.GET });
   }
 }

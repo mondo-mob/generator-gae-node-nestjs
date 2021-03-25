@@ -13,14 +13,14 @@ import client from './util/client';
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <React.Fragment>
+    <>
       <CssBaseline />
       <DelayLoading />
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <App />
         <Toast />
       </MuiPickersUtilsProvider>
-    </React.Fragment>
+    </>
   </ApolloProvider>,
   document.getElementById('root') as HTMLElement,
 );

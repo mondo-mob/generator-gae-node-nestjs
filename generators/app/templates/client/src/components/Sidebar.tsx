@@ -1,22 +1,12 @@
-import {
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Theme,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core';
+import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Users from '@material-ui/icons/SupervisorAccount';
 import cx from 'classnames';
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const styles = (theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   drawerPaper: {
     position: 'relative' as 'relative',
     whiteSpace: 'nowrap' as 'nowrap',
@@ -55,45 +45,48 @@ const styles = (theme: Theme) => ({
       color: theme.palette.primary.main,
     },
   },
-});
+}));
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   open: boolean;
   handleDrawerClose?: () => void;
 }
 
 const ListItemLink = ListItem as any;
 
-const Sidebar: React.FC<Props> = ({ classes, handleDrawerClose, open }) => (
-  <Drawer
-    variant="permanent"
-    classes={{
-      paper: cx(classes.drawerPaper, !open && classes.drawerPaperClose),
-    }}
-    open={open}
-  >
-    <div className={classes.toolbar}>
-      <IconButton onClick={handleDrawerClose}>
-        <ChevronLeftIcon />
-      </IconButton>
-    </div>
-    <Divider />
-    <List>
-      <ListItemLink
-        button
-        title="Users"
-        component={NavLink}
-        to={`/users`}
-        activeClassName={classes.active}
-        className={classes.linkIcon}
-      >
-        <ListItemIcon className={classes.icon}>
-          <Users />
-        </ListItemIcon>
-        <ListItemText primary="Users" />
-      </ListItemLink>
-    </List>
-  </Drawer>
-);
+const Sidebar: React.FC<Props> = ({ handleDrawerClose, open }) => {
+  const classes = useStyles();
+  return (
+    <Drawer
+      variant="permanent"
+      classes={{
+        paper: cx(classes.drawerPaper, !open && classes.drawerPaperClose),
+      }}
+      open={open}
+    >
+      <div className={classes.toolbar}>
+        <IconButton onClick={handleDrawerClose}>
+          <ChevronLeftIcon />
+        </IconButton>
+      </div>
+      <Divider />
+      <List>
+        <ListItemLink
+          button
+          title="Users"
+          component={NavLink}
+          to={`/users`}
+          activeClassName={classes.active}
+          className={classes.linkIcon}
+        >
+          <ListItemIcon className={classes.icon}>
+            <Users />
+          </ListItemIcon>
+          <ListItemText primary="Users" />
+        </ListItemLink>
+      </List>
+    </Drawer>
+  );
+};
 
-export default withStyles(styles)(Sidebar);
+export default Sidebar;

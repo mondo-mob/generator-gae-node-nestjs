@@ -78,9 +78,9 @@ export interface InviteUserVariables {
 // ====================================================
 
 export interface ListUsers_users {
-  __typename: "User";
+  __typename: 'UserDto';
   id: string;
-  name: string;
+  name: string | null;
   email: string;
   enabled: boolean;
   roles: UserRole[];
@@ -100,9 +100,9 @@ export interface ListUsers {
 // ====================================================
 
 export interface Me_me {
-  __typename: "User";
+  __typename: 'UserDto';
   id: string;
-  name: string;
+  name: string | null;
   roles: UserRole[];
   enabled: boolean;
 }
@@ -121,10 +121,10 @@ export interface Me {
 // ====================================================
 
 export interface UserDetails_userById {
-  __typename: "User";
+  __typename: 'UserDto';
   id: string;
   email: string;
-  name: string;
+  name: string | null;
   roles: UserRole[];
   enabled: boolean;
 }
@@ -147,10 +147,10 @@ export interface UserDetailsVariables {
 // ====================================================
 
 export interface UpdateUser_updateUser {
-  __typename: "User";
+  __typename: 'UserDto';
   id: string;
   email: string;
-  name: string;
+  name: string | null;
   roles: UserRole[];
   enabled: boolean;
 }
@@ -175,9 +175,9 @@ export interface UpdateUserVariables {
 //==============================================================
 
 export enum UserRole {
-  admin = "admin",
-  super = "super",
-  user = "user",
+  admin = 'admin',
+  super = 'super',
+  user = 'user',
 }
 
 //==============================================================

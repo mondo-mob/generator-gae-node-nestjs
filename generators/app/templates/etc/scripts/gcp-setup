@@ -1,0 +1,52 @@
+#!/bin/bash
+set -e
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+source ${DIR}/include/log-scripts.sh
+project_id=$1
+if [[ "$project_id" = "" ]]; then
+ fail "Usage: $script_name <project-id> <secret-key> <secret-value>"
+fi
+
+project_option="--project=${project_id}"
+appengine_service_account="${project_id}@appspot.gserviceaccount.com"
+
+enable_api() {
+ gcloud services enable ${1} ${project_option}
+ log " ✅  API enabled: ${1}"
+}
+
+check_secrets() {
+  actual_secrets="$(gcloud secrets list ${project_option} --page-size=200)"
+  echo
+  log "Checking for expected secrets to be created ... "
+  missing_secret="false"
+  for expected in "$@"; do
+      if [[ ! "${actual_secrets}" =~ "${expected} "  ]]; then
+        error "  - missing: ${expected}"
+        missing_secret="true"
+      fi
+  done
+
+  if [[ "$missing_secret" = "false" ]]; then
+    log "✅  Secrets have all been created"
+  else
+    error "The above secrets need to be created"
+  fi
+
+
+}
+
+enable_api secretmanager.googleapis.com
+enable_api cloudtasks.googleapis.com
+enable_api cloudscheduler.googleapis.com
+
+echo
+log "Granting roles/permissions"
+gcloud projects add-iam-policy-binding ${project_id} --member=serviceAccount:${appengine_service_account} --role=roles/secretmanager.secretAccessor
+log " ✅  Granting complete"
+
+### If you have secrets you expect in each environment add a line for each one to prompt someone to set it up.
+# Use the gcp-secret command to set a secret within a project.
+#check_secrets MY_API_KEY
+
+

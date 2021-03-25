@@ -1,27 +1,17 @@
-import { isArray } from 'lodash';
 import * as React from 'react';
-import { Query } from '@apollo/client/react/components';
-import { Me, UserRole } from '../graphql';
-import Unauthorised from '../modules/pages/Unauthorised';
-import { meQuery } from '../modules/users/queries';
-import { RouteHelper } from '../routes/route-helper';
+import { useContext } from 'react';
+import { UserRole } from '../graphql';
+import { asArray } from '../util/util';
+import { UserContext } from './context/UserContext';
 
 interface Props {
   roles: UserRole | UserRole[];
 }
 
-const Authorised: React.FC<Props> = ({ roles, children }) => (
-  <Query<Me> query={meQuery}>
-    {({ data, loading }) => {
-      if (loading) {
-        return null;
-      }
+const Authorised: React.FC<Props> = ({ roles, children }) => {
+  const { hasRole } = useContext(UserContext);
 
-      const r = new RouteHelper(Unauthorised, data && data.me);
-      const rolesArray: UserRole[] = isArray(roles) ? roles : [roles];
-      return r.hasAnyRole(...rolesArray) ? <React.Fragment>{children}</React.Fragment> : null;
-    }}
-  </Query>
-);
+  return hasRole(...asArray(roles)) ? <>{children}</> : null;
+};
 
 export default Authorised;

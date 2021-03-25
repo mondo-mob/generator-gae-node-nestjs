@@ -1,35 +1,35 @@
 import { Context, Roles, AllowAnonymous } from '@mondomob/gae-node-nestjs';
 import { Args, Context as GqlContext, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { UserDto } from './users.dto';
 import { UserRepository } from './users.repository';
 import { UsersService } from './users.service';
-import { User } from './users.model';
 
-@Resolver(() => User)
+@Resolver(() => UserDto)
 export class UsersResolver {
   constructor(private readonly userRepository: UserRepository, private readonly userService: UsersService) {}
 
   @AllowAnonymous()
-  @Query(() => User, { nullable: true })
-  async me(_req: void, _args: void, context: Context): Promise<User | undefined> {
+  @Query(() => UserDto, { nullable: true })
+  async me(_req: void, _args: void, context: Context): Promise<UserDto | undefined> {
     if (context.user) {
-      return context.user as User;
+      return context.user as UserDto;
     }
   }
 
-  @Query(() => [User])
-  async users(_obj: {}, _args: {}, context: Context): Promise<User[]> {
+  @Query(() => [UserDto])
+  async users(_obj: {}, _args: {}, context: Context): Promise<UserDto[]> {
     const [users] = await this.userRepository.query(context);
 
-    return (users as any) as User[];
+    return (users as any) as UserDto[];
   }
 
-  @Query(() => User)
+  @Query(() => UserDto)
   async userById(@Args('id', { type: () => ID }) id: string, @GqlContext() context: Context) {
     return this.userRepository.get(context, id);
   }
 
   @Roles('admin')
-  @Mutation(() => User)
+  @Mutation(() => UserDto)
   async updateUser(
     @Args('roles', { type: () => [String!] }) roles: string[],
     @Args('name') name: string,

@@ -42,7 +42,9 @@ export function getN<T>(): T {
 }
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-export type OneOrMany<T> = T | ReadonlyArray<T>;
+export type OneOrMany<T> = T | T[];
+
+export const asArray = <T>(input: OneOrMany<T> = []): T[] => (Array.isArray(input) ? input : [input]);
 
 interface SafeSubmitOptions<R> {
   successMessage: string;

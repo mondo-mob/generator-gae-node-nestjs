@@ -1,19 +1,19 @@
-import { Button, Theme, withStyles, WithStyles } from '@material-ui/core';
-import { ApolloClient } from '@apollo/client';
-import { isArray } from 'lodash';
-import * as qs from 'query-string';
+import { ApolloClient, useApolloClient } from '@apollo/client';
+import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import * as React from 'react';
-import { withApollo, WithApolloClient } from '@apollo/client/react/hoc';
+import { useEffect } from 'react';
 import { Field, FormRenderProps } from 'react-final-form';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import google from '../../assets/google.svg';
 import Form from '../../components/Form';
 import Input from '../../components/form/TextField';
 import { showMessage } from '../../components/Toast';
 import { requestJSON } from '../../util/http';
+import { asArray } from '../../util/util';
 import AccountPage from './AccountPage';
 
-const styles = (theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   submit: {
     width: '100%',
     marginTop: theme.spacing(4),
@@ -31,9 +31,9 @@ const styles = (theme: Theme) => ({
       height: 18,
     },
   },
-});
+}));
 
-const logIn = (client: ApolloClient<void>) => async ({
+const logIn = (client: ApolloClient<object>) => async ({
   username,
   password,
 }: {
@@ -48,73 +48,61 @@ const logIn = (client: ApolloClient<void>) => async ({
   await client.reFetchObservableQueries();
 };
 
-interface Props extends WithStyles<typeof styles>, RouteComponentProps<{}>, WithApolloClient<{}> {}
+const SignIn = () => {
+  const { search } = useLocation();
+  const error = new URLSearchParams(search).get('error');
+  const history = useHistory();
+  const classes = useStyles();
+  const client = useApolloClient();
 
-interface State {
-  error?: string | string[];
-}
-
-class SignIn extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    const { error } = qs.parse(this.props.location.search);
-
-    this.state = {
-      error: error || undefined,
-    };
-  }
-
-  public componentDidMount() {
-    if (this.state.error) {
-      const msg = isArray(this.state.error) ? this.state.error : [this.state.error];
+  useEffect(() => {
+    if (error) {
+      const msg = asArray(error);
       showMessage(msg.join(' '), true);
-      this.props.history.replace(`/signin`);
+      history.replace('/signing');
     }
-  }
+  }, [error, history]);
 
-  public render() {
-    const { classes, client } = this.props;
+  return (
+    <AccountPage
+      title="Sign In"
+      links={
+        <>
+          <Link to="/reset">Forgot password?</Link>
+        </>
+      }
+    >
+      <Form
+        onSubmit={logIn(client)}
+        render={({ handleSubmit, submitting }: FormRenderProps) => (
+          <form onSubmit={handleSubmit}>
+            <Field label="Email" fullWidth name="username" margin="normal" component={Input} />
 
-    return (
-      <AccountPage
-        title="Sign In"
-        links={
-          <React.Fragment>
-            <Link to="/reset">Forgot password?</Link>
-          </React.Fragment>
-        }
-      >
-        <Form
-          onSubmit={logIn(client!)}
-          render={({ handleSubmit, submitting }: FormRenderProps) => (
-            <form onSubmit={handleSubmit}>
-              <Field label="Email" fullWidth name="username" margin="normal" component={Input} />
+            <Field
+              label="Password"
+              fullWidth
+              type="password"
+              name="password"
+              margin="normal"
+              component={Input}
+              autoComplete="current-password"
+            />
 
-              <Field label="Password" fullWidth type="password" name="password" margin="normal" component={Input} autoComplete="current-password" />
+            <Button type="submit" color="primary" variant="contained" className={classes.submit} disabled={submitting}>
+              Sign in
+            </Button>
 
-              <Button
-                type="submit"
-                color="primary"
-                variant="contained"
-                className={classes.submit}
-                disabled={submitting}
-              >
-                Sign in
-              </Button>
+            <Button variant="contained" href="/auth/signin/google" className={classes.google}>
+              <div className={classes.googleButton}>
+                <img src={google} alt="" />
+                <span>Sign in with google</span>
+              </div>
+            </Button>
+          </form>
+        )}
+      />
+    </AccountPage>
+  );
+};
 
-              <Button variant="contained" href="/auth/signin/google" className={classes.google}>
-                <div className={classes.googleButton}>
-                  <img src={google} alt="" />
-                  <span>Sign in with google</span>
-                </div>
-              </Button>
-            </form>
-          )}
-        />
-      </AccountPage>
-    );
-  }
-}
-
-export default withStyles(styles)(withApollo<Props>(SignIn));
+export default SignIn;

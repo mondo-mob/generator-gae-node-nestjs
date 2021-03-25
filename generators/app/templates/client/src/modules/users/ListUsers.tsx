@@ -1,14 +1,15 @@
-import { makeStyles, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { useQuery } from '@apollo/client';
+import { CircularProgress, makeStyles, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { includes } from 'lodash';
 import * as React from 'react';
-import { QueryResult } from '@apollo/client';
-import { Query } from '@apollo/client/react/components';
 import { Link } from 'react-router-dom';
-import HeaderWithActions from '../../components/HeaderWithActions';
-import { ListUsers, ListUsers_users, UserRole } from '../../graphql';
-import { listUsersQuery } from './queries';
+import PageHeader from '../../components/common/layout/PageHeader';
+import PaperSection from '../../components/common/layout/PaperSection';
+import { ListUsers as IListUsers, ListUsers_users, UserRole } from '../../graphql';
+import { updateUserRoute } from '../../routes/AdminRoutes';
 import InviteUserDialog from './InviteUserDialog';
+import { listUsersQuery } from './queries';
 
 const useStyles = makeStyles((theme: Theme) => ({
   usernameCell: {
@@ -23,13 +24,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const isSuper = (user: ListUsers_users) => includes(user.roles, UserRole.super);
 
-const List: React.FC = () => {
+const ListUsers = () => {
   const classes = useStyles();
+  const { data, loading } = useQuery<IListUsers>(listUsersQuery);
   return (
-    <React.Fragment>
-      <HeaderWithActions actions={<InviteUserDialog />} title="Users" />
-      <Query query={listUsersQuery}>
-        {({ data }: QueryResult<ListUsers>) => (
+    <>
+      <PageHeader title="Users" breadcrumbElements="Users" actions={<InviteUserDialog />} />
+      {loading || !data ? (
+        <CircularProgress />
+      ) : (
+        <PaperSection>
           <Table>
             <TableHead>
               <TableRow>
@@ -52,16 +56,16 @@ const List: React.FC = () => {
                     <TableCell>{user.email}</TableCell>
                     <TableCell>{user.roles.join(', ')}</TableCell>
                     <TableCell>{user.enabled ? 'Yes' : 'No '}</TableCell>
-                    <TableCell>{!isSuper(user) && <Link to={`/admin/users/${user.id}`}>Edit</Link>}</TableCell>
+                    <TableCell>{!isSuper(user) && <Link to={updateUserRoute(user.id)}>Edit</Link>}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             )}
           </Table>
-        )}
-      </Query>
-    </React.Fragment>
+        </PaperSection>
+      )}
+    </>
   );
 };
 
-export default List;
+export default ListUsers;

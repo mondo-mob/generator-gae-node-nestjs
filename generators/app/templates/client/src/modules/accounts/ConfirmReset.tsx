@@ -1,4 +1,4 @@
-import { Mutation } from '@apollo/client/react/components';
+import { useMutation } from '@apollo/client';
 import { withApollo, WithApolloClient } from '@apollo/client/react/hoc';
 import { Button, makeStyles, Theme } from '@material-ui/core';
 import gql from 'graphql-tag';
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const resetPassword = gql`
+const confirmResetPasswordMutation = gql`
   mutation ConfirmResetPassword($password: String!, $code: String!) {
     confirmResetPassword(newPassword: $password, code: $code)
   }
@@ -41,57 +41,51 @@ const validatePasswordConfirmation = (value: string, allValues: any) =>
 
 const ConfirmReset: React.FC<Props> = ({ match, history }) => {
   const classes = useStyles();
+  const [confirmResetPassword] = useMutation<ConfirmResetPassword, ConfirmResetPasswordVariables>(
+    confirmResetPasswordMutation,
+  );
+
   return (
     <AccountPage
       title="Reset password"
       links={
-        <React.Fragment>
+        <>
           <Link to="/signin">Signing in?</Link>
-        </React.Fragment>
+        </>
       }
     >
-      <Mutation<ConfirmResetPassword, ConfirmResetPasswordVariables> mutation={resetPassword}>
-        {mutation => (
-          <Form<FormData>
-            onSubmit={({password}) => mutation({variables: {password, code: match.params.code}})}
-            successMessage="Password successfully reset"
-            onSuccess={() => history.push(`/sigin`)}
-            render={({handleSubmit, submitting}: FormRenderProps) => (
-              <form onSubmit={handleSubmit}>
-                <Field
-                  label="New password"
-                  fullWidth
-                  name="password"
-                  type="password"
-                  margin="normal"
-                  validate={required('Password is required')}
-                  component={Input}
-                />
+      <Form<FormData>
+        onSubmit={({ password }) => confirmResetPassword({ variables: { password, code: match.params.code } })}
+        successMessage="Password successfully reset"
+        onSuccess={() => history.push(`/sigin`)}
+        render={({ handleSubmit, submitting }: FormRenderProps) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              label="New password"
+              fullWidth
+              name="password"
+              type="password"
+              margin="normal"
+              validate={required('Password is required')}
+              component={Input}
+            />
 
-                <Field
-                  label="Confirm new password"
-                  fullWidth
-                  name="confirm_password"
-                  type="password"
-                  margin="normal"
-                  validate={validatePasswordConfirmation}
-                  component={Input}
-                />
+            <Field
+              label="Confirm new password"
+              fullWidth
+              name="confirm_password"
+              type="password"
+              margin="normal"
+              validate={validatePasswordConfirmation}
+              component={Input}
+            />
 
-                <Button
-                  type="submit"
-                  color="primary"
-                  variant="contained"
-                  className={classes.submit}
-                  disabled={submitting}
-                >
-                  Reset password
-                </Button>
-              </form>
-            )}
-          />
+            <Button type="submit" color="primary" variant="contained" className={classes.submit} disabled={submitting}>
+              Reset password
+            </Button>
+          </form>
         )}
-      </Mutation>
+      />
     </AccountPage>
   );
 };

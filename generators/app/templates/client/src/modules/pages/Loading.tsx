@@ -1,7 +1,8 @@
-import { CircularProgress, Typography, WithStyles, withStyles } from '@material-ui/core';
+import { CircularProgress, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import * as React from 'react';
 
-const styles = {
+const useStyles = makeStyles({
   page: {
     height: '100vh',
     display: 'flex',
@@ -13,17 +14,20 @@ const styles = {
       marginBottom: 20,
     },
   },
-};
+});
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   message?: string;
 }
 
-const Loading: React.FC<Props> = ({ classes, message }) => (
-  <div className={classes.page}>
-    <CircularProgress />
-    <Typography>{message ? message : 'Loading...'}</Typography>
-  </div>
-);
+const Loading: React.FC<Props> = ({ message }) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.page}>
+      <CircularProgress />
+      <Typography>{message ? message : 'Loading...'}</Typography>
+    </div>
+  );
+};
 
-export default withStyles(styles)(Loading);
+export default Loading;

@@ -11,7 +11,7 @@
     "types": [
       {
         "kind": "OBJECT",
-        "name": "User",
+        "name": "UserDto",
         "description": null,
         "specifiedByUrl": null,
         "fields": [
@@ -36,13 +36,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -229,7 +225,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "User",
+              "name": "UserDto",
               "ofType": null
             },
             "isDeprecated": false,
@@ -250,7 +246,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "OBJECT",
-                    "name": "User",
+                    "name": "UserDto",
                     "ofType": null
                   }
                 }
@@ -285,7 +281,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "User",
+                "name": "UserDto",
                 "ofType": null
               }
             },
@@ -562,7 +558,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "User",
+                "name": "UserDto",
                 "ofType": null
               }
             },

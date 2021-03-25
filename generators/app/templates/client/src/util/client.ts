@@ -11,7 +11,7 @@ const cache: InMemoryCache = new InMemoryCache({});
 const extractOperationNames = (options: any) => {
   const body = options?.body ? JSON.parse(options.body) : [];
   const array = isArray(body) ? body : [body];
-  return array.map((operation) => operation.operationName).filter((name) => !!name);
+  return array.map(operation => operation.operationName).filter(name => !!name);
 };
 
 const client = new ApolloClient({

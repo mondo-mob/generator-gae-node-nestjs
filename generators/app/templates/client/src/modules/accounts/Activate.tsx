@@ -14,9 +14,9 @@ import Loading from '../pages/Loading';
 import AccountPage from './AccountPage';
 
 const checkActivationCodeQuery = gql`
-    query CheckActivationCode($code: String!) {
-        checkActivationCode(code: $code)
-    }
+  query CheckActivationCode($code: String!) {
+    checkActivationCode(code: $code)
+  }
 `;
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -34,13 +34,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props extends RouteComponentProps<{ code: string }>, WithApolloClient<{}> {
-}
+interface Props extends RouteComponentProps<{ code: string }>, WithApolloClient<{}> {}
 
 const activate = (client: ApolloClient<void>, code: string, callback: any) => async ({
-                                                                                       name,
-                                                                                       password,
-                                                                                     }: {
+  name,
+  password,
+}: {
   name: string;
   password: string;
 }) => {
@@ -55,34 +54,34 @@ const activate = (client: ApolloClient<void>, code: string, callback: any) => as
   callback();
 };
 
-const Activate: React.FC<Props> = ({client, match, history}) => {
+const Activate: React.FC<Props> = ({ client, match, history }) => {
   const classes = useStyles();
-  const {code} = match.params;
+  const { code } = match.params;
 
-  const {data, loading} = useQuery<CheckActivationCode, CheckActivationCodeVariables>(checkActivationCodeQuery, {
+  const { data, loading } = useQuery<CheckActivationCode, CheckActivationCodeVariables>(checkActivationCodeQuery, {
     variables: {
       code,
     },
   });
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
     <AccountPage
       title="Activate account"
       links={
-        <React.Fragment>
+        <>
           <Link to="/signin">Signing in?</Link>
-        </React.Fragment>
+        </>
       }
     >
       {data!.checkActivationCode && <div className={classes.errorMessage}>{data!.checkActivationCode}</div>}
       {!data!.checkActivationCode && (
         <Form
           onSubmit={activate(client!, code, () => history.push('/signin'))}
-          render={({handleSubmit, submitting}: FormRenderProps) => (
+          render={({ handleSubmit, submitting }: FormRenderProps) => (
             <form onSubmit={handleSubmit}>
               <Field
                 label="Name"

@@ -1,14 +1,13 @@
-import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, } from '@material-ui/core';
+import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Users from '@material-ui/icons/SupervisorAccount';
 import cx from 'classnames';
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import { UserRole } from '../../graphql';
-import { RouteHelper } from '../../routes/route-helper';
 import Authorised from '../Authorised';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   drawerPaper: {
     position: 'relative' as 'relative',
     whiteSpace: 'nowrap' as 'nowrap',
@@ -52,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
 interface Props {
   open: boolean;
   handleDrawerClose?: () => void;
-  r: RouteHelper;
 }
 
 const ListItemLink = ListItem as any;
@@ -74,10 +72,10 @@ const AdminSidebar: React.FC<Props> = ({ handleDrawerClose, open }) => {
     >
       <div className={classes.toolbar}>
         <IconButton onClick={handleDrawerClose}>
-          <ChevronLeftIcon/>
+          <ChevronLeftIcon />
         </IconButton>
       </div>
-      <Divider/>
+      <Divider />
       <List>
         <Authorised roles={UserRole.admin}>
           <ListItemLink
@@ -89,9 +87,9 @@ const AdminSidebar: React.FC<Props> = ({ handleDrawerClose, open }) => {
             className={classes.linkIcon}
           >
             <ListItemIcon className={classes.icon}>
-              <Users/>
+              <Users />
             </ListItemIcon>
-            <ListItemText primary="Users"/>
+            <ListItemText primary="Users" />
           </ListItemLink>
         </Authorised>
       </List>

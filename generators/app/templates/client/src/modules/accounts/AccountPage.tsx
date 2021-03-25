@@ -1,7 +1,8 @@
-import { Theme, Typography, withStyles, WithStyles } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import * as React from 'react';
 
-const styles = (theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   page: {
     minHeight: '100vh',
     display: 'flex',
@@ -26,25 +27,28 @@ const styles = (theme: Theme) => ({
     fontWeight: 'lighter' as 'lighter',
     color: theme.palette.grey[800],
   },
-});
+}));
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   links?: JSX.Element;
   title: string;
 }
 
-const AccountPage: React.FC<Props> = ({ classes, children, links, title }) => (
-  <div className={classes.page}>
-    <div className={classes.card}>
-      <Typography variant="h5" className={classes.title}>
-        {title}
-      </Typography>
+const AccountPage: React.FC<Props> = ({ children, links, title }) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.page}>
+      <div className={classes.card}>
+        <Typography variant="h5" className={classes.title}>
+          {title}
+        </Typography>
 
-      {children}
+        {children}
+      </div>
+
+      <div className={classes.links}>{links}</div>
     </div>
+  );
+};
 
-    <div className={classes.links}>{links}</div>
-  </div>
-);
-
-export default withStyles(styles)(AccountPage);
+export default AccountPage;

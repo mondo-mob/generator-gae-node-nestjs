@@ -87,6 +87,7 @@ module.exports = class extends Generator {
 
     copy('client', 'client', fileCopyOptions);
     copy('server', 'server', fileCopyOptions);
+    copy('etc', 'etc', fileCopyOptions);
     copyTpl('README.md');
     copyTpl('package.json');
     copy('gitignore', '.gitignore');
@@ -94,7 +95,6 @@ module.exports = class extends Generator {
     copy('server/gitignore', 'server/.gitignore');
     copyTpl('client/package.json');
     copyTpl('client/public/index.html');
-    copyTpl('client/src/components/PageTitle.tsx');
     copyTpl('server/package.json');
     copyTpl('server/config/default.json');
     copyTpl('server/config/development.json', 'server/config/development.json', {

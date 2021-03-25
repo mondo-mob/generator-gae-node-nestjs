@@ -308,3 +308,15 @@ or
 
 npx server s c --env dev /system/migrate/bootstrap
 ```
+
+# GCP Setup
+
+To make things easier, enabling APIs, services, etc is scripted via simple bash. 
+
+To set up some common required APIs you can run `./etc/scripts/gcp-setup <your-project-id>`
+
+This also assumes you plan to use secrets manager. You can remove that line if you don't. If you need to create a secret
+for an environment there is a script to simplify that. Run `./etc/scripts/gcp-secret <your-project-id> <secret-key> <secret-value>`.
+
+Both scripts can be run without any args to prompt for usage.
+

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 test_project_dir=$1
 if [[ "$test_project_dir" = "" ]]; then

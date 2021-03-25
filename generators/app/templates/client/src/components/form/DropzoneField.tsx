@@ -82,7 +82,7 @@ class DropzoneFieldInner extends React.Component<Props, State> {
       ...rest
     } = this.props;
     return (
-      <React.Fragment>
+      <>
         <Dropzone
           className={classes!.dropzone}
           activeClassName={classes!.dropzoneActive}
@@ -121,7 +121,7 @@ class DropzoneFieldInner extends React.Component<Props, State> {
             ))}
         </List>
         {meta.error && meta.touched && <FormHelperText error>{meta.error}</FormHelperText>}
-      </React.Fragment>
+      </>
     );
   }
 

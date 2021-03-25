@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start:dev": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-development npx server",
-    "format": "prettier --write \"./src/**/*.ts\" && prettier --write \"./src/**/*.graphqls\"",
+    "format": "prettier --write \"./src/**/*.ts\"",
     "lint": "tslint --project .",
     "start": "node ./dist/main.js",
     "prestart:dev": "rm -rf dist/ && npm run lint",
@@ -24,7 +24,7 @@
     "dsui": "dsui --port 4000",
     "kill": "bash ./scripts/kill.sh",
     "kill-force": "bash ./scripts/kill.sh -9",
-    "clear-datastore": "rm -rf ~/.config/gcloud/emulators/datastore",
+    "clear-datastore": "npm run kill-force && rm -rf ~/.config/gcloud/emulators/datastore",
     "generate-build-version": "node ./scripts/buildVersionGenerator.js"
   },
   "dependencies": {
