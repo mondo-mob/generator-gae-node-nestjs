@@ -1,3 +1,6 @@
+## 2.1.1 (2021-03-26)
+- Generator lib updates and generator lint/styling. Should be no change to generated output from v2.1.0.
+
 ## 2.1.0 (2021-03-26)
 - `client/` now has `react-scripts` updated to latest 
 - Big cleanup of older style components. Replaced HOC usage with hooks
