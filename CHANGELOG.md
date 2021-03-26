@@ -1,5 +1,5 @@
 ## 2.1.0 (2021-03-26)
-- client/ now has react-scripts updated to 
+- `client/` now has `react-scripts` updated to latest 
 - Big cleanup of older style components. Replaced HOC usage with hooks
 - Some basic styling improvements to make a big difference to the generated app
 - Internal dependency updates
