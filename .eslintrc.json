@@ -1,0 +1,16 @@
+{
+  "plugins": ["prettier"],
+  "extends": ["xo", "prettier"],
+  "rules": {
+    "prettier/prettier": "warn"
+  },
+  "env": {
+    "jest": true,
+    "node": true
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts?(x)"]
+    }
+  ]
+}

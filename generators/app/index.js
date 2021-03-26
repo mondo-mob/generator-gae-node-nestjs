@@ -11,9 +11,7 @@ const generateKey = bits => crypto.randomBytes(Math.ceil(bits / 8)).toString('ba
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
-    this.log(
-      yosay(`Welcome to the ${chalk.red('@mondomob/gae-node-nestjs')} generator!`),
-    );
+    this.log(yosay(`Welcome to the ${chalk.red('@mondomob/gae-node-nestjs')} generator!`));
 
     const prompts = [
       {
@@ -58,25 +56,15 @@ module.exports = class extends Generator {
     const copyTpl = (src, dest, additionalContext) => {
       const destName = dest || src;
       const srcParam = _.isArray(src)
-        ? _.map(src, entry =>
-          _.startsWith(entry, '!') ? entry : this.templatePath(entry),
-        )
+        ? _.map(src, entry => (_.startsWith(entry, '!') ? entry : this.templatePath(entry)))
         : this.templatePath(src);
 
-      return this.fs.copyTpl(
-        srcParam,
-        this.destinationPath(destName),
-        _.merge(context, additionalContext || {}),
-      );
+      return this.fs.copyTpl(srcParam, this.destinationPath(destName), _.merge(context, additionalContext || {}));
     };
 
     const copy = (src, dest, options) => {
       const destName = dest || src;
-      return this.fs.copy(
-        this.templatePath(src),
-        this.destinationPath(destName),
-        options,
-      );
+      return this.fs.copy(this.templatePath(src), this.destinationPath(destName), options);
     };
 
     const fileCopyOptions = {
