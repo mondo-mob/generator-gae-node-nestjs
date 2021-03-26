@@ -64,6 +64,9 @@ const Toast = () => {
 };
 
 export default Toast;
-export const showMessage = (message: string | NestHttpException, isError: boolean = false) => {
-  showToast(message, isError);
+export const showMessage = (message: string | NestHttpException) => {
+  showToast(message, false);
+};
+export const showErrorMessage = (message: string | NestHttpException) => {
+  showToast(message, true);
 };

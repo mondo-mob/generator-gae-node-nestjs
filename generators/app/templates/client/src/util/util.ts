@@ -1,7 +1,7 @@
 // tslint:disable:no-console
 import { FORM_ERROR, FormApi } from 'final-form';
 import * as _ from 'lodash';
-import { showMessage } from '../components/Toast';
+import { showErrorMessage, showMessage } from '../components/Toast';
 
 export function get<T, K extends keyof NonNullable<T>>(
   value: T,
@@ -62,7 +62,7 @@ export function safeSubmit<T, R = {}>(
       const result = await handler(data, api);
 
       if (config.successMessage) {
-        showMessage(config.successMessage, false);
+        showMessage(config.successMessage);
       }
 
       if (config.onSuccess) {
@@ -80,7 +80,7 @@ export function safeSubmit<T, R = {}>(
         message = ex.message || 'Unexpected error submitting form';
       }
 
-      showMessage(message, true);
+      showErrorMessage(message);
 
       return {
         [FORM_ERROR]: message,

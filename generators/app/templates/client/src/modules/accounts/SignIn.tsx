@@ -8,7 +8,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import google from '../../assets/google.svg';
 import Form from '../../components/Form';
 import Input from '../../components/form/TextField';
-import { showMessage } from '../../components/Toast';
+import { showErrorMessage } from '../../components/Toast';
 import { requestJSON } from '../../util/http';
 import { asArray } from '../../util/util';
 import AccountPage from './AccountPage';
@@ -58,7 +58,7 @@ const SignIn = () => {
   useEffect(() => {
     if (error) {
       const msg = asArray(error);
-      showMessage(msg.join(' '), true);
+      showErrorMessage(msg.join(' '));
       history.replace('/signing');
     }
   }, [error, history]);

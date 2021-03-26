@@ -7,6 +7,7 @@ import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import Form from '../../components/Form';
 import Input from '../../components/form/TextField';
+import { showMessage } from '../../components/Toast';
 import { CheckActivationCode, CheckActivationCodeVariables } from '../../graphql';
 import { requestJSON } from '../../util/http';
 import { required } from '../../util/validation';
@@ -35,9 +36,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const activate = (client: ApolloClient<object>, code: string, callback: any) => async ({
-  name,
-  password,
-}: {
+                                                                                         name,
+                                                                                         password,
+                                                                                       }: {
   name: string;
   password: string;
 }) => {
@@ -46,9 +47,7 @@ const activate = (client: ApolloClient<object>, code: string, callback: any) => 
     password,
     code,
   });
-
-  await client.reFetchObservableQueries();
-
+  showMessage('Your account has been activated. Please sign in.');
   callback();
 };
 

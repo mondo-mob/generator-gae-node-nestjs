@@ -3,7 +3,7 @@ import { BatchHttpLink } from '@apollo/client/link/batch-http';
 import { onError } from '@apollo/client/link/error';
 import { isArray } from 'lodash';
 import { finishLoading, startLoading } from '../components/PageProgressBar';
-import { showMessage } from '../components/Toast';
+import { showErrorMessage } from '../components/Toast';
 import { getCsrfHeaders } from './csrf';
 
 const cache: InMemoryCache = new InMemoryCache({});
@@ -28,7 +28,7 @@ const client = new ApolloClient({
       if (graphQLErrors) {
         graphQLErrors.forEach(({ message, locations, path }) => {
           if (process.env.NODE_ENV !== 'production') {
-            showMessage(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`, true);
+            showErrorMessage(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
           } else {
             // tslint:disable:no-console
             console.error(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
@@ -40,7 +40,7 @@ const client = new ApolloClient({
         if (message.statusCode && message.statusCode === 403 && window.location.pathname !== '/signin') {
           window.location.href = '/signin';
         }
-        showMessage(`[Network error]: ${networkError}`, true);
+        showErrorMessage(`[Network error]: ${networkError}`);
       }
     }),
     new ApolloLink((operation, forward) => {
