@@ -12,7 +12,7 @@ module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(
-      yosay(`Welcome to the ${chalk.red('@mondomob/gae-node-nestjs')} generator!`)
+      yosay(`Welcome to the ${chalk.red('@mondomob/gae-node-nestjs')} generator!`),
     );
 
     const prompts = [
@@ -20,25 +20,26 @@ module.exports = class extends Generator {
         name: 'project',
         message: 'What is the ID of this project?',
         store: true,
-        default: slugify(this.appname)
+        default: slugify(this.appname),
       },
       {
         name: 'projectName',
         message: 'What is the name of this project?',
         store: true,
-        default: _.startCase(this.appname)
+        default: _.startCase(this.appname),
       },
       {
         name: 'adminEmail',
         message: 'What email address should we use to create the initial admin login?',
-        store: true
+        store: true,
+        default: 'admin@foo.bar',
       },
       {
         name: 'appEngineRegion',
         message: 'What google cloud region will this project run in?',
         store: true,
-        default: 'australia-southeast1'
-      }
+        default: 'australia-southeast1',
+      },
     ];
 
     return this.prompt(prompts).then(props => {
@@ -51,21 +52,21 @@ module.exports = class extends Generator {
     const context = Object.assign({}, this.props, {
       project: slugify(this.props.project),
       slugify,
-      _
+      _,
     });
 
     const copyTpl = (src, dest, additionalContext) => {
       const destName = dest || src;
       const srcParam = _.isArray(src)
         ? _.map(src, entry =>
-            _.startsWith(entry, '!') ? entry : this.templatePath(entry)
-          )
+          _.startsWith(entry, '!') ? entry : this.templatePath(entry),
+        )
         : this.templatePath(src);
 
       return this.fs.copyTpl(
         srcParam,
         this.destinationPath(destName),
-        _.merge(context, additionalContext || {})
+        _.merge(context, additionalContext || {}),
       );
     };
 
@@ -74,15 +75,15 @@ module.exports = class extends Generator {
       return this.fs.copy(
         this.templatePath(src),
         this.destinationPath(destName),
-        options
+        options,
       );
     };
 
     const fileCopyOptions = {
       globOptions: {
         dot: true,
-        ignore: ['**/gitignore', '**/env.json']
-      }
+        ignore: ['**/gitignore', '**/env.json'],
+      },
     };
 
     copy('client', 'client', fileCopyOptions);
@@ -99,22 +100,22 @@ module.exports = class extends Generator {
     copyTpl('server/config/default.json');
     copyTpl('server/config/development.json', 'server/config/development.json', {
       secret: generateKey(512),
-      cookieSecret: generateKey(512)
+      cookieSecret: generateKey(512),
     });
     copyTpl('server/config/env.json', 'server/config/dev.json', {
       env: 'dev',
       secret: generateKey(512),
-      cookieSecret: generateKey(512)
+      cookieSecret: generateKey(512),
     });
     copyTpl('server/config/env.json', 'server/config/uat.json', {
       env: 'uat',
       secret: generateKey(512),
-      cookieSecret: generateKey(512)
+      cookieSecret: generateKey(512),
     });
     copyTpl('server/config/env.json', 'server/config/prod.json', {
       env: 'prod',
       secret: generateKey(512),
-      cookieSecret: generateKey(512)
+      cookieSecret: generateKey(512),
     });
     copyTpl('client/scripts/kill.sh');
     copyTpl('server/scripts/kill.sh');
