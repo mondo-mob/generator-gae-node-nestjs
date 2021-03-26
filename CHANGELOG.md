@@ -1,3 +1,10 @@
+## 2.1.0 (2021-03-26)
+- client/ now has react-scripts updated to 
+- Big cleanup of older style components. Replaced HOC usage with hooks
+- Some basic styling improvements to make a big difference to the generated app
+- Internal dependency updates
+
+
 ## 2.0.4 (2021-03-11)
 - Update GQL HTTP requests with operations query string. This makes it easier to troubleshoot network traffic without 
   inspecting the payload by simply adding the operation names as a query string parameter client-side and these parameters get ignored.
