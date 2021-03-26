@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/client';
-import { withApollo, WithApolloClient } from '@apollo/client/react/hoc';
 import { Button, makeStyles, Theme } from '@material-ui/core';
 import gql from 'graphql-tag';
 import * as React from 'react';
 import { Field, FormRenderProps } from 'react-final-form';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { useParams } from 'react-router';
+import { Link, useHistory } from 'react-router-dom';
 import Form from '../../components/Form';
 import Input from '../../components/form/TextField';
 import { ConfirmResetPassword, ConfirmResetPasswordVariables } from '../../graphql';
@@ -29,8 +29,6 @@ const confirmResetPasswordMutation = gql`
   }
 `;
 
-interface Props extends RouteComponentProps<{ code: string }>, WithApolloClient<{}> {}
-
 interface FormData {
   password: string;
   confirmPassword: string;
@@ -39,11 +37,13 @@ interface FormData {
 const validatePasswordConfirmation = (value: string, allValues: any) =>
   value !== allValues.password ? 'Password confirmation must match' : undefined;
 
-const ConfirmReset: React.FC<Props> = ({ match, history }) => {
+const ConfirmReset = () => {
   const classes = useStyles();
   const [confirmResetPassword] = useMutation<ConfirmResetPassword, ConfirmResetPasswordVariables>(
     confirmResetPasswordMutation,
   );
+  const { code } = useParams<{ code: string }>();
+  const history = useHistory();
 
   return (
     <AccountPage
@@ -55,7 +55,7 @@ const ConfirmReset: React.FC<Props> = ({ match, history }) => {
       }
     >
       <Form<FormData>
-        onSubmit={({ password }) => confirmResetPassword({ variables: { password, code: match.params.code } })}
+        onSubmit={({ password }) => confirmResetPassword({ variables: { password, code } })}
         successMessage="Password successfully reset"
         onSuccess={() => history.push(`/sigin`)}
         render={({ handleSubmit, submitting }: FormRenderProps) => (
@@ -90,4 +90,4 @@ const ConfirmReset: React.FC<Props> = ({ match, history }) => {
   );
 };
 
-export default withApollo<Props>(ConfirmReset);
+export default ConfirmReset;

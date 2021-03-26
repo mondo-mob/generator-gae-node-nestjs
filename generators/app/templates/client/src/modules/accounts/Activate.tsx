@@ -1,10 +1,10 @@
-import { ApolloClient, useQuery } from '@apollo/client';
-import { withApollo, WithApolloClient } from '@apollo/client/react/hoc';
+import { ApolloClient, useApolloClient, useQuery } from '@apollo/client';
 import { Button, makeStyles, Theme } from '@material-ui/core';
 import gql from 'graphql-tag';
 import * as React from 'react';
 import { Field, FormRenderProps } from 'react-final-form';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import Form from '../../components/Form';
 import Input from '../../components/form/TextField';
 import { CheckActivationCode, CheckActivationCodeVariables } from '../../graphql';
@@ -34,9 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props extends RouteComponentProps<{ code: string }>, WithApolloClient<{}> {}
-
-const activate = (client: ApolloClient<void>, code: string, callback: any) => async ({
+const activate = (client: ApolloClient<object>, code: string, callback: any) => async ({
   name,
   password,
 }: {
@@ -54,9 +52,11 @@ const activate = (client: ApolloClient<void>, code: string, callback: any) => as
   callback();
 };
 
-const Activate: React.FC<Props> = ({ client, match, history }) => {
+const Activate = () => {
   const classes = useStyles();
-  const { code } = match.params;
+  const history = useHistory();
+  const { code } = useParams<{ code: string }>();
+  const client = useApolloClient();
 
   const { data, loading } = useQuery<CheckActivationCode, CheckActivationCodeVariables>(checkActivationCodeQuery, {
     variables: {
@@ -72,15 +72,15 @@ const Activate: React.FC<Props> = ({ client, match, history }) => {
     <AccountPage
       title="Activate account"
       links={
-        <>
+        <React.Fragment>
           <Link to="/signin">Signing in?</Link>
-        </>
+        </React.Fragment>
       }
     >
       {data!.checkActivationCode && <div className={classes.errorMessage}>{data!.checkActivationCode}</div>}
       {!data!.checkActivationCode && (
         <Form
-          onSubmit={activate(client!, code, () => history.push('/signin'))}
+          onSubmit={activate(client, code, () => history.push('/signin'))}
           render={({ handleSubmit, submitting }: FormRenderProps) => (
             <form onSubmit={handleSubmit}>
               <Field
@@ -119,4 +119,4 @@ const Activate: React.FC<Props> = ({ client, match, history }) => {
   );
 };
 
-export default withApollo<Props>(Activate);
+export default Activate;

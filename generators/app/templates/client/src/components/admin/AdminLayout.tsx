@@ -4,6 +4,7 @@ import { FC, useContext, useState } from 'react';
 import { UserRole } from '../../graphql';
 import Unauthorised from '../../modules/pages/Unauthorised';
 import AppHeader from '../common/layout/AppHeader';
+import InnerLayout from '../common/layout/InnerLayout';
 import { UserContext } from '../context/UserContext';
 import AdminSidebar from './AdminSidebar';
 
@@ -42,7 +43,7 @@ const AdminLayout: FC<Props> = ({ anyRoles, children }) => {
         <AdminSidebar open={open} handleDrawerClose={() => setOpen(false)} />
         <div className={classes.content}>
           <div className={classes.toolbar} />
-          <div>{children}</div>
+          <InnerLayout>{children}</InnerLayout>
         </div>
       </main>
     </div>

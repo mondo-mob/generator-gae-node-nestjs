@@ -15,7 +15,7 @@ const AdminRoutes = () => {
   return (
     <AdminLayout anyRoles={[UserRole.admin, UserRole.super]}>
       <Switch>
-        <Route path="/admin/users/:userId" component={ifHasRole(UpdateUser as any, UserRole.admin)} />
+        <Route path="/admin/users/:userId" component={ifHasRole(UpdateUser, UserRole.admin)} />
         <Route exact path={listUsersRoute} component={ifHasRole(ListUsers, UserRole.admin)} />
         <Redirect to="/admin/users" />
       </Switch>

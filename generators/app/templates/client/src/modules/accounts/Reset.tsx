@@ -1,5 +1,4 @@
 import { useMutation } from '@apollo/client';
-import { withApollo, WithApolloClient } from '@apollo/client/react/hoc';
 import { Button, makeStyles, Theme } from '@material-ui/core';
 import gql from 'graphql-tag';
 import * as React from 'react';
@@ -29,9 +28,7 @@ const resetPasswordMutation = gql`
   }
 `;
 
-interface Props extends WithApolloClient<{}> {}
-
-const Reset: React.FC<Props> = () => {
+const Reset = () => {
   const classes = useStyles();
   const [resetPassword] = useMutation<ResetPassword, ResetPasswordVariables>(resetPasswordMutation);
   return (
@@ -67,4 +64,4 @@ const Reset: React.FC<Props> = () => {
   );
 };
 
-export default withApollo<Props>(Reset);
+export default Reset;

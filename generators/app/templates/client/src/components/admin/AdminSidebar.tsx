@@ -53,7 +53,6 @@ interface Props {
   handleDrawerClose?: () => void;
 }
 
-const ListItemLink = ListItem as any;
 // @ts-ignore
 // The usage of React.forwardRef will no longer be required for react-router-dom v6.
 // see https://github.com/ReactTraining/react-router/issues/6056
@@ -78,7 +77,7 @@ const AdminSidebar: React.FC<Props> = ({ handleDrawerClose, open }) => {
       <Divider />
       <List>
         <Authorised roles={UserRole.admin}>
-          <ListItemLink
+          <ListItem
             button
             title="Users"
             component={NavLinkRef}
@@ -90,7 +89,7 @@ const AdminSidebar: React.FC<Props> = ({ handleDrawerClose, open }) => {
               <Users />
             </ListItemIcon>
             <ListItemText primary="Users" />
-          </ListItemLink>
+          </ListItem>
         </Authorised>
       </List>
     </Drawer>

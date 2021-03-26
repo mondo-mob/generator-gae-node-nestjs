@@ -3,9 +3,9 @@ import { Button, CircularProgress, FormControlLabel, makeStyles, Switch, Theme, 
 import gql from 'graphql-tag';
 import { without } from 'lodash';
 import * as React from 'react';
-import { useContext } from 'react';
+import { FC, useContext } from 'react';
 import { Field, FormRenderProps } from 'react-final-form';
-import { RouteComponentProps } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import Actions from '../../components/common/layout/Actions';
 import PageHeader from '../../components/common/layout/PageHeader';
@@ -74,13 +74,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props extends RouteComponentProps<RouteProps> {}
-
-const UpdateUser: React.FC<Props> = ({ match, history }) => {
+const UpdateUser: FC = () => {
   const classes = useStyles();
+  const { userId } = useParams<RouteProps>();
+  const history = useHistory();
 
   const { data, loading } = useQuery<UserDetails, UserDetailsVariables>(userDetailsQuery, {
-    variables: { userId: match.params.userId },
+    variables: { userId },
   });
   const [updateUser] = useMutation<IUpdateUser, UpdateUserVariables>(mutation);
   const { currentUser } = useContext(UserContext);
@@ -104,7 +104,7 @@ const UpdateUser: React.FC<Props> = ({ match, history }) => {
         onSubmit={({ name, roles }) => {
           return updateUser({
             variables: {
-              userId: match.params.userId,
+              userId,
               name,
               roles,
             },
