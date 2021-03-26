@@ -1,3 +1,6 @@
+## 2.1.2 (2021-03-26)
+- A few more HOC usages converted to hooks in generated client code
+
 ## 2.1.1 (2021-03-26)
 - Generator lib updates and generator lint/styling. Should be no change to generated output from v2.1.0.
 
