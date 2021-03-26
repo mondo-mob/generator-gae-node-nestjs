@@ -36,9 +36,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const activate = (client: ApolloClient<object>, code: string, callback: any) => async ({
-                                                                                         name,
-                                                                                         password,
-                                                                                       }: {
+  name,
+  password,
+}: {
   name: string;
   password: string;
 }) => {
