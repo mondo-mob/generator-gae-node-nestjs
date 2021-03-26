@@ -1,3 +1,7 @@
+## 2.1.3 (2021-03-26)
+- Fix an existing issue with Activate and get it to redirect to signin page with a toast after activation successful
+- Internal refactor so showMessage(msg, errorBoolean) is replaced with showMessage(msg) and showErrorMessage(msg | error)
+
 ## 2.1.2 (2021-03-26)
 - A few more HOC usages converted to hooks in generated client code
 
