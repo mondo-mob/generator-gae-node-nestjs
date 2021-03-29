@@ -10,6 +10,7 @@
     "ordered-imports": false,
     "member-access": false,
     "no-floating-promises": true,
+    "max-classes-per-file": false,
     "no-import-zones": [
       true,
       {
