@@ -1,3 +1,8 @@
+## 2.1.4 (2021-03-29)
+- FIX:  missing `test-helpers.ts` has been added in
+- Script to help create GCP project with App Engine. See root readme
+- Improve local data bootstrappers to make it easier to add others by implementing common interface and configuring provider
+
 ## 2.1.3 (2021-03-26)
 - Fix an existing issue with Activate and get it to redirect to signin page with a toast after activation successful
 - Internal refactor so showMessage(msg, errorBoolean) is replaced with showMessage(msg) and showErrorMessage(msg | error)
