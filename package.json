@@ -1,6 +1,6 @@
 {
   "name": "@mondomob/generator-gae-node-nestjs",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "A generator for building nestjs apps on app engine node",
   "repository": "https://github.com/mondo-mob/generator-gae-node-nestjs",
   "author": {
