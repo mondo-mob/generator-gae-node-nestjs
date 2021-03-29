@@ -1,3 +1,6 @@
+## 2.1.5 (2021-03-29)
+- Enable appengine api by default for deployments in the `gcp-setup` script
+
 ## 2.1.4 (2021-03-29)
 - FIX:  missing `test-helpers.ts` has been added in
 - Script to help create GCP project with App Engine. See root readme
