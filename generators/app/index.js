@@ -79,6 +79,7 @@ module.exports = class extends Generator {
     copy('etc', 'etc', fileCopyOptions);
     copyTpl('README.md');
     copyTpl('package.json');
+    copyTpl('etc/scripts/gcp-new-project');
     copy('gitignore', '.gitignore');
     copy('client/gitignore', 'client/.gitignore');
     copy('server/gitignore', 'server/.gitignore');

@@ -1,12 +1,13 @@
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { GCloudModule } from '@mondomob/gae-node-nestjs';
-import { ConfigurationModule, configurationProvider } from './config/config.module';
-import { UserModule } from './users/users.module';
-import { MigrationModule } from './migrations/migrations.module';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
 import { AttachmentsModule } from './attachments/attachments.module';
+import { ConfigurationModule, configurationProvider } from './config/config.module';
+import { BootstrapperModule } from './migrations/bootstrappers/bootstrapper.module';
+import { MigrationModule } from './migrations/migrations.module';
+import { UserModule } from './users/users.module';
 import { BuildVersionMiddleware } from './util/buildVersion.middleware';
 import { CacheHeadersMiddleware } from './util/cacheHeaders.middleware';
-import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { GraphQLModule } from '@nestjs/graphql';
     }),
     ConfigurationModule,
     UserModule,
+    BootstrapperModule,
     MigrationModule,
     AttachmentsModule,
   ],

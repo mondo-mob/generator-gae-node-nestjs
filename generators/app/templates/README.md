@@ -313,10 +313,22 @@ npx server s c --env dev /system/migrate/bootstrap
 
 To make things easier, enabling APIs, services, etc is scripted via simple bash. 
 
+### 1) Create project with App Engine
+To create your project with App Engine enabled, first you need to find the folder id of the folder you wish to nest it under. We currently
+require a folder (this is neater). In your project selector, go to the **ALL** tab and you will see your folders with their id.
+
+To create project and enable App Engine run `./etc/scripts/gcp-new-project <your-project-id> <folder-numeric-id>`
+
+You will then be prompted to enable billing before proceeding with `gcp-setup`.
+
+### 2) Set up project (edit file and re-run as setup changes)
+
 To set up some common required APIs you can run `./etc/scripts/gcp-setup <your-project-id>`
 
-This also assumes you plan to use secrets manager. You can remove that line if you don't. If you need to create a secret
-for an environment there is a script to simplify that. Run `./etc/scripts/gcp-secret <your-project-id> <secret-key> <secret-value>`.
+This also assumes you plan to use secrets manager. You can remove that line if you don't.
+
+### 3) Set secrets within GCP secret manager
+If you need to create a secret for an environment there is a script to simplify that. Run `./etc/scripts/gcp-secret <your-project-id> <secret-key> <secret-value>`.
 
 Both scripts can be run without any args to prompt for usage.
 

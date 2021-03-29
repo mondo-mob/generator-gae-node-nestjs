@@ -1,0 +1,37 @@
+#!/bin/bash
+set -e
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+source ${DIR}/include/log-scripts.sh
+project_id=$1
+parent_folder=$2
+region="<%= appEngineRegion %>"
+if [[ $# -lt 2 ]]; then
+ error "Usage: $script_name <project-id> <parent-folder-id>"
+ error "Example:"
+ fail "       $script_name my-project-dev 123456"
+fi
+
+read -r -p "Confirm create project with appengine in region ${region}. Project: ${project_id}. Parent folder id: ${parent_folder} Are you sure? [y/N] " response
+if [[ "$response" =~ ^([yY])$ ]]; then
+  echo "Creating ..."
+else
+  echo "Okey dokey ... exiting"
+  exit 1
+fi
+
+
+project_option="--project=${project_id}"
+appengine_service_account="${project_id}@appspot.gserviceaccount.com"
+
+echo
+log "Creating project ${project_id}"
+gcloud projects create ${project_id} --folder=${parent_folder}
+log " ✅  ${project_id} created"
+log "Creating App Engine instance in ${region}"
+gcloud app create --project=${project_id} --region=${region}
+log " ✅  App Engine created"
+
+log "Project and app engine created - please enable the billing account and then run gcp-setup"
+log "Visit: https://console.cloud.google.com/billing?project=${project_id}"
+
+

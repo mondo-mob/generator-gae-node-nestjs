@@ -1,70 +1,72 @@
-import { Injectable } from '@nestjs/common';
 import {
+  Context,
+  createLogger,
   CredentialRepository,
-  newContext,
   DatastoreProvider,
   hashPassword,
-  createLogger,
   LoginIdentifierRepository,
+  newContext,
 } from '@mondomob/gae-node-nestjs';
+import { Injectable } from '@nestjs/common';
+import { randomBytes } from 'crypto';
 import { ConfigurationProvider } from '../config/config.provider';
 import { UserRepository } from '../users/users.repository';
-import { randomBytes } from 'crypto';
 import { UsersService } from '../users/users.service';
 
 const generatePassword = (bits: number) => randomBytes(Math.ceil(bits / 8)).toString('base64');
 
 @Injectable()
-export class MigrationService {
-  private readonly logger = createLogger('migration-service');
+export class SystemUserService {
+  private readonly logger = createLogger('system-user-service');
+  private readonly systemUsername: string;
 
   constructor(
     private readonly credentialsRepository: CredentialRepository,
     private readonly userRepository: UserRepository,
     private readonly loginIdentifierRepository: LoginIdentifierRepository,
     private readonly userService: UsersService,
-    private readonly configurationProvider: ConfigurationProvider,
     private readonly datastoreProvider: DatastoreProvider,
-  ) {}
-
-  async bootstrap() {
-    if (this.configurationProvider.isDevelopment()) {
-      const context = newContext(this.datastoreProvider.datastore);
-
-      const match = await this.userService.getByEmail(context, this.configurationProvider.bootstrapAdminUser);
-
-      if (!match) {
-        this.logger.info('Bootsrapping system user');
-        await this.bootstrapSystemUser('password');
-      }
-    }
+    configurationProvider: ConfigurationProvider,
+  ) {
+    this.systemUsername = configurationProvider.bootstrapAdminUser;
   }
 
-  async bootstrapSystemUser(password: string = generatePassword(256)): Promise<string> {
-    const context = newContext(this.datastoreProvider.datastore);
-    const userId = '12345';
+  async systemUserExists(context: Context): Promise<boolean> {
+    const systemUser = await this.userService.getByEmail(context, this.systemUsername);
+    return !!systemUser;
+  }
 
+  async bootstrapSystemUser(
+    context: Context = this.newContext(),
+    password: string = generatePassword(256),
+  ): Promise<string> {
+    const userId = '12345';
+    this.logger.info(`Bootstrapping system user with id ${userId}`);
     await this.credentialsRepository.save(context, {
-      id: this.configurationProvider.bootstrapAdminUser,
+      id: this.systemUsername,
       type: 'password',
       userId,
       password: await hashPassword(password),
     });
 
     await this.loginIdentifierRepository.save(context, {
-      id: this.configurationProvider.bootstrapAdminUser,
+      id: this.systemUsername,
       createdAt: new Date(),
       userId,
     });
 
     await this.userRepository.save(context, {
       id: userId,
-      email: this.configurationProvider.bootstrapAdminUser,
+      email: this.systemUsername,
       name: 'Admin',
       roles: ['super', 'admin'],
       enabled: true,
     });
 
     return password;
+  }
+
+  private newContext() {
+    return newContext(this.datastoreProvider.datastore);
   }
 }

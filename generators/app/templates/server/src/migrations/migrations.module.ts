@@ -1,17 +1,17 @@
-import { Module, OnModuleInit } from '@nestjs/common';
-import { MigrationController } from './migrations.controller';
-import { MigrationService } from './migrations.service';
-import { UserModule } from '../users/users.module';
+import { Module } from '@nestjs/common';
 import { ConfigurationModule } from '../config/config.module';
+import { BootstrapService } from './bootstrap.service';
+import { BootstrapperModule } from './bootstrappers/bootstrapper.module';
+import { MigrationController } from './migrations.controller';
 
 @Module({
-  imports: [UserModule, ConfigurationModule],
-  providers: [MigrationService],
+  imports: [ConfigurationModule, BootstrapperModule],
+  providers: [BootstrapService],
   controllers: [MigrationController],
 })
-export class MigrationModule implements OnModuleInit {
-  constructor(private readonly migrationService: MigrationService) {}
+export class MigrationModule {
+  constructor(private readonly bootstrapService: BootstrapService) {}
   async onModuleInit() {
-    await this.migrationService.bootstrap();
+    await this.bootstrapService.bootstrap();
   }
 }
