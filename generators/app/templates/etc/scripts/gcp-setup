@@ -36,6 +36,7 @@ check_secrets() {
 
 }
 
+enable_api appengine.googleapis.com
 enable_api secretmanager.googleapis.com
 enable_api cloudtasks.googleapis.com
 enable_api cloudscheduler.googleapis.com
