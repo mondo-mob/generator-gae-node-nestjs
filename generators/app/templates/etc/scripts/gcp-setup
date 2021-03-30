@@ -36,6 +36,32 @@ check_secrets() {
 
 }
 
+setup_ci_service_account() {
+  local ci_account_id=$1
+  if [ "${ci_account_id}" = "" ]; then
+   error "ci_account_id needed as first param to create account. This is the part before the '@' symbol in the full account email. Example: ci-pipelines"
+   exit 1
+  fi
+
+  local ci_service_account="${ci_account_id}@${project_id}.iam.gserviceaccount.com"
+  if gcloud iam service-accounts list ${project_option} | grep -q "${ci_service_account}"; then
+    log "  - ${ci_service_account} exists"
+  else
+    log "  - Creating ${ci_service_account}"
+    gcloud iam service-accounts create ${ci_account_id} ${project_option} --description="Pipelines deployment for ${project_id}" --display-name="${ci_account_id}"
+  fi
+  gcloud projects add-iam-policy-binding ${project_id} --member=serviceAccount:${ci_service_account} --role=roles/appengine.appAdmin
+  gcloud projects add-iam-policy-binding ${project_id} --member=serviceAccount:${ci_service_account} --role=roles/cloudbuild.builds.editor
+  gcloud projects add-iam-policy-binding ${project_id} --member=serviceAccount:${ci_service_account} --role=roles/cloudscheduler.admin
+  gcloud projects add-iam-policy-binding ${project_id} --member=serviceAccount:${ci_service_account} --role=roles/cloudtasks.admin
+  gcloud projects add-iam-policy-binding ${project_id} --member=serviceAccount:${ci_service_account} --role=roles/datastore.owner
+  gcloud projects add-iam-policy-binding ${project_id} --member=serviceAccount:${ci_service_account} --role=roles/storage.admin
+  gcloud projects add-iam-policy-binding ${project_id} --member=serviceAccount:${ci_service_account} --role=roles/serviceusage.serviceUsageViewer
+  gcloud projects add-iam-policy-binding ${project_id} --member=serviceAccount:${ci_service_account} --role=roles/iam.serviceAccountUser
+
+  log "  - ${ci_service_account} setup complete"
+}
+
 enable_api appengine.googleapis.com
 enable_api secretmanager.googleapis.com
 enable_api cloudtasks.googleapis.com
@@ -45,6 +71,9 @@ echo
 log "Granting roles/permissions"
 gcloud projects add-iam-policy-binding ${project_id} --member=serviceAccount:${appengine_service_account} --role=roles/secretmanager.secretAccessor
 log " ✅  Granting complete"
+
+# Uncomment below to create a service account for your CI pipelines with the correct permissions. This will result in the account: ci-pipelines@<your-project-id>.iam.gserviceaccount.com
+# setup_ci_service_account ci-pipelines
 
 ### If you have secrets you expect in each environment add a line for each one to prompt someone to set it up.
 # Use the gcp-secret command to set a secret within a project.
