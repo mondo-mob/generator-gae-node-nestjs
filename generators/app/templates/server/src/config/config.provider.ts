@@ -1,9 +1,10 @@
+import { Configuration, createLogger } from '@mondomob/gae-node-nestjs';
 import * as t from 'io-ts';
 import { reporter } from 'io-ts-reporters';
 import { ThrowReporter } from 'io-ts/lib/ThrowReporter';
 import * as _ from 'lodash';
-import { Logger } from '@mondomob/gae-node-nestjs';
-import { Configuration, createLogger } from '@mondomob/gae-node-nestjs';
+import { SecretsClient } from './secrets/secrets.client';
+import { SecretsResolver } from './secrets/secrets.resolver';
 
 const auth = t.partial({
   local: t.interface({
@@ -50,6 +51,7 @@ const Config = t.intersection([
   t.partial({
     APP_ENGINE_ENVIRONMENT: t.string,
     GOOGLE_CLOUD_PROJECT: t.string,
+    gcpProjectId: t.string, // If different from projectId (e.g. locally accessing dev)
     devHooks,
     apiEndpoint: t.string,
     searchServiceEndpoint: t.string,
@@ -65,12 +67,10 @@ interface SessionConfiguration {
 }
 
 export class ConfigurationProvider implements Configuration {
+  private readonly logger = createLogger('configuration-provider');
   configuration: t.TypeOf<typeof Config>;
-  logger: Logger;
 
   constructor() {
-    this.logger = createLogger('configuration-provider');
-
     if (process.env.GOOGLE_CLOUD_PROJECT) {
       const projectId = process.env.GOOGLE_CLOUD_PROJECT;
       process.env.NODE_CONFIG_ENV = _.last(projectId.split('-'));
@@ -97,6 +97,14 @@ export class ConfigurationProvider implements Configuration {
     }
 
     this.configuration = decodedConfig.value;
+  }
+
+  async resolveSecrets() {
+    const secretsResolver = new SecretsResolver(new SecretsClient(this.gcpProjectId));
+    this.logger.info('Resolving all secrets ...');
+    this.configuration = await secretsResolver.resolveSecrets(this.configuration);
+    this.logger.info('Secrets resolved');
+    return this;
   }
 
   get requestScope() {
@@ -169,5 +177,13 @@ export class ConfigurationProvider implements Configuration {
       apiEndpoint: this.apiEndpoint,
       projectId: this.projectId,
     };
+  }
+
+  /**
+   * This is the project id used for using GCP services. In local development this is different from the root projectId.
+   * We use the gcpProjectId config option but fall back to projectId if it's not set.
+   */
+  get gcpProjectId() {
+    return this.configuration.gcpProjectId || this.configuration.projectId;
   }
 }

@@ -2,7 +2,7 @@ import { GCloudModule } from '@mondomob/gae-node-nestjs';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AttachmentsModule } from './attachments/attachments.module';
-import { ConfigurationModule, configurationProvider } from './config/config.module';
+import { ConfigurationModule, staticConfig } from './config/config.module';
 import { BootstrapperModule } from './migrations/bootstrappers/bootstrapper.module';
 import { MigrationModule } from './migrations/migrations.module';
 import { UserModule } from './users/users.module';
@@ -17,7 +17,7 @@ import { CacheHeadersMiddleware } from './util/cacheHeaders.middleware';
       graphQLModule: GraphQLModule.forRoot({
         path: '/api/graphql',
         context: (props: any) => props.req?.context,
-        autoSchemaFile: configurationProvider.isDevelopment() ? 'schema.gql' : true, // in-memory for GCP but generate file locally to help troubleshoot
+        autoSchemaFile: staticConfig.isDevelopment() ? 'schema.gql' : true, // in-memory for GCP but generate file locally to help troubleshoot
         fieldResolverEnhancers: ['filters', 'interceptors'],
       }),
     }),

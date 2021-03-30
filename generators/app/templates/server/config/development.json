@@ -1,5 +1,6 @@
 {
   "projectId": "<%= slugify(project) %>-development",
+  "gcpProjectId": "<%= slugify(project) %>-dev",
   "apiEndpoint": "localhost:9000",
   "host": "http://localhost:3000",
   "systemSecret": "<%= secret %>",

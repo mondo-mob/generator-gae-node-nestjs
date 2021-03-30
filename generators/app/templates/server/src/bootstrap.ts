@@ -5,7 +5,7 @@ import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import * as express from 'express';
 import { AppModule } from './app.module';
-import { configurationProvider } from './config/config.module';
+import { staticConfig } from './config/config.module';
 import { getBuildInfo } from './util/buildVersionUtils';
 
 if (process.env.APP_ENGINE_ENVIRONMENT) {
@@ -19,8 +19,8 @@ export async function bootstrap() {
   const expressApp = express();
   const buildTs = getBuildInfo()?.version;
   await configureExpress(expressApp, {
-    session: configurationProvider.session,
-    sessionTimeoutInMinutes: configurationProvider.sessionTimeoutInMinutes,
+    session: staticConfig.session,
+    sessionTimeoutInMinutes: staticConfig.sessionTimeoutInMinutes,
     staticAssets: {
       root: 'public',
       options: {
