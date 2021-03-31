@@ -16,6 +16,7 @@ export class UsersResolver {
     }
   }
 
+  @Roles('admin')
   @Query(() => [UserDto])
   async users(_obj: {}, _args: {}, context: Context): Promise<UserDto[]> {
     const [users] = await this.userRepository.query(context);
@@ -23,6 +24,7 @@ export class UsersResolver {
     return (users as any) as UserDto[];
   }
 
+  @Roles('admin')
   @Query(() => UserDto)
   async userById(@Args('id', { type: () => ID }) id: string, @GqlContext() context: Context) {
     return this.userRepository.get(context, id);
