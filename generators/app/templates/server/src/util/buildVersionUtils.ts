@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-const buildInfoFile = './buildinfo.json';
+const buildInfoFile = './dist/buildinfo.json';
 
 export interface BuildInfo {
   version: number;

@@ -16,7 +16,7 @@
     "test": "jest",
     "test:cov": "jest --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "build": "rm -rf public && npm run generate-build-version && npm run lint && npm run test && npm run --prefix ../client build && npm run compile:prod",
+    "build": "rm -rf public && npm run lint && npm run test && npm run --prefix ../client build && npm run compile:prod && npm run generate-build-version",
     "deploy:dev": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-dev npm run deploy && TAG_NAME=dev/`date +%Y%m%d_%H%M%S` && git tag -a $TAG_NAME -m 'dev deployed' && git push origin $TAG_NAME",
     "deploy:uat": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-uat npm run deploy && TAG_NAME=uat/`date +%Y%m%d_%H%M%S` && git tag -a $TAG_NAME -m 'uat deployed' && git push origin $TAG_NAME",
     "deploy:prod": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-prod npm run deploy && TAG_NAME=prod/`date +%Y%m%d_%H%M%S` && git tag -a $TAG_NAME -m 'prod deployed' && git push origin $TAG_NAME",
