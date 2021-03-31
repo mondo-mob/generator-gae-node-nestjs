@@ -1,3 +1,16 @@
+## 2.2.0 (2021-03-31)
+- **Secrets!!!** .... but without the hassle. Excited to be able to have config trigger a secret to be resolved by simply using `SECRET(MY_SECRET_KEY)` 
+  as the value of any string configuration property within any json configuration file inside `config/`. As long as your secret has been 
+  set correctly in your project using `./etc/scripts/gcp-secret <your-project-id> <secret-key> <secret-value>` then the configuration's value 
+  will be replaced with the secret value before the configuration module completes and makes configuration available
+  - `gcpProjectId` config property added to enable a different project id to be used for gcp resources. This is mainly for locally development
+    so that we can use `-dev` gcp project to resolve secrets. This has been automatically set in `development.json` as convention and
+    this property is currently only used for resolving secrets.
+  - No calls to GCP secret manager will be made if there are no properties with the `SECRET()` construct
+  - See the generated root `README.md` for instructions on secrets
+- Added a convenience function to `gcp-setup` to set up a CI service account with the correct permissions. Just uncomment the line
+  that makes a call to this and your service account will be set up as part of the script (for the specified project id).
+
 ## 2.1.5 (2021-03-29)
 - Enable appengine api by default for deployments in the `gcp-setup` script
 
