@@ -309,8 +309,9 @@ or
 npx server s c --env dev /system/migrate/bootstrap
 ```
 
-# GCP Setup
+# Setup and config
 
+## GCP Setup
 To make things easier, enabling APIs, services, etc is scripted via simple bash. 
 
 ### 1) Create project with App Engine
@@ -331,4 +332,70 @@ This also assumes you plan to use secrets manager. You can remove that line if y
 If you need to create a secret for an environment there is a script to simplify that. Run `./etc/scripts/gcp-secret <your-project-id> <secret-key> <secret-value>`.
 
 Both scripts can be run without any args to prompt for usage.
+
+## Secrets
+
+There should be no reason to store passwords and api keys in our config any more. You can easily allow a secret to be resolved from [Google's Secret Manager](https://cloud.google.com/secret-manager)
+by specifying a value of a property as `SECRET(<your-secret-key>)`. The secret key you specify between the brackets must only contain: numbers, letters, `_`, `-`.
+
+Steps to use a secret:
+
+ * use the `./etc/scripts/gcp-secret <your-project-id> <secret-key> <secret-value>` to set the secret for each of your environments
+ * it's recommended to add to your `./etc/scripts/gcp-setup` file an assertion to make sure that secret is setup using the `check_secrets` line
+ * use `SECRET(<secret-key>)` in place of config values in your config  json
+
+
+**Example**: Setting a `TWILIO_API_KEY` in a project with three environments: `my-project-dev`, `my-project-uat`, `my-project-prod`.
+
+Note that for twilio I also need to configure a `sid` and a `from` mobile number. We will also assume we have one twillio api key for all test
+environments and a separate configuration for production.
+
+ * Setup secrets for each environment
+    * `./etc/scripts/gcp-secret my-project-dev TWILIO_API_KEY apikeyvalue-foo-123412312`
+    * `./etc/scripts/gcp-secret my-project-uat TWILIO_API_KEY apikeyvalue-foo-123412312`
+    * `./etc/scripts/gcp-secret my-project-prod TWILIO_API_KEY apikeyvalue-foo-different-key-for-prod`
+ * Change last line of `gcp-setup` to be `check_secrets TWILIO_API_KEY`  (note this can take many args ... one for each key separated by space)
+ * Change your configs ...
+    * `config/dev.json`
+    ```json
+      {
+        // existing config goes here (omitted)
+   
+        "twilio": {
+          "sid": "my-test-twilio-sid",
+          "from": "+61400000000",
+          "apiKey": "SECRET(TWILIO_API_KEY)"
+        }    
+      }  
+    ```
+     * `config/uat.json`
+    ```json
+      {
+        // existing config goes here (omitted)
+   
+        "twilio": {
+          "sid": "my-test-twilio-sid",
+          "from": "+61400000000",
+          "apiKey": "SECRET(TWILIO_API_KEY)"
+        }    
+      }  
+    ```
+     * `config/dev.json`
+    ```json
+      {
+        // existing config goes here (omitted)
+   
+        "twilio": {
+          "sid": "my-prod-twilio-sid",
+          "from": "+61400000000",
+          "apiKey": "SECRET(TWILIO_API_KEY)"
+        }    
+      }  
+    ```
+ * By default the `gcpProjectId` in your `development.json` has been configured to point to `dev` so if you want to test your secrets from
+   local you can also update your `development.json` with the twilio details too ... assuming your local user has access to dev using [application default auth](https://cloud.google.com/sdk/gcloud/reference/auth/application-default).
+ * When your server starts you should see a log line `secrets-resolver: Resolving secret for key: TWILIO_API_KEY`.
+
+Note that the secrets setup should work with all existing functionality within the `@mondomob/gae-node-nestjs` library that uses configuration, for
+example smtp email setup. Just replace your config value with `SECRET(YOUR_SECRET_KEY)` and it will be resolved before the library uses the value.
 

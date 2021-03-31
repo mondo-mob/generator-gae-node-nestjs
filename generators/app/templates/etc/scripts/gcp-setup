@@ -75,8 +75,8 @@ log " ✅  Granting complete"
 # Uncomment below to create a service account for your CI pipelines with the correct permissions. This will result in the account: ci-pipelines@<your-project-id>.iam.gserviceaccount.com
 # setup_ci_service_account ci-pipelines
 
-### If you have secrets you expect in each environment add a line for each one to prompt someone to set it up.
+### If you have secrets you expect in each environment, enable the check_secrets function and pass all expected secrets separated by space.
 # Use the gcp-secret command to set a secret within a project.
-#check_secrets MY_API_KEY
+#check_secrets MY_API_KEY ANOTHER_API_KEY
 
 
