@@ -20,7 +20,7 @@
     "deploy:dev": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-dev npm run deploy && TAG_NAME=dev/`date +%Y%m%d_%H%M%S` && git tag -a $TAG_NAME -m 'dev deployed' && git push origin $TAG_NAME",
     "deploy:uat": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-uat npm run deploy && TAG_NAME=uat/`date +%Y%m%d_%H%M%S` && git tag -a $TAG_NAME -m 'uat deployed' && git push origin $TAG_NAME",
     "deploy:prod": "CLOUDSDK_CORE_PROJECT=<%= slugify(project) %>-prod npm run deploy && TAG_NAME=prod/`date +%Y%m%d_%H%M%S` && git tag -a $TAG_NAME -m 'prod deployed' && git push origin $TAG_NAME",
-    "deploy": "INLINE_RUNTIME_CHUNK=false npm run build && gcloud app deploy cron.yaml index.yaml app.yaml --quiet",
+    "deploy": "INLINE_RUNTIME_CHUNK=false npm run build && gcloud app deploy cron.yaml index.yaml queue.yaml app.yaml --quiet",
     "dsui": "dsui --port 4000",
     "kill": "bash ./scripts/kill.sh",
     "kill-force": "bash ./scripts/kill.sh -9",
