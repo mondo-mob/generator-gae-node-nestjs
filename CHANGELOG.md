@@ -1,7 +1,12 @@
+## 2.3.1 (2021-05-03)
+
+- New middleware to update request timeout on tasks/crons to be 10 minutes to match app-engine. Also update to latest GAE lib to fix DataLoader cache related defects.
+
 ## 2.2.0 (2021-03-31)
-- **Secrets!!!** .... but without the hassle. Excited to be able to have config trigger a secret to be resolved by simply using `SECRET(MY_SECRET_KEY)` 
-  as the value of any string configuration property within any json configuration file inside `config/`. As long as your secret has been 
-  set correctly in your project using `./etc/scripts/gcp-secret <your-project-id> <secret-key> <secret-value>` then the configuration's value 
+
+- **Secrets!!!** .... but without the hassle. Excited to be able to have config trigger a secret to be resolved by simply using `SECRET(MY_SECRET_KEY)`
+  as the value of any string configuration property within any json configuration file inside `config/`. As long as your secret has been
+  set correctly in your project using `./etc/scripts/gcp-secret <your-project-id> <secret-key> <secret-value>` then the configuration's value
   will be replaced with the secret value before the configuration module completes and makes configuration available
   - `gcpProjectId` config property added to enable a different project id to be used for gcp resources. This is mainly for locally development
     so that we can use `-dev` gcp project to resolve secrets. This has been automatically set in `development.json` as convention and
@@ -12,32 +17,38 @@
   that makes a call to this and your service account will be set up as part of the script (for the specified project id).
 
 ## 2.1.5 (2021-03-29)
+
 - Enable appengine api by default for deployments in the `gcp-setup` script
 
 ## 2.1.4 (2021-03-29)
-- FIX:  missing `test-helpers.ts` has been added in
+
+- FIX: missing `test-helpers.ts` has been added in
 - Script to help create GCP project with App Engine. See root readme
 - Improve local data bootstrappers to make it easier to add others by implementing common interface and configuring provider
 
 ## 2.1.3 (2021-03-26)
+
 - Fix an existing issue with Activate and get it to redirect to signin page with a toast after activation successful
 - Internal refactor so showMessage(msg, errorBoolean) is replaced with showMessage(msg) and showErrorMessage(msg | error)
 
 ## 2.1.2 (2021-03-26)
+
 - A few more HOC usages converted to hooks in generated client code
 
 ## 2.1.1 (2021-03-26)
+
 - Generator lib updates and generator lint/styling. Should be no change to generated output from v2.1.0.
 
 ## 2.1.0 (2021-03-26)
-- `client/` now has `react-scripts` updated to latest 
+
+- `client/` now has `react-scripts` updated to latest
 - Big cleanup of older style components. Replaced HOC usage with hooks
 - Some basic styling improvements to make a big difference to the generated app
 - Internal dependency updates
 
-
 ## 2.0.4 (2021-03-11)
-- Update GQL HTTP requests with operations query string. This makes it easier to troubleshoot network traffic without 
+
+- Update GQL HTTP requests with operations query string. This makes it easier to troubleshoot network traffic without
   inspecting the payload by simply adding the operation names as a query string parameter client-side and these parameters get ignored.
   This also appears in the app-engine logs and is easier to trace server-side too.
 

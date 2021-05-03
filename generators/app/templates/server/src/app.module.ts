@@ -8,6 +8,7 @@ import { MigrationModule } from './migrations/migrations.module';
 import { UserModule } from './users/users.module';
 import { BuildVersionMiddleware } from './util/buildVersion.middleware';
 import { CacheHeadersMiddleware } from './util/cacheHeaders.middleware';
+import { TaskTimeoutMiddleware } from './util/task-timeout.middleware';
 
 @Module({
   imports: [
@@ -35,6 +36,8 @@ export class AppModule {
       .forRoutes({ path: '*', method: RequestMethod.ALL })
       .apply(CacheHeadersMiddleware)
       .exclude('(api|tasks|system)/(.*)')
-      .forRoutes({ path: '*', method: RequestMethod.GET });
+      .forRoutes({ path: '*', method: RequestMethod.GET })
+      .apply(TaskTimeoutMiddleware)
+      .forRoutes({ path: '/tasks/**/*', method: RequestMethod.ALL }, { path: '/cron/**/*', method: RequestMethod.ALL });
   }
 }
